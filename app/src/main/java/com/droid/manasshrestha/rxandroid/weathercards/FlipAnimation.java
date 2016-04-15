@@ -28,7 +28,7 @@ public class FlipAnimation extends Animation {
         this.fromView = fromView;
         this.toView = toView;
 
-        setDuration(350);
+        setDuration(250);
         setFillAfter(false);
         setInterpolator(new AccelerateDecelerateInterpolator());
     }

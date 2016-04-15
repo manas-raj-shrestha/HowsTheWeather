@@ -1,5 +1,8 @@
 package com.droid.manasshrestha.rxandroid.weathercards;
 
+import android.animation.Animator;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,6 +11,9 @@ import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -179,15 +185,77 @@ public class WeatherCardsFragment extends Fragment implements WeatherCardContrac
         lineChartView.setInteractive(true);
     }
 
-    private void flipCard(View currentView, View nextView) {
+    private void flipCard(final View currentView, final View nextView) {
 
-        FlipAnimation flipAnimation = new FlipAnimation(currentView, nextView);
+        ValueAnimator animator = new ValueAnimator().ofFloat(rvMainRoot.getScaleX(), 0.6f);
+        animator.setDuration(250);
 
-        if (currentView.getVisibility() == View.GONE) {
-            flipAnimation.reverse();
-        }
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                rvMainRoot.setScaleX((Float) (valueAnimator.getAnimatedValue()));
+                rvMainRoot.setScaleY((Float) (valueAnimator.getAnimatedValue()));
+            }
+        });
 
-        rvMainRoot.startAnimation(flipAnimation);
+        animator.start();
+
+        animator.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animator) {
+
+                FlipAnimation flipAnimation = new FlipAnimation(currentView, nextView);
+
+                if (currentView.getVisibility() == View.GONE) {
+                    flipAnimation.reverse();
+                }
+
+                flipAnimation.setAnimationListener(new Animation.AnimationListener() {
+                    @Override
+                    public void onAnimationStart(Animation animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+                        ValueAnimator animator = new ValueAnimator().ofFloat(rvMainRoot.getScaleX(), 1f);
+                        animator.setDuration(250);
+
+                        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                            @Override
+                            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                                rvMainRoot.setScaleX((Float) (valueAnimator.getAnimatedValue()));
+                                rvMainRoot.setScaleY((Float) (valueAnimator.getAnimatedValue()));
+                            }
+                        });
+
+                        animator.start();
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animation animation) {
+
+                    }
+                });
+                rvMainRoot.startAnimation(flipAnimation);
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animator) {
+
+            }
+        });
+
     }
 
     @OnClick({R.id.card_front, R.id.card_back})
