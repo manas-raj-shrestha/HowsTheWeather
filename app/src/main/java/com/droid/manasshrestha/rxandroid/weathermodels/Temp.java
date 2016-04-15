@@ -1,6 +1,4 @@
-package com.droid.manasshrestha.rxandroid.textModels;
-
-import com.google.gson.annotations.SerializedName;
+package com.droid.manasshrestha.rxandroid.weathermodels;
 
 public class Temp {
 

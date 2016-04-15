@@ -3,7 +3,7 @@ package com.droid.manasshrestha.rxandroid.weathercards;
 import android.graphics.drawable.Drawable;
 
 
-import com.droid.manasshrestha.rxandroid.textModels.Temp;
+import com.droid.manasshrestha.rxandroid.weathermodels.Temp;
 
 import lecho.lib.hellocharts.model.LineChartData;
 

@@ -8,11 +8,11 @@ import android.util.Log;
 import android.view.View;
 
 import com.droid.manasshrestha.rxandroid.R;
-import com.droid.manasshrestha.rxandroid.WeatherApplication;
+import com.droid.manasshrestha.rxandroid.data.PrefUtils;
 import com.droid.manasshrestha.rxandroid.locationhandlers.GpsInfo;
 import com.droid.manasshrestha.rxandroid.locationhandlers.LocationCatcher;
 import com.droid.manasshrestha.rxandroid.retrofit.RetrofitManager;
-import com.droid.manasshrestha.rxandroid.textModels.Weath;
+import com.droid.manasshrestha.rxandroid.weathermodels.WeatherModel;
 import com.google.android.gms.maps.model.LatLng;
 import com.pixelcan.inkpageindicator.InkPageIndicator;
 
@@ -42,7 +42,7 @@ public class WidgetCardsActivity extends AppCompatActivity {
 
         viewPager.setPageTransformer(true, new DepthPageTransformer());
 
-        final Subscriber subscriber2 = new Subscriber<ArrayList<Weath>>() {
+        final Subscriber subscriber2 = new Subscriber<ArrayList<WeatherModel>>() {
             @Override
             public void onCompleted() {
 
@@ -54,7 +54,7 @@ public class WidgetCardsActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onNext(final ArrayList<Weath> example) {
+            public void onNext(final ArrayList<WeatherModel> example) {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -67,10 +67,15 @@ public class WidgetCardsActivity extends AppCompatActivity {
             }
         };
 
-        final LocationCatcher locationCatcher = new LocationCatcher(WeatherApplication.getContext());
+        final LocationCatcher locationCatcher = new LocationCatcher(this);
         locationCatcher.getLocation(new LocationCatcher.LocationCallBack() {
             @Override
             public void onLocationNotFound() {
+                if (PrefUtils.getLastKnownLatitude() != 0.0){
+                    RetrofitManager.getInstance().getWeatherForecastDaily(new LatLng(PrefUtils.getLastKnownLatitude(), PrefUtils.getLastKnownLongitude()), subscriber2);
+                }else {
+                    locationCatcher.showSettingsAlert();
+                }
             }
 
             @Override
@@ -78,6 +83,7 @@ public class WidgetCardsActivity extends AppCompatActivity {
                 if (location != null) {
                     locationCatcher.cancelLocationCallback();
                     RetrofitManager.getInstance().getWeatherForecastDaily(new LatLng(location.getLatitude(), location.getLongitude()), subscriber2);
+                    PrefUtils.setLastKnownLocation(location);
                 }
             }
         });

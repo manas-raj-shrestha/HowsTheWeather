@@ -20,7 +20,7 @@ import com.google.android.gms.location.LocationServices;
 
 /**
  * Location Fetch.
- *
+ * <p/>
  * Use of the Location API to retrieve the last known location for device.
  * Uses Google Play services (GoogleApiClient) to fetch the location.
  */
@@ -131,7 +131,8 @@ public class LocationCatcher implements LocationInterface, LocationListener, com
                      */
                     showSettingsAlert();
                 }
-                Log.e("null", "null");
+                Log.e("null", "null mLastLocationNull");
+                locationCallBack.onLocationNotFound();
             } else {
                 double latitude = mLastLocation.getLatitude();
                 double longitude = mLastLocation.getLongitude();
@@ -142,14 +143,14 @@ public class LocationCatcher implements LocationInterface, LocationListener, com
                 startLocationUpdates();
             }
         } else {
-            Log.e("null", "null");
+            Log.e("null", "null location client not connected");
+            locationCallBack.onLocationNotFound();
             if (android.os.Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP) {
                 /**only for Lollipop and older versions
                  * as permission check does not work for them
                  */
                 showSettingsAlert();
             }
-
         }
 
     }
@@ -157,8 +158,8 @@ public class LocationCatcher implements LocationInterface, LocationListener, com
     /**
      * Show {@link AlertDialog} if {@link android.os.Build.VERSION} is less than Marshmallow
      */
-    private void showSettingsAlert() {
-
+    public void showSettingsAlert() {
+        Log.e("show alert", "show alert");
         if (!((Activity) context).isFinishing()) {
 
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
@@ -167,7 +168,7 @@ public class LocationCatcher implements LocationInterface, LocationListener, com
             alertDialog.setTitle("Enable GPS");
 
             // Setting Dialog Message
-            alertDialog.setMessage("Please enable gps to list your job");
+            alertDialog.setMessage("Please enable gps");
 
             // Setting Icon to Dialog
             // alertDialog.setIcon(R.drawable.delete);
@@ -195,6 +196,8 @@ public class LocationCatcher implements LocationInterface, LocationListener, com
 
             // Showing Alert Message
             alertDialog.show();
+        }else {
+            Log.e("activity","finishing");
         }
     }
 

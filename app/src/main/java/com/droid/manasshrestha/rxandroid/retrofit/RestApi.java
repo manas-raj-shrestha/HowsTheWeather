@@ -1,7 +1,7 @@
 package com.droid.manasshrestha.rxandroid.retrofit;
 
 
-import com.droid.manasshrestha.rxandroid.textModels.Weath;
+import com.droid.manasshrestha.rxandroid.weathermodels.WeatherModel;
 
 import retrofit.http.GET;
 import retrofit.http.Path;
@@ -14,7 +14,7 @@ import rx.Observable;
 public interface RestApi {
 
     @GET("forecast/{apiKey}/{latlng}")
-    Observable<Weath> getWeatherDaily(@Path("apiKey") String apiKey, @Path("latlng") String latLng,
+    Observable<WeatherModel> getWeatherDaily(@Path("apiKey") String apiKey, @Path("latlng") String latLng,
                                       @Query("units") String units);
 
 }

@@ -26,7 +26,6 @@ public class DepthPageTransformer implements ViewPager.PageTransformer {
             } else if (position == -1) {
                 view.setRotation(0);
                 view.setTranslationX(0);
-                Log.e("xx", "" + view.getX());
             } else {
                 view.setTranslationX(position * 250f);
                 view.setRotation((position) * 25f);
@@ -44,7 +43,6 @@ public class DepthPageTransformer implements ViewPager.PageTransformer {
                     + (1 - MIN_SCALE) * (1 - Math.abs(position));
             view.setScaleX(scaleFactor);
             view.setScaleY(scaleFactor);
-//            view.setRotation((float) (view.getRotation() + 0.25));
             view.setRotation(0);
 
         } else { // (1,+Infinity]

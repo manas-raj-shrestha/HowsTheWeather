@@ -7,9 +7,9 @@ import android.support.v4.content.ContextCompat;
 import android.text.format.DateFormat;
 
 import com.droid.manasshrestha.rxandroid.R;
-import com.droid.manasshrestha.rxandroid.textModels.Datum;
-import com.droid.manasshrestha.rxandroid.textModels.Temp;
-import com.droid.manasshrestha.rxandroid.textModels.Weath;
+import com.droid.manasshrestha.rxandroid.weathermodels.Datum;
+import com.droid.manasshrestha.rxandroid.weathermodels.Temp;
+import com.droid.manasshrestha.rxandroid.weathermodels.WeatherModel;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -26,10 +26,10 @@ import lecho.lib.hellocharts.model.PointValue;
 public class WeatherCardPresenter {
 
     WeatherCardContract.Views weatherCardContract;
-    Weath forecastList;
+    WeatherModel forecastList;
     Context context;
 
-    public WeatherCardPresenter(Context context, WeatherCardContract.Views weatherCardContract, Weath forecastList) {
+    public WeatherCardPresenter(Context context, WeatherCardContract.Views weatherCardContract, WeatherModel forecastList) {
         this.context = context;
         this.weatherCardContract = weatherCardContract;
         this.forecastList = forecastList;

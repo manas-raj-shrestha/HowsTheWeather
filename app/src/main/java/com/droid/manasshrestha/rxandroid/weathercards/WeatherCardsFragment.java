@@ -4,7 +4,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,10 +14,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.droid.manasshrestha.rxandroid.R;
-import com.droid.manasshrestha.rxandroid.textModels.Temp;
-import com.droid.manasshrestha.rxandroid.textModels.Weath;
-
-import java.lang.reflect.Field;
+import com.droid.manasshrestha.rxandroid.weathermodels.Temp;
+import com.droid.manasshrestha.rxandroid.weathermodels.WeatherModel;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -88,10 +85,10 @@ public class WeatherCardsFragment extends Fragment implements WeatherCardContrac
     @Bind(R.id.chart)
             LineChartView lineChartView;
 
-    Weath forecastList;
+    WeatherModel forecastList;
     WeatherCardPresenter weatherCardPresenter;
 
-    public WeatherCardsFragment(Weath forecastList) {
+    public WeatherCardsFragment(WeatherModel forecastList) {
         this.forecastList = forecastList;
     }
 

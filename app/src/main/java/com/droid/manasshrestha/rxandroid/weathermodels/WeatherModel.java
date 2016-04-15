@@ -1,9 +1,9 @@
-package com.droid.manasshrestha.rxandroid.textModels;
+package com.droid.manasshrestha.rxandroid.weathermodels;
 
 
 import com.google.gson.annotations.SerializedName;
 
-public class Weath {
+public class WeatherModel {
 
     @SerializedName("latitude")
     private Double latitude;
