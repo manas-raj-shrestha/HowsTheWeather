@@ -1,0 +1,161 @@
+<android.support.v7.widget.CardView
+    android:id="@+id/card_back"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="8dp"
+    android:visibility="gone"
+    card_view:cardCornerRadius="8dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:id="@+id/ll_card_back"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+
+
+        <TextView
+            android:id="@+id/tv_weather_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="16dp"
+            android:text="Light snow"
+            android:textColor="@android:color/white"
+            android:textSize="22sp" />
+
+        <TableLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+
+            <TableRow>
+
+                <TextView
+                    android:layout_marginRight="80dp"
+                    android:text="Pressure"
+                    android:textColor="@android:color/white" />
+
+                <TextView
+                    android:id="@+id/tv_pressure"
+                    android:textColor="@android:color/white" />
+
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:layout_marginRight="80dp"
+                    android:text="Wind Speed"
+                    android:textColor="@android:color/white" />
+
+                <TextView
+                    android:id="@+id/tv_wind_speed"
+                    android:textColor="@android:color/white" />
+
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:layout_marginRight="80dp"
+                    android:text="Wind Direction"
+                    android:textColor="@android:color/white" />
+
+                <TextView
+                    android:id="@+id/tv_wind_direction"
+                    android:textColor="@android:color/white" />
+
+            </TableRow>
+
+        </TableLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="16dp"
+            android:text="Temperature"
+            android:textColor="@android:color/white"
+            android:textSize="18sp" />
+
+        <TableLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+
+            <TableRow>
+
+                <TextView
+                    android:layout_marginRight="80dp"
+                    android:padding="3dp"
+                    android:text="Max"
+                    android:textColor="@android:color/white" />
+
+                <TextView
+                    android:id="@+id/tv_max_temp"
+                    android:gravity="left"
+                    android:padding="3dp"
+                    android:textColor="@android:color/white" />
+
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:padding="3dp"
+                    android:text="Max Time"
+                    android:textColor="@android:color/white" />
+
+                <TextView
+                    android:id="@+id/tv_max_temp_time"
+                    android:gravity="left"
+                    android:padding="3dp"
+                    android:textColor="@android:color/white" />
+
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:padding="3dp"
+                    android:text="Min"
+                    android:textColor="@android:color/white" />
+
+                <TextView
+                    android:id="@+id/tv_min_temp"
+                    android:gravity="left"
+                    android:textColor="@android:color/white" />
+
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:padding="3dp"
+                    android:text="Min Time"
+                    android:textColor="@android:color/white" />
+
+                <TextView
+                    android:id="@+id/tv_temp_min_time"
+                    android:gravity="left"
+                    android:padding="3dp"
+                    android:textColor="@android:color/white" />
+
+            </TableRow>
+
+        </TableLayout>
+
+        <lecho.lib.hellocharts.view.LineChartView
+            android:id="@+id/chart"
+            android:layout_marginTop="24dp"
+            android:layout_width="match_parent"
+            android:layout_height="150dp" />
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

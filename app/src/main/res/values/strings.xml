@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Weather Now</string>
+    <string name="app_key_open_weather">c18f5a141f0911f9867030a2d9ee1ea3</string>
+</resources>

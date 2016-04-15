@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#2b2b2b"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp">
+
+        <ImageView
+            android:id="@+id/iv_location"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/location" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="8dp"
+            android:layout_toRightOf="@id/iv_location"
+            android:fontFamily="sans-serif-condensed"
+            android:text="KATHMANDU"
+            android:textColor="#727272"
+            android:textSize="18sp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <pl.droidsonroids.gif.GifImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/gif_cloud_load"
+            android:background="@drawable/loading_cloud"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="-100dp"
+            />
+
+        <com.pixelcan.inkpageindicator.InkPageIndicator
+            android:layout_marginBottom="8dp"
+            android:id="@+id/indicator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:dotDiameter="8dp"
+            app:dotGap="8dp"
+            android:layout_alignParentBottom="true"
+            app:animationDuration="320"
+            app:pageIndicatorColor="#ffffff"
+            app:currentPageIndicatorColor="#727272"/>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vp_cards"
+            android:layout_above="@id/indicator"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </RelativeLayout>
+
+</LinearLayout>

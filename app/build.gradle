@@ -1,0 +1,53 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.2"
+
+    defaultConfig {
+        applicationId "com.droid.manasshrestha.rxandroid"
+        minSdkVersion 16
+        multiDexEnabled true
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:23.1.1'
+
+    //rxjava
+    compile 'io.reactivex:rxandroid:1.0.1'
+    compile 'com.squareup.retrofit:adapter-rxjava:2.0.0-beta2'
+
+    //retrofit 2
+    compile 'com.squareup.retrofit2:retrofit:2.0.0'
+
+    //gson
+    compile 'com.squareup.retrofit:converter-gson:2.0.0-beta2'
+
+    //injection
+    compile 'com.jakewharton:butterknife:7.0.1'
+
+    //card view
+    compile 'com.android.support:cardview-v7:23.0.0'
+    compile 'com.pacioianu.david:ink-page-indicator:1.1.1'
+    compile 'pl.droidsonroids.gif:android-gif-drawable:1.1.+'
+    compile 'com.google.android.gms:play-services:8.4.0'
+
+    //charts
+    compile 'com.github.lecho:hellocharts-android:v1.5.8'
+
+    //glide
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+
+}
