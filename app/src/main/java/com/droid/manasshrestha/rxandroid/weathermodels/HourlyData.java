@@ -2,7 +2,7 @@ package com.droid.manasshrestha.rxandroid.weathermodels;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Datum {
+public class HourlyData {
 
     @SerializedName("time")
     private Long timeUnix;

@@ -6,6 +6,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import com.droid.manasshrestha.rxandroid.R;
 import com.droid.manasshrestha.rxandroid.data.PrefUtils;
@@ -33,6 +34,9 @@ public class WidgetCardsActivity extends AppCompatActivity {
 
     @Bind(R.id.gif_cloud_load)
     GifImageView cloudLoader;
+
+    @Bind(R.id.tv_city_name)
+    TextView tvCityName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +66,9 @@ public class WidgetCardsActivity extends AppCompatActivity {
                         viewPager.setAdapter(new WeatherCardsAdapter(getSupportFragmentManager(), example));
                         InkPageIndicator inkPageIndicator = (InkPageIndicator) findViewById(R.id.indicator);
                         inkPageIndicator.setViewPager(viewPager);
+                        String[] strings = example.get(0).getTimezone().split("/");
+                        Log.e("splitted", String.valueOf(strings.length));
+                        tvCityName.setText(strings[1].toUpperCase());
                     }
                 }, 1000);
             }
@@ -71,9 +78,9 @@ public class WidgetCardsActivity extends AppCompatActivity {
         locationCatcher.getLocation(new LocationCatcher.LocationCallBack() {
             @Override
             public void onLocationNotFound() {
-                if (PrefUtils.getLastKnownLatitude() != 0.0){
+                if (PrefUtils.getLastKnownLatitude() != 0.0) {
                     RetrofitManager.getInstance().getWeatherForecastDaily(new LatLng(PrefUtils.getLastKnownLatitude(), PrefUtils.getLastKnownLongitude()), subscriber2);
-                }else {
+                } else {
                     locationCatcher.showSettingsAlert();
                 }
             }

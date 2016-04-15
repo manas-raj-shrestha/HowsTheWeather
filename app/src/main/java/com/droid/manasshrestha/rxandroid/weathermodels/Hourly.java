@@ -13,7 +13,7 @@ public class Hourly {
     private String icon;
 
     @SerializedName("data")
-    private ArrayList<Datum> data = new ArrayList<Datum>();
+    private ArrayList<HourlyData> data = new ArrayList<HourlyData>();
 
     /**
      * @return The summary
@@ -46,14 +46,14 @@ public class Hourly {
     /**
      * @return The data
      */
-    public ArrayList<Datum> getData() {
+    public ArrayList<HourlyData> getData() {
         return data;
     }
 
     /**
      * @param data The data
      */
-    public void setData(ArrayList<Datum> data) {
+    public void setData(ArrayList<HourlyData> data) {
         this.data = data;
     }
 

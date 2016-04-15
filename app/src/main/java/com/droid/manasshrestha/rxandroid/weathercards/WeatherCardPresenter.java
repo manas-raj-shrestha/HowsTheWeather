@@ -7,7 +7,7 @@ import android.support.v4.content.ContextCompat;
 import android.text.format.DateFormat;
 
 import com.droid.manasshrestha.rxandroid.R;
-import com.droid.manasshrestha.rxandroid.weathermodels.Datum;
+import com.droid.manasshrestha.rxandroid.weathermodels.HourlyData;
 import com.droid.manasshrestha.rxandroid.weathermodels.Temp;
 import com.droid.manasshrestha.rxandroid.weathermodels.WeatherModel;
 
@@ -60,7 +60,7 @@ public class WeatherCardPresenter {
      * Sets data to temperature-time chart
      */
     private void setDataToChart() {
-        ArrayList<Datum> arrayList = forecastList.getHourly().getData();
+        ArrayList<HourlyData> arrayList = forecastList.getHourly().getData();
 
         List<PointValue> values = new ArrayList<>();
         for (int i = 0; i < arrayList.size(); i = i + 2) {

@@ -8,19 +8,19 @@ import java.util.List;
 public class Daily {
 
     @SerializedName("data")
-    private List<Datu> data = new ArrayList<Datu>();
+    private List<DailyData> data = new ArrayList<DailyData>();
 
     /**
      * @return The data
      */
-    public List<Datu> getData() {
+    public List<DailyData> getData() {
         return data;
     }
 
     /**
      * @param data The data
      */
-    public void setData(List<Datu> data) {
+    public void setData(List<DailyData> data) {
         this.data = data;
     }
 

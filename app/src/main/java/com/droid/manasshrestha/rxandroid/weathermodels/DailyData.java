@@ -2,7 +2,7 @@ package com.droid.manasshrestha.rxandroid.weathermodels;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Datu {
+public class DailyData {
 
     @SerializedName("time")
     private Long time;

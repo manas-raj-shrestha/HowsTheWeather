@@ -24,10 +24,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
+            android:id="@+id/tv_city_name"
             android:layout_marginLeft="8dp"
             android:layout_toRightOf="@id/iv_location"
             android:fontFamily="sans-serif-condensed"
-            android:text="KATHMANDU"
             android:textColor="#727272"
             android:textSize="18sp" />
 
