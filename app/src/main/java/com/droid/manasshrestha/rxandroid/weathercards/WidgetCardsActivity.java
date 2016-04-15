@@ -44,7 +44,7 @@ public class WidgetCardsActivity extends AppCompatActivity {
         setContentView(R.layout.widget_cards_activity);
         ButterKnife.bind(this);
 
-        viewPager.setPageTransformer(true, new DepthPageTransformer());
+        viewPager.setPageTransformer(true, new CardTiltTransformer());
 
         final Subscriber subscriber2 = new Subscriber<ArrayList<WeatherModel>>() {
             @Override

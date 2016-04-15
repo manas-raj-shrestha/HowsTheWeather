@@ -4,7 +4,10 @@ import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
 
-public class DepthPageTransformer implements ViewPager.PageTransformer {
+/**
+ * Card tilt view pager animation
+ */
+public class CardTiltTransformer implements ViewPager.PageTransformer {
     private static final float MIN_SCALE = 0.75f;
 
     public void transformPage(View view, float position) {
