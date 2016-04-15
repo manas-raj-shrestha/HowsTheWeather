@@ -168,38 +168,38 @@ public class WeatherCardPresenter {
      */
     private void pickWeatherIcon() {
         String weatherCondition = forecastList.getDaily().getData().get(0).getIcon();
-        Drawable weatherIcon = ContextCompat.getDrawable(context, R.drawable.sunny);
+//        Drawable weatherIcon = ContextCompat.getDrawable(context, R.drawable.sunny);
 
-        switch (weatherCondition) {
-            case "clear-day":
-            case "clear-night":
-                weatherIcon = ContextCompat.getDrawable(context, R.drawable.sunny);
-                break;
-            case "rain":
-                weatherIcon = ContextCompat.getDrawable(context, R.drawable.rainy);
-                break;
-            case "snow":
-                weatherIcon = ContextCompat.getDrawable(context, R.drawable.snow);
-                break;
-            case "sleet":
-                weatherIcon = ContextCompat.getDrawable(context, R.drawable.sleet);
-                break;
-            case "wind":
-                weatherIcon = ContextCompat.getDrawable(context, R.drawable.wind);
-                break;
-            case "fog":
-                weatherIcon = ContextCompat.getDrawable(context, R.drawable.fog);
-                break;
-            case "cloudy":
-                weatherIcon = ContextCompat.getDrawable(context, R.drawable.clouds);
-                break;
-            case "partly-cloudy-day":
-            case "partly-cloudy-night":
-                weatherIcon = ContextCompat.getDrawable(context, R.drawable.partly_cloudy);
-                break;
-        }
+//        switch (weatherCondition) {
+//            case "clear-day":
+//            case "clear-night":
+//                weatherIcon = ContextCompat.getDrawable(context, R.drawable.sunny);
+//                break;
+//            case "rain":
+//                weatherIcon = ContextCompat.getDrawable(context, R.drawable.rainy);
+//                break;
+//            case "snow":
+//                weatherIcon = ContextCompat.getDrawable(context, R.drawable.snow);
+//                break;
+//            case "sleet":
+//                weatherIcon = ContextCompat.getDrawable(context, R.drawable.sleet);
+//                break;
+//            case "wind":
+//                weatherIcon = ContextCompat.getDrawable(context, R.drawable.wind);
+//                break;
+//            case "fog":
+//                weatherIcon = ContextCompat.getDrawable(context, R.drawable.fog);
+//                break;
+//            case "cloudy":
+//                weatherIcon = ContextCompat.getDrawable(context, R.drawable.clouds);
+//                break;
+//            case "partly-cloudy-day":
+//            case "partly-cloudy-night":
+//                weatherIcon = ContextCompat.getDrawable(context, R.drawable.partly_cloudy);
+//                break;
+//        }
 
-        weatherCardContract.setWeatherIcon(weatherIcon);
+        weatherCardContract.setWeatherIcon(null);
     }
 
     /**

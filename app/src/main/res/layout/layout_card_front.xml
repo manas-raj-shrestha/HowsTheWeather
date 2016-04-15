@@ -26,8 +26,8 @@
             android:textColor="@android:color/white"
             android:textSize="24sp" />
 
-        <ImageView
-            android:id="@+id/iv_weather_icon"
+        <FrameLayout
+            android:id="@+id/fl_animated_icons"
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:layout_centerInParent="true"

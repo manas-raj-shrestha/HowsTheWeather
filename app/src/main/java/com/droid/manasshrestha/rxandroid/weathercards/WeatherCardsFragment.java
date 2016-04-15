@@ -8,12 +8,14 @@ import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.droid.manasshrestha.rxandroid.R;
+import com.droid.manasshrestha.rxandroid.animatedicons.ClearWeather;
 import com.droid.manasshrestha.rxandroid.weathermodels.Temp;
 import com.droid.manasshrestha.rxandroid.weathermodels.WeatherModel;
 
@@ -34,8 +36,8 @@ public class WeatherCardsFragment extends Fragment implements WeatherCardContrac
     @Bind(R.id.tv_avg_temp)
     TextView tvAvgTemp;
 
-    @Bind(R.id.iv_weather_icon)
-    ImageView ivWeatherIcon;
+    @Bind(R.id.fl_animated_icons)
+    FrameLayout flAnimatedIcons;
 
     @Bind(R.id.tv_humidity)
     TextView tvHumidity;
@@ -113,7 +115,13 @@ public class WeatherCardsFragment extends Fragment implements WeatherCardContrac
 
     @Override
     public void setWeatherIcon(Drawable drawable) {
-        ivWeatherIcon.setImageDrawable(drawable);
+        ClearWeather clearWeather =  new ClearWeather(getActivity());
+        RelativeLayout.LayoutParams layoutParam = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        clearWeather.setLayoutParams(layoutParam);
+
+        flAnimatedIcons.addView(clearWeather);
+        flAnimatedIcons.invalidate();
+//        ivWeatherIcon.setImageDrawable(drawable);
     }
 
     @Override
