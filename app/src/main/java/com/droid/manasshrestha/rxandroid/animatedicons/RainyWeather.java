@@ -24,9 +24,11 @@ public class RainyWeather extends RelativeLayout {
     private static final int POST_DELAY_TIME = 50;
     private static final int MSG_INVALIDATE_VIEW = 0;
 
-    private static final int lineOneDpIncrement = 2;
-    private static final int lineTwoDpIncrement = 3;
-    private static final int lineThreeDpIncrement = 2;
+    private static final int LINE_ONE_DP_INCREMENT = 2;
+    private static final int LINE_TWO_DP_INCREMENT = 3;
+    private static final int LINE_THREE_DP_INCREMENT = 2;
+
+    private static final int LINE_STROKE_WIDTH = 4;
 
     private ImageView imageView;
     private Paint paint = new Paint();
@@ -68,6 +70,10 @@ public class RainyWeather extends RelativeLayout {
         setImageView();
     }
 
+    /**
+     * creates an image view
+     * image view holds the main animation component
+     */
     private void setImageView() {
         imageView = new ImageView(getContext());
         LayoutParams layoutParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
@@ -77,7 +83,7 @@ public class RainyWeather extends RelativeLayout {
 
         LayoutInflater.from(getContext()).inflate(R.layout.layout_card_front, this, false);
         paint.setColor(Color.WHITE);
-        paint.setStrokeWidth(GeneralUtils.convertDpToPixel(3));
+        paint.setStrokeWidth(GeneralUtils.convertDpToPixel(LINE_STROKE_WIDTH));
 
         AnimateRainThread animateRainThread = new AnimateRainThread();
         animateRainThread.start();
@@ -104,6 +110,9 @@ public class RainyWeather extends RelativeLayout {
 
     }
 
+    /**
+     * Thread to implement logic for rain drops
+     */
     private class AnimateRainThread extends Thread {
         private Boolean stopThread = false;
 
@@ -113,10 +122,10 @@ public class RainyWeather extends RelativeLayout {
 
             while (!stopThread) {
                 if (imageView.getBottom() - GeneralUtils.convertDpToPixel(lineOneStartY) < imageView.getBottom()) {
-                    lineOneStartX = lineOneStartX - lineOneDpIncrement;
-                    lineOneStopX = lineOneStopX - lineOneDpIncrement;
-                    lineOneStartY = lineOneStartY - lineOneDpIncrement;
-                    lineOneStopY = lineOneStopY - lineOneDpIncrement;
+                    lineOneStartX = lineOneStartX - LINE_ONE_DP_INCREMENT;
+                    lineOneStopX = lineOneStopX - LINE_ONE_DP_INCREMENT;
+                    lineOneStartY = lineOneStartY - LINE_ONE_DP_INCREMENT;
+                    lineOneStopY = lineOneStopY - LINE_ONE_DP_INCREMENT;
                 } else {
                     lineOneStartX = 30;
                     lineOneStopX = 15;
@@ -125,10 +134,10 @@ public class RainyWeather extends RelativeLayout {
                 }
 
                 if (imageView.getBottom() - GeneralUtils.convertDpToPixel(lineTwoStartY) < imageView.getBottom()) {
-                    lineTwoStartX = lineTwoStartX - lineTwoDpIncrement;
-                    lineTwoStopX = lineTwoStopX - lineTwoDpIncrement;
-                    lineTwoStartY = lineTwoStartY - lineTwoDpIncrement;
-                    lineTwoStopY = lineTwoStopY - lineTwoDpIncrement;
+                    lineTwoStartX = lineTwoStartX - LINE_TWO_DP_INCREMENT;
+                    lineTwoStopX = lineTwoStopX - LINE_TWO_DP_INCREMENT;
+                    lineTwoStartY = lineTwoStartY - LINE_TWO_DP_INCREMENT;
+                    lineTwoStopY = lineTwoStopY - LINE_TWO_DP_INCREMENT;
                 } else {
                     lineTwoStartX = 135;
                     lineTwoStopX = 120;
@@ -137,10 +146,10 @@ public class RainyWeather extends RelativeLayout {
                 }
 
                 if (imageView.getBottom() - GeneralUtils.convertDpToPixel(lineThreeStartY) < imageView.getBottom()) {
-                    lineThreeStartX = lineThreeStartX - lineThreeDpIncrement;
-                    lineThreeStopX = lineThreeStopX - lineThreeDpIncrement;
-                    lineThreeStartY = lineThreeStartY - lineThreeDpIncrement;
-                    lineThreeStopY = lineThreeStopY - lineThreeDpIncrement;
+                    lineThreeStartX = lineThreeStartX - LINE_THREE_DP_INCREMENT;
+                    lineThreeStopX = lineThreeStopX - LINE_THREE_DP_INCREMENT;
+                    lineThreeStartY = lineThreeStartY - LINE_THREE_DP_INCREMENT;
+                    lineThreeStopY = lineThreeStopY - LINE_THREE_DP_INCREMENT;
                 } else {
                     lineThreeStartX = 200;
                     lineThreeStopX = 185;
