@@ -1,0 +1,162 @@
+package com.droid.manasshrestha.rxandroid.animatedicons;
+
+import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.os.Handler;
+import android.os.Message;
+import android.util.AttributeSet;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+
+import com.bumptech.glide.Glide;
+import com.droid.manasshrestha.rxandroid.GeneralUtils;
+import com.droid.manasshrestha.rxandroid.R;
+
+/**
+ * Animated rainy weather icon
+ */
+public class RainyWeather extends RelativeLayout {
+
+    private static final int POST_DELAY_TIME = 50;
+    private static final int MSG_INVALIDATE_VIEW = 0;
+
+    private static final int lineOneDpIncrement = 2;
+    private static final int lineTwoDpIncrement = 3;
+    private static final int lineThreeDpIncrement = 2;
+
+    private ImageView imageView;
+    private Paint paint = new Paint();
+
+    private int lineOneStartX = 30;
+    private int lineOneStopX = 15;
+    private int lineOneStartY = 40;
+    private int lineOneStopY = 20;
+
+    private int lineTwoStartX = 135;
+    private int lineTwoStopX = 120;
+    private int lineTwoStartY = 80;
+    private int lineTwoStopY = 60;
+
+    private int lineThreeStartX = 200;
+    private int lineThreeStopX = 185;
+    private int lineThreeStartY = 80;
+    private int lineThreeStopY = 60;
+
+    Handler handler = new Handler(new Handler.Callback() {
+        @Override
+        public boolean handleMessage(Message message) {
+            invalidate();
+            return false;
+        }
+    });
+
+    public RainyWeather(Context context) {
+        this(context, null, 0);
+    }
+
+    public RainyWeather(Context context, AttributeSet attrs) {
+        this(context, attrs, 0);
+    }
+
+    public RainyWeather(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        setWillNotDraw(false);
+        setImageView();
+    }
+
+    private void setImageView() {
+        imageView = new ImageView(getContext());
+        LayoutParams layoutParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        imageView.setLayoutParams(layoutParams);
+        this.addView(imageView);
+        Glide.with(getContext()).load(R.drawable.clouds).into(imageView);
+
+        LayoutInflater.from(getContext()).inflate(R.layout.layout_card_front, this, false);
+        paint.setColor(Color.WHITE);
+        paint.setStrokeWidth(GeneralUtils.convertDpToPixel(3));
+
+        AnimateRainThread animateRainThread = new AnimateRainThread();
+        animateRainThread.start();
+    }
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+
+        canvas.drawLine(imageView.getX() + GeneralUtils.convertDpToPixel(lineOneStartX),
+                imageView.getBottom() - GeneralUtils.convertDpToPixel(lineOneStartY),
+                imageView.getX() + GeneralUtils.convertDpToPixel(lineOneStopX),
+                imageView.getBottom() - GeneralUtils.convertDpToPixel(lineOneStopY), paint);
+
+        canvas.drawLine(imageView.getX() + GeneralUtils.convertDpToPixel(lineTwoStartX),
+                imageView.getBottom() - GeneralUtils.convertDpToPixel(lineTwoStartY),
+                imageView.getX() + GeneralUtils.convertDpToPixel(lineTwoStopX),
+                imageView.getBottom() - GeneralUtils.convertDpToPixel(lineTwoStopY), paint);
+
+        canvas.drawLine(imageView.getX() + GeneralUtils.convertDpToPixel(lineThreeStartX),
+                imageView.getBottom() - GeneralUtils.convertDpToPixel(lineThreeStartY),
+                imageView.getX() + GeneralUtils.convertDpToPixel(lineThreeStopX),
+                imageView.getBottom() - GeneralUtils.convertDpToPixel(lineThreeStopY), paint);
+
+    }
+
+    private class AnimateRainThread extends Thread {
+        private Boolean stopThread = false;
+
+        @Override
+        public void run() {
+            super.run();
+
+            while (!stopThread) {
+                if (imageView.getBottom() - GeneralUtils.convertDpToPixel(lineOneStartY) < imageView.getBottom()) {
+                    lineOneStartX = lineOneStartX - lineOneDpIncrement;
+                    lineOneStopX = lineOneStopX - lineOneDpIncrement;
+                    lineOneStartY = lineOneStartY - lineOneDpIncrement;
+                    lineOneStopY = lineOneStopY - lineOneDpIncrement;
+                } else {
+                    lineOneStartX = 30;
+                    lineOneStopX = 15;
+                    lineOneStartY = 40;
+                    lineOneStopY = 20;
+                }
+
+                if (imageView.getBottom() - GeneralUtils.convertDpToPixel(lineTwoStartY) < imageView.getBottom()) {
+                    lineTwoStartX = lineTwoStartX - lineTwoDpIncrement;
+                    lineTwoStopX = lineTwoStopX - lineTwoDpIncrement;
+                    lineTwoStartY = lineTwoStartY - lineTwoDpIncrement;
+                    lineTwoStopY = lineTwoStopY - lineTwoDpIncrement;
+                } else {
+                    lineTwoStartX = 135;
+                    lineTwoStopX = 120;
+                    lineTwoStartY = 80;
+                    lineTwoStopY = 60;
+                }
+
+                if (imageView.getBottom() - GeneralUtils.convertDpToPixel(lineThreeStartY) < imageView.getBottom()) {
+                    lineThreeStartX = lineThreeStartX - lineThreeDpIncrement;
+                    lineThreeStopX = lineThreeStopX - lineThreeDpIncrement;
+                    lineThreeStartY = lineThreeStartY - lineThreeDpIncrement;
+                    lineThreeStopY = lineThreeStopY - lineThreeDpIncrement;
+                } else {
+                    lineThreeStartX = 200;
+                    lineThreeStopX = 185;
+                    lineThreeStartY = 80;
+                    lineThreeStopY = 60;
+                }
+
+                try {
+                    Thread.sleep(POST_DELAY_TIME);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                handler.sendEmptyMessage(MSG_INVALIDATE_VIEW);
+            }
+        }
+    }
+
+}

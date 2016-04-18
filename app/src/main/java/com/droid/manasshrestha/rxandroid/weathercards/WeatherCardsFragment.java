@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,7 @@ import android.widget.TextView;
 
 import com.droid.manasshrestha.rxandroid.R;
 import com.droid.manasshrestha.rxandroid.animatedicons.ClearWeather;
+import com.droid.manasshrestha.rxandroid.animatedicons.RainyWeather;
 import com.droid.manasshrestha.rxandroid.weathermodels.Temp;
 import com.droid.manasshrestha.rxandroid.weathermodels.WeatherModel;
 
@@ -35,7 +37,7 @@ import lecho.lib.hellocharts.view.LineChartView;
  * Weather card fragment
  */
 public class WeatherCardsFragment extends Fragment implements WeatherCardContract.Views {
-
+static  int count = 1;
     @Bind(R.id.tv_week_day)
     TextView tvWeekDay;
 
@@ -121,12 +123,15 @@ public class WeatherCardsFragment extends Fragment implements WeatherCardContrac
 
     @Override
     public void setWeatherIcon(Drawable drawable) {
-        ClearWeather clearWeather =  new ClearWeather(getActivity());
+
+        Log.e("count--",count+"");
+        count++;
+
+        RainyWeather clearWeather =  new RainyWeather(getActivity());
         RelativeLayout.LayoutParams layoutParam = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         clearWeather.setLayoutParams(layoutParam);
 
         flAnimatedIcons.addView(clearWeather);
-        flAnimatedIcons.invalidate();
 //        ivWeatherIcon.setImageDrawable(drawable);
     }
 
