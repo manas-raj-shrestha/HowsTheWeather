@@ -24,6 +24,7 @@ import android.widget.TextView;
 import com.droid.manasshrestha.rxandroid.R;
 import com.droid.manasshrestha.rxandroid.animatedicons.ClearWeather;
 import com.droid.manasshrestha.rxandroid.animatedicons.RainyWeather;
+import com.droid.manasshrestha.rxandroid.animatedicons.SnowyWeather;
 import com.droid.manasshrestha.rxandroid.weathermodels.Temp;
 import com.droid.manasshrestha.rxandroid.weathermodels.WeatherModel;
 
@@ -127,7 +128,7 @@ static  int count = 1;
         Log.e("count--",count+"");
         count++;
 
-        RainyWeather clearWeather =  new RainyWeather(getActivity());
+        SnowyWeather clearWeather =  new SnowyWeather(getActivity());
         RelativeLayout.LayoutParams layoutParam = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         clearWeather.setLayoutParams(layoutParam);
 
