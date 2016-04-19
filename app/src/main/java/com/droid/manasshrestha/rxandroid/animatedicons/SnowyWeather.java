@@ -49,6 +49,13 @@ public class SnowyWeather extends RelativeLayout {
     private int flakeThreeStartY = 70;
     private int flakeThreeStopY = 60;
 
+    private int flakeOneXBoundaryLeft = 15;
+    private int flakeOneXBoundaryRight = 45;
+    private int flakeTwoXBoundaryLeft = 75;
+    private int flakeTwoXBoundaryRight = 105;
+    private int flakeThreeXBoundaryLeft = 135;
+    private int flakeThreeXBoundaryRight = 165;
+
     private Bitmap bitmap;
     private RectF bitmapRect = new RectF();
 
@@ -139,14 +146,14 @@ public class SnowyWeather extends RelativeLayout {
                     flakeOneStopY = flakeOneStopY - SNOWFLAKE_DP_INCREMENT;
 
                     if (!reverseDirectionFLakeOne) {
-                        if (flakeOneStartX >= 15) {
+                        if (flakeOneStartX >= flakeOneXBoundaryLeft) {
                             flakeOneStartX = flakeOneStartX - SNOWFLAKE_DP_INCREMENT;
                             flakeOneStopX = flakeOneStopX - SNOWFLAKE_DP_INCREMENT;
                         } else {
                             reverseDirectionFLakeOne = true;
                         }
                     } else {
-                        if (flakeOneStartX <= 45) {
+                        if (flakeOneStartX <= flakeOneXBoundaryRight) {
                             flakeOneStartX = flakeOneStartX + SNOWFLAKE_DP_INCREMENT;
                             flakeOneStopX = flakeOneStopX + SNOWFLAKE_DP_INCREMENT;
                         } else {
@@ -163,14 +170,14 @@ public class SnowyWeather extends RelativeLayout {
                     flakeTwoStopY = flakeTwoStopY - SNOWFLAKE_DP_INCREMENT;
 
                     if (!reverseDirectionFLakeTwo) {
-                        if (flakeTwoStartX >= 75) {
+                        if (flakeTwoStartX >= flakeTwoXBoundaryLeft) {
                             flakeTwoStartX = flakeTwoStartX - SNOWFLAKE_DP_INCREMENT;
                             flakeTwoStopX = flakeTwoStopX - SNOWFLAKE_DP_INCREMENT;
                         } else {
                             reverseDirectionFLakeTwo = true;
                         }
                     } else {
-                        if (flakeTwoStartX <= 105) {
+                        if (flakeTwoStartX <= flakeTwoXBoundaryRight) {
                             flakeTwoStartX = flakeTwoStartX + SNOWFLAKE_DP_INCREMENT;
                             flakeTwoStopX = flakeTwoStopX + SNOWFLAKE_DP_INCREMENT;
                         } else {
@@ -187,14 +194,14 @@ public class SnowyWeather extends RelativeLayout {
                     flakeThreeStopY = flakeThreeStopY - SNOWFLAKE_DP_INCREMENT;
 
                     if (!reverseDirectionFLakeThree) {
-                        if (flakeThreeStartX >= 135) {
+                        if (flakeThreeStartX >= flakeThreeXBoundaryLeft) {
                             flakeThreeStartX = flakeThreeStartX - SNOWFLAKE_DP_INCREMENT;
                             flakeThreeStopX = flakeThreeStopX - SNOWFLAKE_DP_INCREMENT;
                         } else {
                             reverseDirectionFLakeThree = true;
                         }
                     } else {
-                        if (flakeThreeStartX <= 165) {
+                        if (flakeThreeStartX <= flakeThreeXBoundaryRight) {
                             flakeThreeStartX = flakeThreeStartX + SNOWFLAKE_DP_INCREMENT;
                             flakeThreeStopX = flakeThreeStopX + SNOWFLAKE_DP_INCREMENT;
                         } else {
