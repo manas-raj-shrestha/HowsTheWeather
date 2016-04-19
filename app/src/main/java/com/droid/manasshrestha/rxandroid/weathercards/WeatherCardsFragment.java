@@ -1,7 +1,6 @@
 package com.droid.manasshrestha.rxandroid.weathercards;
 
 import android.animation.Animator;
-import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -12,19 +11,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.view.animation.Animation;
-import android.view.animation.TranslateAnimation;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.droid.manasshrestha.rxandroid.R;
-import com.droid.manasshrestha.rxandroid.animatedicons.ClearWeather;
-import com.droid.manasshrestha.rxandroid.animatedicons.RainyWeather;
-import com.droid.manasshrestha.rxandroid.animatedicons.SnowyWeather;
+import com.droid.manasshrestha.rxandroid.animatedicons.SleetWeather;
+import com.droid.manasshrestha.rxandroid.animatedicons.SnowWeather;
 import com.droid.manasshrestha.rxandroid.weathermodels.Temp;
 import com.droid.manasshrestha.rxandroid.weathermodels.WeatherModel;
 
@@ -128,7 +123,7 @@ static  int count = 1;
         Log.e("count--",count+"");
         count++;
 
-        SnowyWeather clearWeather =  new SnowyWeather(getActivity());
+        SleetWeather clearWeather =  new SleetWeather(getActivity());
         RelativeLayout.LayoutParams layoutParam = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         clearWeather.setLayoutParams(layoutParam);
 
