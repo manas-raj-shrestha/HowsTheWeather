@@ -44,10 +44,10 @@ public class SnowyWeather extends RelativeLayout {
     private int flakeTwoStartY = 60;
     private int flakeTwoStopY = 50;
 
-    int flakeThreeStartX = 150;
-    int flakeThreeStopX = 160;
-    int flakeThreeStartY = 70;
-    int flakeThreeStopY = 60;
+    private int flakeThreeStartX = 150;
+    private int flakeThreeStopX = 160;
+    private int flakeThreeStartY = 70;
+    private int flakeThreeStopY = 60;
 
     private Bitmap bitmap;
     private RectF bitmapRect = new RectF();
@@ -124,6 +124,9 @@ public class SnowyWeather extends RelativeLayout {
      */
     private class AnimateSnowThread extends Thread {
         private Boolean stopThread = false;
+        private Boolean reverseDirectionFLakeOne = false;
+        private Boolean reverseDirectionFLakeTwo = false;
+        private Boolean reverseDirectionFLakeThree = false;
 
         @Override
         public void run() {
@@ -134,6 +137,22 @@ public class SnowyWeather extends RelativeLayout {
                 if (imageView.getBottom() - GeneralUtils.convertDpToPixel(flakeOneStartY) < imageView.getBottom()) {
                     flakeOneStartY = flakeOneStartY - SNOWFLAKE_DP_INCREMENT;
                     flakeOneStopY = flakeOneStopY - SNOWFLAKE_DP_INCREMENT;
+
+                    if (!reverseDirectionFLakeOne) {
+                        if (flakeOneStartX >= 15) {
+                            flakeOneStartX = flakeOneStartX - SNOWFLAKE_DP_INCREMENT;
+                            flakeOneStopX = flakeOneStopX - SNOWFLAKE_DP_INCREMENT;
+                        } else {
+                            reverseDirectionFLakeOne = true;
+                        }
+                    } else {
+                        if (flakeOneStartX <= 45) {
+                            flakeOneStartX = flakeOneStartX + SNOWFLAKE_DP_INCREMENT;
+                            flakeOneStopX = flakeOneStopX + SNOWFLAKE_DP_INCREMENT;
+                        } else {
+                            reverseDirectionFLakeOne = false;
+                        }
+                    }
                 } else {
                     flakeOneStartY = 40;
                     flakeOneStopY = 30;
@@ -142,6 +161,22 @@ public class SnowyWeather extends RelativeLayout {
                 if (imageView.getBottom() - GeneralUtils.convertDpToPixel(flakeTwoStartY) < imageView.getBottom()) {
                     flakeTwoStartY = flakeTwoStartY - SNOWFLAKE_DP_INCREMENT;
                     flakeTwoStopY = flakeTwoStopY - SNOWFLAKE_DP_INCREMENT;
+
+                    if (!reverseDirectionFLakeTwo) {
+                        if (flakeTwoStartX >= 75) {
+                            flakeTwoStartX = flakeTwoStartX - SNOWFLAKE_DP_INCREMENT;
+                            flakeTwoStopX = flakeTwoStopX - SNOWFLAKE_DP_INCREMENT;
+                        } else {
+                            reverseDirectionFLakeTwo = true;
+                        }
+                    } else {
+                        if (flakeTwoStartX <= 105) {
+                            flakeTwoStartX = flakeTwoStartX + SNOWFLAKE_DP_INCREMENT;
+                            flakeTwoStopX = flakeTwoStopX + SNOWFLAKE_DP_INCREMENT;
+                        } else {
+                            reverseDirectionFLakeTwo = false;
+                        }
+                    }
                 } else {
                     flakeTwoStartY = 60;
                     flakeTwoStopY = 50;
@@ -150,9 +185,26 @@ public class SnowyWeather extends RelativeLayout {
                 if (imageView.getBottom() - GeneralUtils.convertDpToPixel(flakeThreeStartY) < imageView.getBottom()) {
                     flakeThreeStartY = flakeThreeStartY - SNOWFLAKE_DP_INCREMENT;
                     flakeThreeStopY = flakeThreeStopY - SNOWFLAKE_DP_INCREMENT;
+
+                    if (!reverseDirectionFLakeThree) {
+                        if (flakeThreeStartX >= 135) {
+                            flakeThreeStartX = flakeThreeStartX - SNOWFLAKE_DP_INCREMENT;
+                            flakeThreeStopX = flakeThreeStopX - SNOWFLAKE_DP_INCREMENT;
+                        } else {
+                            reverseDirectionFLakeThree = true;
+                        }
+                    } else {
+                        if (flakeThreeStartX <= 165) {
+                            flakeThreeStartX = flakeThreeStartX + SNOWFLAKE_DP_INCREMENT;
+                            flakeThreeStopX = flakeThreeStopX + SNOWFLAKE_DP_INCREMENT;
+                        } else {
+                            reverseDirectionFLakeThree = false;
+                        }
+                    }
+
                 } else {
-                    flakeThreeStartY = 60;
-                    flakeThreeStopY = 50;
+                    flakeThreeStartY = 70;
+                    flakeThreeStopY = 60;
                 }
                 try {
                     Thread.sleep(POST_DELAY_TIME);
