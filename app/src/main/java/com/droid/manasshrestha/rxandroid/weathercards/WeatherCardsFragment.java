@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.droid.manasshrestha.rxandroid.R;
 import com.droid.manasshrestha.rxandroid.animatedicons.SleetWeather;
 import com.droid.manasshrestha.rxandroid.animatedicons.SnowWeather;
+import com.droid.manasshrestha.rxandroid.animatedicons.WindWeather;
 import com.droid.manasshrestha.rxandroid.weathermodels.Temp;
 import com.droid.manasshrestha.rxandroid.weathermodels.WeatherModel;
 
@@ -123,7 +124,7 @@ static  int count = 1;
         Log.e("count--",count+"");
         count++;
 
-        SleetWeather clearWeather =  new SleetWeather(getActivity());
+        WindWeather clearWeather =  new WindWeather(getActivity());
         RelativeLayout.LayoutParams layoutParam = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         clearWeather.setLayoutParams(layoutParam);
 
