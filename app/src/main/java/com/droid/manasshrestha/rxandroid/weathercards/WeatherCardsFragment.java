@@ -13,10 +13,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.droid.manasshrestha.rxandroid.R;
 import com.droid.manasshrestha.rxandroid.animatedicons.SleetWeather;
 import com.droid.manasshrestha.rxandroid.animatedicons.SnowWeather;
@@ -37,6 +39,12 @@ public class WeatherCardsFragment extends Fragment implements WeatherCardContrac
 static  int count = 1;
     @Bind(R.id.tv_week_day)
     TextView tvWeekDay;
+
+    @Bind(R.id.iv_water_drop)
+    ImageView ivWaterDrop;
+
+    @Bind(R.id.iv_clouds)
+    ImageView ivClouds;
 
     @Bind(R.id.tv_avg_temp)
     TextView tvAvgTemp;
@@ -111,6 +119,9 @@ static  int count = 1;
         ButterKnife.bind(this, view);
         weatherCardPresenter = new WeatherCardPresenter(getActivity(), this, forecastList);
         weatherCardPresenter.setData();
+
+        Glide.with(this).load(R.drawable.water_drop).into(ivWaterDrop);
+        Glide.with(this).load(R.drawable.clouds).into(ivClouds);
     }
 
     @Override

@@ -72,12 +72,12 @@
                     android:layout_weight="1">
 
                     <ImageView
+                        android:id="@+id/iv_water_drop"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="8dp"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/water_drop" />
+                        android:scaleType="fitXY" />
 
                     <TextView
                         android:id="@+id/tv_humidity"
@@ -104,7 +104,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="8dp"
                         android:scaleType="fitXY"
-                        android:src="@drawable/clouds" />
+                        android:id="@+id/iv_clouds" />
 
                     <TextView
                         android:id="@+id/tv_clouds"
