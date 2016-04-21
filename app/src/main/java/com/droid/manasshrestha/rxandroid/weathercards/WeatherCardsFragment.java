@@ -20,8 +20,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.droid.manasshrestha.rxandroid.R;
-import com.droid.manasshrestha.rxandroid.animatedicons.SleetWeather;
-import com.droid.manasshrestha.rxandroid.animatedicons.SnowWeather;
+import com.droid.manasshrestha.rxandroid.animatedicons.FogWeather;
 import com.droid.manasshrestha.rxandroid.animatedicons.WindWeather;
 import com.droid.manasshrestha.rxandroid.weathermodels.Temp;
 import com.droid.manasshrestha.rxandroid.weathermodels.WeatherModel;
@@ -36,7 +35,7 @@ import lecho.lib.hellocharts.view.LineChartView;
  * Weather card fragment
  */
 public class WeatherCardsFragment extends Fragment implements WeatherCardContract.Views {
-static  int count = 1;
+    static int count = 1;
     @Bind(R.id.tv_week_day)
     TextView tvWeekDay;
 
@@ -98,7 +97,7 @@ static  int count = 1;
     TextView tvWeatherDesc;
 
     @Bind(R.id.chart)
-            LineChartView lineChartView;
+    LineChartView lineChartView;
 
     WeatherModel forecastList;
     WeatherCardPresenter weatherCardPresenter;
@@ -132,10 +131,10 @@ static  int count = 1;
     @Override
     public void setWeatherIcon(Drawable drawable) {
 
-        Log.e("count--",count+"");
+        Log.e("count--", count + "");
         count++;
 
-        WindWeather clearWeather =  new WindWeather(getActivity());
+        FogWeather clearWeather = new FogWeather(getActivity());
         RelativeLayout.LayoutParams layoutParam = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         clearWeather.setLayoutParams(layoutParam);
 
