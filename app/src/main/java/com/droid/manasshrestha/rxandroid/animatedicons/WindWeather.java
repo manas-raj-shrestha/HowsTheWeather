@@ -18,13 +18,14 @@ import com.droid.manasshrestha.rxandroid.GeneralUtils;
 import com.droid.manasshrestha.rxandroid.R;
 
 /**
- * Animated rainy weather icon
+ * Animated wind weather icon
  */
 public class WindWeather extends RelativeLayout {
 
     private static final int POST_DELAY_TIME = 40;
     private static final int MSG_INVALIDATE_VIEW = 0;
     private static final int ANGLE_INCREMENT = 10;
+    private static final int FAKE_Y_ORIGIN = 150;
 
     private static final int LINE_STROKE_WIDTH = 2;
 
@@ -124,9 +125,9 @@ public class WindWeather extends RelativeLayout {
         x2 = x2 + ANGLE_INCREMENT;
 
         //sin wave equation y = A*sin(x) A is amplitude and x must be in radians
-        y1 = (((float) Math.sin(Math.toRadians(x1))) * 100) / 4 + GeneralUtils.convertDpToPixel(150);
-        y2 = (((float) Math.sin(Math.toRadians(x2))) * 100) / 4 + GeneralUtils.convertDpToPixel(150);
-        y3 = (((float) Math.sin(Math.toRadians(x3))) * 100) / 4 + GeneralUtils.convertDpToPixel(150);
+        y1 = (((float) Math.sin(Math.toRadians(x1))) * 100) / 4 + GeneralUtils.convertDpToPixel(FAKE_Y_ORIGIN);
+        y2 = (((float) Math.sin(Math.toRadians(x2))) * 100) / 4 + GeneralUtils.convertDpToPixel(FAKE_Y_ORIGIN);
+        y3 = (((float) Math.sin(Math.toRadians(x3))) * 100) / 4 + GeneralUtils.convertDpToPixel(FAKE_Y_ORIGIN);
 
         plottingX = x1 * 1f;
         plottingX2 = x2 * 1f;
@@ -157,6 +158,7 @@ public class WindWeather extends RelativeLayout {
         public void run() {
             super.run();
             while (!stopThread) {
+
                 if (x1 <= getWidth()) {
                     Matrix matrix = new Matrix();
                     matrix.postRotate(rotation);
@@ -185,7 +187,6 @@ public class WindWeather extends RelativeLayout {
 
                 handler.sendEmptyMessage(MSG_INVALIDATE_VIEW);
             }
-
 
         }
     }
