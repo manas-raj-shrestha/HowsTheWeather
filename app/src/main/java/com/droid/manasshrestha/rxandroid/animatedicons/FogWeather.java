@@ -16,11 +16,26 @@ import com.droid.manasshrestha.rxandroid.GeneralUtils;
 import com.droid.manasshrestha.rxandroid.R;
 
 /**
- * Animated sunny weather icon
+ * Animated foggy weather icon
  */
 public class FogWeather extends RelativeLayout {
-    ImageView imageView;
-    Paint paint;
+    private ImageView imageView;
+    private Paint paint;
+
+    private int lineOneX1 = 10;
+    private int lineOneX2 = 165;
+    private int lineOneY1 = 30;
+    private int lineOneY2 = 30;
+
+    private int lineTwoX1 = 20;
+    private int lineTwoX2 = 175;
+    private int lineTwoY1 = 20;
+    private int lineTwoY2 = 20;
+
+    private int lineThreeX1 = 10;
+    private int lineThreeX2 = 165;
+    private int lineThreeY1 = 10;
+    private int lineThreeY2 = 10;
 
     public FogWeather(Context context) {
         this(context, null, 0);
@@ -63,36 +78,6 @@ public class FogWeather extends RelativeLayout {
         fogAnimationThread.start();
     }
 
-    private int lineOneX1 = 10;
-    private int lineOneX2 = 125;
-    private int lineOneY1 = 30;
-    private int lineOneY2 = 30;
-
-    private int lineTwoX1 = 20;
-    private int lineTwoX2 = 135;
-    private int lineTwoY1 = 20;
-    private int lineTwoY2 = 20;
-
-    private int lineThreeX1 = 30;
-    private int lineThreeX2 = 145;
-    private int lineThreeY1 = 10;
-    private int lineThreeY2 = 10;
-
-//    private int lineOneX1 = 10;
-//    private int lineOneX2 = 85;
-//    private int lineOneY1 = 30;
-//    private int lineOneY2 = 30;
-//
-//    private int lineTwoX1 = 20;
-//    private int lineTwoX2 = 95;
-//    private int lineTwoY1 = 20;
-//    private int lineTwoY2 = 20;
-//
-//    private int lineThreeX1 = 30;
-//    private int lineThreeX2 = 105;
-//    private int lineThreeY1 = 10;
-//    private int lineThreeY2 = 10;
-
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
@@ -112,11 +97,14 @@ public class FogWeather extends RelativeLayout {
                 imageView.getBottom() - GeneralUtils.convertDpToPixel(lineThreeY2), paint);
     }
 
+    /**
+     * Animation logic for fog lines
+     */
     private class FogAnimationThread extends Thread {
 
         boolean reverseLineOne = false;
         boolean reverseLineTwo = true;
-        boolean reverseLineThree = true;
+        boolean reverseLineThree = false;
 
         @Override
         public void run() {
