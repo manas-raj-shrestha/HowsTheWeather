@@ -74,26 +74,28 @@ public class WidgetCardsActivity extends AppCompatActivity {
             }
         };
 
-        final LocationCatcher locationCatcher = new LocationCatcher(this);
-        locationCatcher.getLocation(new LocationCatcher.LocationCallBack() {
-            @Override
-            public void onLocationNotFound() {
-                if (PrefUtils.getLastKnownLatitude() != 0.0) {
-                    RetrofitManager.getInstance().getWeatherForecastDaily(new LatLng(PrefUtils.getLastKnownLatitude(), PrefUtils.getLastKnownLongitude()), subscriber2);
-                } else {
-                    locationCatcher.showSettingsAlert();
-                }
-            }
+        RetrofitManager.getInstance().getWeatherForecastDaily(new LatLng(27.712228, 85.324416), subscriber2);
 
-            @Override
-            public void onLocationFound(GpsInfo location) {
-                if (location != null) {
-                    locationCatcher.cancelLocationCallback();
-                    RetrofitManager.getInstance().getWeatherForecastDaily(new LatLng(location.getLatitude(), location.getLongitude()), subscriber2);
-                    PrefUtils.setLastKnownLocation(location);
-                }
-            }
-        });
+//        final LocationCatcher locationCatcher = new LocationCatcher(this);
+//        locationCatcher.getLocation(new LocationCatcher.LocationCallBack() {
+//            @Override
+//            public void onLocationNotFound() {
+//                if (PrefUtils.getLastKnownLatitude() != 0.0) {
+//                    RetrofitManager.getInstance().getWeatherForecastDaily(new LatLng(PrefUtils.getLastKnownLatitude(), PrefUtils.getLastKnownLongitude()), subscriber2);
+//                } else {
+//                    locationCatcher.showSettingsAlert();
+//                }
+//            }
+//
+//            @Override
+//            public void onLocationFound(GpsInfo location) {
+//                if (location != null) {
+//                    locationCatcher.cancelLocationCallback();
+//                    RetrofitManager.getInstance().getWeatherForecastDaily(new LatLng(location.getLatitude(), location.getLongitude()), subscriber2);
+//                    PrefUtils.setLastKnownLocation(location);
+//                }
+//            }
+//        });
 
     }
 }
