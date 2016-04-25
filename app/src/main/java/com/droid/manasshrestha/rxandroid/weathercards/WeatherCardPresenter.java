@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import com.droid.manasshrestha.rxandroid.animatedicons.ClearWeather;
 import com.droid.manasshrestha.rxandroid.animatedicons.CloudyWeather;
 import com.droid.manasshrestha.rxandroid.animatedicons.FogWeather;
+import com.droid.manasshrestha.rxandroid.animatedicons.PartlyCloudyWeather;
 import com.droid.manasshrestha.rxandroid.animatedicons.RainyWeather;
 import com.droid.manasshrestha.rxandroid.animatedicons.SleetWeather;
 import com.droid.manasshrestha.rxandroid.animatedicons.SnowWeather;
@@ -201,7 +202,7 @@ public class WeatherCardPresenter {
                 break;
             case "partly-cloudy-day":
             case "partly-cloudy-night":
-                viewGroup = new ClearWeather(context);
+                viewGroup = new PartlyCloudyWeather(context);
                 break;
         }
 
