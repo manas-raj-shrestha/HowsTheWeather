@@ -67,13 +67,13 @@ public class WidgetCardsActivity extends AppCompatActivity {
                         InkPageIndicator inkPageIndicator = (InkPageIndicator) findViewById(R.id.indicator);
                         inkPageIndicator.setViewPager(viewPager);
                         String[] strings = example.get(0).getTimezone().split("/");
-                        Log.e("splitted", String.valueOf(strings.length));
                         tvCityName.setText(strings[1].toUpperCase());
                     }
                 }, 1000);
             }
         };
 
+        //TODO remove this line
         RetrofitManager.getInstance().getWeatherForecastDaily(new LatLng(27.712228, 85.324416), subscriber2);
 
 //        final LocationCatcher locationCatcher = new LocationCatcher(this);
@@ -81,6 +81,7 @@ public class WidgetCardsActivity extends AppCompatActivity {
 //            @Override
 //            public void onLocationNotFound() {
 //                if (PrefUtils.getLastKnownLatitude() != 0.0) {
+//                    //use the location from shared preferences if location was not found
 //                    RetrofitManager.getInstance().getWeatherForecastDaily(new LatLng(PrefUtils.getLastKnownLatitude(), PrefUtils.getLastKnownLongitude()), subscriber2);
 //                } else {
 //                    locationCatcher.showSettingsAlert();
@@ -92,6 +93,8 @@ public class WidgetCardsActivity extends AppCompatActivity {
 //                if (location != null) {
 //                    locationCatcher.cancelLocationCallback();
 //                    RetrofitManager.getInstance().getWeatherForecastDaily(new LatLng(location.getLatitude(), location.getLongitude()), subscriber2);
+//
+//                    //save the new location as last known location
 //                    PrefUtils.setLastKnownLocation(location);
 //                }
 //            }
