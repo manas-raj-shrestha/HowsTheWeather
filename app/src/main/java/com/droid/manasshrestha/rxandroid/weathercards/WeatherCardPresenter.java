@@ -2,11 +2,16 @@ package com.droid.manasshrestha.rxandroid.weathercards;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.support.v4.content.ContextCompat;
 import android.text.format.DateFormat;
+import android.view.ViewGroup;
 
-import com.droid.manasshrestha.rxandroid.R;
+import com.droid.manasshrestha.rxandroid.animatedicons.ClearWeather;
+import com.droid.manasshrestha.rxandroid.animatedicons.CloudyWeather;
+import com.droid.manasshrestha.rxandroid.animatedicons.FogWeather;
+import com.droid.manasshrestha.rxandroid.animatedicons.RainyWeather;
+import com.droid.manasshrestha.rxandroid.animatedicons.SleetWeather;
+import com.droid.manasshrestha.rxandroid.animatedicons.SnowWeather;
+import com.droid.manasshrestha.rxandroid.animatedicons.WindWeather;
 import com.droid.manasshrestha.rxandroid.weathermodels.HourlyData;
 import com.droid.manasshrestha.rxandroid.weathermodels.Temp;
 import com.droid.manasshrestha.rxandroid.weathermodels.WeatherModel;
@@ -168,38 +173,39 @@ public class WeatherCardPresenter {
      */
     private void pickWeatherIcon() {
         String weatherCondition = forecastList.getDaily().getData().get(0).getIcon();
+        ViewGroup viewGroup = null;
 //        Drawable weatherIcon = ContextCompat.getDrawable(context, R.drawable.sunny);
 
-//        switch (weatherCondition) {
-//            case "clear-day":
-//            case "clear-night":
-//                weatherIcon = ContextCompat.getDrawable(context, R.drawable.sunny);
-//                break;
-//            case "rain":
-//                weatherIcon = ContextCompat.getDrawable(context, R.drawable.rainy);
-//                break;
-//            case "snow":
-//                weatherIcon = ContextCompat.getDrawable(context, R.drawable.snow);
-//                break;
-//            case "sleet":
-//                weatherIcon = ContextCompat.getDrawable(context, R.drawable.sleet);
-//                break;
-//            case "wind":
-//                weatherIcon = ContextCompat.getDrawable(context, R.drawable.wind);
-//                break;
-//            case "fog":
-//                weatherIcon = ContextCompat.getDrawable(context, R.drawable.fog);
-//                break;
-//            case "cloudy":
-//                weatherIcon = ContextCompat.getDrawable(context, R.drawable.clouds);
-//                break;
-//            case "partly-cloudy-day":
-//            case "partly-cloudy-night":
-//                weatherIcon = ContextCompat.getDrawable(context, R.drawable.partly_cloudy);
-//                break;
-//        }
+        switch (weatherCondition) {
+            case "clear-day":
+            case "clear-night":
+                viewGroup = new ClearWeather(context);
+                break;
+            case "rain":
+                viewGroup = new RainyWeather(context);
+                break;
+            case "snow":
+                viewGroup = new SnowWeather(context);
+                break;
+            case "sleet":
+                viewGroup = new SleetWeather(context);
+                break;
+            case "wind":
+                viewGroup = new WindWeather(context);
+                break;
+            case "fog":
+                viewGroup = new FogWeather(context);
+                break;
+            case "cloudy":
+                viewGroup = new CloudyWeather(context);
+                break;
+            case "partly-cloudy-day":
+            case "partly-cloudy-night":
+                viewGroup = new ClearWeather(context);
+                break;
+        }
 
-        weatherCardContract.setWeatherIcon(null);
+        weatherCardContract.setWeatherIcon(viewGroup);
     }
 
     /**

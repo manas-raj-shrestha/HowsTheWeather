@@ -1,6 +1,7 @@
 package com.droid.manasshrestha.rxandroid.weathercards;
 
 import android.graphics.drawable.Drawable;
+import android.view.ViewGroup;
 
 
 import com.droid.manasshrestha.rxandroid.weathermodels.Temp;
@@ -15,7 +16,7 @@ public interface WeatherCardContract {
     interface Views {
         void setWeekDay(String weekDay);
 
-        void setWeatherIcon(Drawable drawable);
+        void setWeatherIcon(ViewGroup viewGroup);
 
         void setHumidity(int humidity);
 

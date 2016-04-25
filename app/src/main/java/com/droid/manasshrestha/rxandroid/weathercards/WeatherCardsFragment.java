@@ -2,12 +2,10 @@ package com.droid.manasshrestha.rxandroid.weathercards;
 
 import android.animation.Animator;
 import android.animation.ValueAnimator;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,9 +18,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.droid.manasshrestha.rxandroid.R;
-import com.droid.manasshrestha.rxandroid.animatedicons.CloudyWeather;
-import com.droid.manasshrestha.rxandroid.animatedicons.FogWeather;
-import com.droid.manasshrestha.rxandroid.animatedicons.WindWeather;
 import com.droid.manasshrestha.rxandroid.weathermodels.Temp;
 import com.droid.manasshrestha.rxandroid.weathermodels.WeatherModel;
 
@@ -33,10 +28,10 @@ import lecho.lib.hellocharts.model.LineChartData;
 import lecho.lib.hellocharts.view.LineChartView;
 
 /**
- * Weather card fragment
+ * Contains individual weather cards
  */
 public class WeatherCardsFragment extends Fragment implements WeatherCardContract.Views {
-    static int count = 1;
+
     @Bind(R.id.tv_week_day)
     TextView tvWeekDay;
 
@@ -109,8 +104,7 @@ public class WeatherCardsFragment extends Fragment implements WeatherCardContrac
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.weather_card_fragment, container, false);
-        return view;
+        return inflater.inflate(R.layout.weather_card_fragment, container, false);
     }
 
     @Override
@@ -130,17 +124,12 @@ public class WeatherCardsFragment extends Fragment implements WeatherCardContrac
     }
 
     @Override
-    public void setWeatherIcon(Drawable drawable) {
+    public void setWeatherIcon(ViewGroup viewGroup) {
 
-        Log.e("count--", count + "");
-        count++;
-
-        CloudyWeather clearWeather = new CloudyWeather(getActivity());
         RelativeLayout.LayoutParams layoutParam = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        clearWeather.setLayoutParams(layoutParam);
+        viewGroup.setLayoutParams(layoutParam);
 
-        flAnimatedIcons.addView(clearWeather);
-//        ivWeatherIcon.setImageDrawable(drawable);
+        flAnimatedIcons.addView(viewGroup);
     }
 
     @Override
@@ -282,4 +271,5 @@ public class WeatherCardsFragment extends Fragment implements WeatherCardContrac
                 break;
         }
     }
+
 }

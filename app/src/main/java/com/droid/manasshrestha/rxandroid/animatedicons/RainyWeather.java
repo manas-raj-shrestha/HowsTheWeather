@@ -84,6 +84,7 @@ public class RainyWeather extends RelativeLayout {
         LayoutInflater.from(getContext()).inflate(R.layout.layout_card_front, this, false);
         paint.setColor(Color.WHITE);
         paint.setStrokeWidth(GeneralUtils.convertDpToPixel(LINE_STROKE_WIDTH));
+        paint.setStrokeCap(Paint.Cap.ROUND);
 
         AnimateRainThread animateRainThread = new AnimateRainThread();
         animateRainThread.start();

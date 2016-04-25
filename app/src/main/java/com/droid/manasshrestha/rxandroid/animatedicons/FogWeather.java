@@ -59,6 +59,10 @@ public class FogWeather extends RelativeLayout {
         }
     });
 
+    /**
+     * creates an image view and add it to the view group
+     * initializes paint objects for drawing
+     */
     private void setImageView() {
 
         imageView = new ImageView(getContext());
@@ -67,12 +71,13 @@ public class FogWeather extends RelativeLayout {
         imageView.setLayoutParams(layoutParams);
         this.addView(imageView);
         Glide.with(getContext()).load(R.drawable.clouds).into(imageView);
+
         paint = new Paint();
         paint.setColor(Color.WHITE);
         paint.setAntiAlias(true);
         paint.setFlags(Paint.ANTI_ALIAS_FLAG);
         paint.setStrokeWidth(GeneralUtils.convertDpToPixel(3));
-        paint.setStrokeCap(Paint.Cap.BUTT);
+        paint.setStrokeCap(Paint.Cap.ROUND);
 
         FogAnimationThread fogAnimationThread = new FogAnimationThread();
         fogAnimationThread.start();
