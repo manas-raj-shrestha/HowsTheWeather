@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.droid.manasshrestha.rxandroid.R;
+import com.droid.manasshrestha.rxandroid.animatedicons.CloudyWeather;
 import com.droid.manasshrestha.rxandroid.animatedicons.FogWeather;
 import com.droid.manasshrestha.rxandroid.animatedicons.WindWeather;
 import com.droid.manasshrestha.rxandroid.weathermodels.Temp;
@@ -134,7 +135,7 @@ public class WeatherCardsFragment extends Fragment implements WeatherCardContrac
         Log.e("count--", count + "");
         count++;
 
-        FogWeather clearWeather = new FogWeather(getActivity());
+        CloudyWeather clearWeather = new CloudyWeather(getActivity());
         RelativeLayout.LayoutParams layoutParam = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         clearWeather.setLayoutParams(layoutParam);
 
