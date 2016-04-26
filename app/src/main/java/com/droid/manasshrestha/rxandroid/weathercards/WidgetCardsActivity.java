@@ -9,9 +9,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.droid.manasshrestha.rxandroid.R;
-import com.droid.manasshrestha.rxandroid.data.PrefUtils;
-import com.droid.manasshrestha.rxandroid.locationhandlers.GpsInfo;
-import com.droid.manasshrestha.rxandroid.locationhandlers.LocationCatcher;
 import com.droid.manasshrestha.rxandroid.retrofit.RetrofitManager;
 import com.droid.manasshrestha.rxandroid.weathermodels.WeatherModel;
 import com.google.android.gms.maps.model.LatLng;
@@ -22,6 +19,7 @@ import java.util.ArrayList;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import pl.droidsonroids.gif.GifImageView;
+import rx.Observable;
 import rx.Subscriber;
 
 /**

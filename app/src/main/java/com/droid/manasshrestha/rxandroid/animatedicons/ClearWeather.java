@@ -1,8 +1,8 @@
 package com.droid.manasshrestha.rxandroid.animatedicons;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
@@ -11,13 +11,29 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.droid.manasshrestha.rxandroid.R;
 
 /**
  * Animated sunny weather icon
  */
 public class ClearWeather extends RelativeLayout {
-    ImageView imageView;
+
+    private static final int ANIM_DURATION = 20000;
+    private static final float START_ANGLE = 0.0f;
+    private static final float END_ANGLE = 360.0f;
+    private static final float PIVOT_VALUE = 0.5f;
+    private static final int REPEAT_COUNT = -1;
+
+    private ImageView ivClearWeather;
+    private SimpleTarget target = new SimpleTarget<Bitmap>() {
+        @Override
+        public void onResourceReady(Bitmap bitmap, GlideAnimation glideAnimation) {
+            ivClearWeather.setImageBitmap(bitmap);
+        }
+    };
+
     public ClearWeather(Context context) {
         this(context, null, 0);
     }
@@ -31,38 +47,26 @@ public class ClearWeather extends RelativeLayout {
         setImageView();
     }
 
+    /**
+     * creates an image view and adds it to this view group
+     * animates the image view by rotate animation
+     */
     private void setImageView() {
 
-        imageView = new ImageView(getContext());
+        ivClearWeather = new ImageView(getContext());
         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        imageView.setLayoutParams(layoutParams);
-        this.addView(imageView);
-        Glide.with(getContext()).load(R.drawable.sunny).override(300,300).into(imageView);
+        ivClearWeather.setLayoutParams(layoutParams);
+        addView(ivClearWeather);
+        Glide.with(getContext()).load(R.drawable.sunny).asBitmap().into(target);
 
-        Animation animation = new RotateAnimation(0.0f, 360.0f,
-                Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,
-                0.5f);
+        Animation animation = new RotateAnimation(START_ANGLE, END_ANGLE,
+                Animation.RELATIVE_TO_SELF, PIVOT_VALUE, Animation.RELATIVE_TO_SELF,
+                PIVOT_VALUE);
         animation.setInterpolator(new LinearInterpolator());
-        animation.setDuration(20000);
-        animation.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
-                Log.e("asdasdasd", "start");
-            }
+        animation.setDuration(ANIM_DURATION);
 
-            @Override
-            public void onAnimationEnd(Animation animation) {
-
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-
-            }
-        });
-
-        animation.setRepeatCount(-1);
-        imageView.startAnimation(animation);
+        animation.setRepeatCount(REPEAT_COUNT);
+        ivClearWeather.startAnimation(animation);
 
     }
 

@@ -116,6 +116,7 @@ public class WeatherCardsFragment extends Fragment implements WeatherCardContrac
 
         Glide.with(this).load(R.drawable.water_drop).into(ivWaterDrop);
         Glide.with(this).load(R.drawable.clouds).into(ivClouds);
+
     }
 
     @Override

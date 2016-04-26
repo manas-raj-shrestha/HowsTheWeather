@@ -3,16 +3,17 @@ package com.droid.manasshrestha.rxandroid.weathercards;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.droid.manasshrestha.rxandroid.weathermodels.WeatherModel;
 
 import java.util.ArrayList;
 
-
 /**
- * Created by ManasShrestha on 3/28/16.
+ * pager adapter for weather cards in view pager
  */
 public class WeatherCardsAdapter extends FragmentPagerAdapter {
+
     private final static int WEEK_DAYS_COUNT = 7;
     private FragmentManager fragmentManager;
     private ArrayList<WeatherModel> forecastLists;
