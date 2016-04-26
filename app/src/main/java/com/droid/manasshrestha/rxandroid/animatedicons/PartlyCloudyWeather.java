@@ -19,7 +19,8 @@ import com.droid.manasshrestha.rxandroid.R;
  */
 public class PartlyCloudyWeather extends RelativeLayout {
 
-    ImageView imageView;
+    private ImageView imageView;
+    private static int check = 0;
 
     public PartlyCloudyWeather(Context context) {
         this(context, null, 0);
@@ -31,11 +32,25 @@ public class PartlyCloudyWeather extends RelativeLayout {
 
     public PartlyCloudyWeather(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+
         imageView = new ImageView(getContext());
-        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams((int)GeneralUtils.convertDpToPixel(140),(int)GeneralUtils.convertDpToPixel(140));
+        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams((int) GeneralUtils.convertDpToPixel(140), (int) GeneralUtils.convertDpToPixel(140));
         imageView.setLayoutParams(layoutParams);
         this.addView(imageView);
         Glide.with(getContext()).load(R.drawable.sunny).into(imageView);
+
+        ImageView imageView2 = new ImageView(getContext());
+        RelativeLayout.LayoutParams layoutParams2 = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        imageView2.setLayoutParams(layoutParams2);
+        this.addView(imageView2);
+        Glide.with(getContext()).load(R.drawable.clouds).into(imageView2);
+
+    }
+
+    @Override
+    protected void onFinishInflate() {
+        super.onFinishInflate();
+
 
         Animation animation = new RotateAnimation(0.0f, 360.0f,
                 Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,
@@ -45,7 +60,8 @@ public class PartlyCloudyWeather extends RelativeLayout {
         animation.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
-                Log.e("asdasdasd", "start");
+                Log.e("asdasdasd", "start partly cloudy " + check);
+                check = check + 1;
             }
 
             @Override
@@ -62,13 +78,6 @@ public class PartlyCloudyWeather extends RelativeLayout {
         animation.setRepeatCount(-1);
         imageView.startAnimation(animation);
 
-        ImageView imageView2 = new ImageView(getContext());
-        RelativeLayout.LayoutParams layoutParams2 = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        imageView2.setLayoutParams(layoutParams2);
-        this.addView(imageView2);
-        Glide.with(getContext()).load(R.drawable.clouds).into(imageView2);
-
 
     }
-
 }
