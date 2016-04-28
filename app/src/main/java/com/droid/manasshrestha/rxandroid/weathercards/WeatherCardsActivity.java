@@ -1,17 +1,15 @@
 package com.droid.manasshrestha.rxandroid.weathercards;
 
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.droid.manasshrestha.rxandroid.R;
-import com.droid.manasshrestha.rxandroid.retrofit.RetrofitManager;
 import com.droid.manasshrestha.rxandroid.weathermodels.WeatherModel;
-import com.google.android.gms.maps.model.LatLng;
 import com.pixelcan.inkpageindicator.InkPageIndicator;
 
 import java.util.ArrayList;
@@ -19,13 +17,12 @@ import java.util.ArrayList;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import pl.droidsonroids.gif.GifImageView;
-import rx.Observable;
-import rx.Subscriber;
+import rx.schedulers.Schedulers;
 
 /**
  * Contains view pager with daily weather info
  */
-public class WidgetCardsActivity extends AppCompatActivity {
+public class WeatherCardsActivity extends AppCompatActivity implements WeatherCardsActivityContract.Views {
 
     @Bind(R.id.vp_cards)
     ViewPager viewPager;
@@ -36,43 +33,21 @@ public class WidgetCardsActivity extends AppCompatActivity {
     @Bind(R.id.tv_city_name)
     TextView tvCityName;
 
+    @Bind(R.id.indicator)
+    InkPageIndicator inkPageIndicator;
+
+    private WeatherCardsActivityPresenter weatherCardsActivityPresenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.widget_cards_activity);
         ButterKnife.bind(this);
 
+        weatherCardsActivityPresenter = new WeatherCardsActivityPresenter(this);
+        weatherCardsActivityPresenter.startNetworkRequest();
+
         viewPager.setPageTransformer(true, new CardTiltTransformer());
-
-        final Subscriber subscriber2 = new Subscriber<ArrayList<WeatherModel>>() {
-            @Override
-            public void onCompleted() {
-
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                Log.e("error", e.toString());
-            }
-
-            @Override
-            public void onNext(final ArrayList<WeatherModel> example) {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        cloudLoader.setVisibility(View.GONE);
-                        viewPager.setAdapter(new WeatherCardsAdapter(getSupportFragmentManager(), example));
-                        InkPageIndicator inkPageIndicator = (InkPageIndicator) findViewById(R.id.indicator);
-                        inkPageIndicator.setViewPager(viewPager);
-                        String[] strings = example.get(0).getTimezone().split("/");
-                        tvCityName.setText(strings[1].toUpperCase());
-                    }
-                }, 1000);
-            }
-        };
-
-        //TODO remove this line
-        RetrofitManager.getInstance().getWeatherForecastDaily(new LatLng(27.712228, 85.324416), subscriber2);
 
 //        final LocationCatcher locationCatcher = new LocationCatcher(this);
 //        locationCatcher.getLocation(new LocationCatcher.LocationCallBack() {
@@ -98,5 +73,17 @@ public class WidgetCardsActivity extends AppCompatActivity {
 //            }
 //        });
 
+    }
+
+    @Override
+    public void setViewPagerData(ArrayList<WeatherModel> weatherModels) {
+        cloudLoader.setVisibility(View.GONE);
+        viewPager.setAdapter(new WeatherCardsAdapter(getSupportFragmentManager(), weatherModels));
+        inkPageIndicator.setViewPager(viewPager);
+    }
+
+    @Override
+    public void setUserLocation(String cityName) {
+        tvCityName.setText(cityName);
     }
 }

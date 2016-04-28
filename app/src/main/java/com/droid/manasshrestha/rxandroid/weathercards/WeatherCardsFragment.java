@@ -2,6 +2,7 @@ package com.droid.manasshrestha.rxandroid.weathercards;
 
 import android.animation.Animator;
 import android.animation.ValueAnimator;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -17,6 +18,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.droid.manasshrestha.rxandroid.R;
 import com.droid.manasshrestha.rxandroid.weathermodels.Temp;
 import com.droid.manasshrestha.rxandroid.weathermodels.WeatherModel;
@@ -95,6 +98,9 @@ public class WeatherCardsFragment extends Fragment implements WeatherCardContrac
     @Bind(R.id.chart)
     LineChartView lineChartView;
 
+    @Bind(R.id.iv_bg)
+    ImageView ivBg;
+
     WeatherModel forecastList;
     WeatherCardPresenter weatherCardPresenter;
 
@@ -149,9 +155,21 @@ public class WeatherCardsFragment extends Fragment implements WeatherCardContrac
     }
 
     @Override
-    public void setCardBackground(int colorId) {
-        cardContainerFront.setBackgroundColor(colorId);
+    public void setCardBackground(int colorId, int drawableId) {
+//        cardContainerFront.setBackgroundColor(colorId);
         cardContainerBack.setBackgroundColor(colorId);
+
+        Glide.with(this).load(drawableId).into(ivBg);
+
+        SimpleTarget simpleTarget = new SimpleTarget<Drawable>() {
+            @Override
+            public void onResourceReady(Drawable resource, GlideAnimation glideAnimation) {
+//cardContainerFront.setBackground();
+            }
+        };
+
+//        Glide.with(getContext()).load(R.drawable.sunny).asBitmap().into(cardContainerFront);
+
     }
 
     @Override

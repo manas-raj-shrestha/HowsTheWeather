@@ -24,7 +24,7 @@ public interface WeatherCardContract {
 
         void setClouds(int clouds);
 
-        void setCardBackground(int colorId);
+        void setCardBackground(int colorId,int drawableId);
 
         void setAtmosphericPressure(String pressure);
 

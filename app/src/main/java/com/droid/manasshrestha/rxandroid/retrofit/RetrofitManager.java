@@ -1,7 +1,5 @@
 package com.droid.manasshrestha.rxandroid.retrofit;
 
-import android.util.Log;
-
 import com.droid.manasshrestha.rxandroid.weathermodels.WeatherModel;
 import com.google.android.gms.maps.model.LatLng;
 
@@ -12,10 +10,8 @@ import retrofit.GsonConverterFactory;
 import retrofit.Retrofit;
 import retrofit.RxJavaCallAdapterFactory;
 import rx.Observable;
-import rx.Subscriber;
-import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Func7;
+import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
 /**
@@ -23,10 +19,12 @@ import rx.schedulers.Schedulers;
  * Manages the network calls
  */
 public class RetrofitManager {
-    //    private final static String BASE_URL = "http://api.openweathermap.org/data/2.5/";
+
     private final static String BASE_URL = "https://api.forecast.io/";
-    private final static String UNIT = "metric";
-    private final static String APP_ID = "c18f5a141f0911f9867030a2d9ee1ea3";
+    private final static String API_KEY = "6bf45156088e2afa94ad4bd23f793252";
+    private final static String UNIT = "si";
+    private final static int DAY_INCREMENT = 1;
+    private final static long UNIX_TIME_CONVERSION_CONSTANT = 1000L;
 
     private static RetrofitManager retrofitManager;
     private static Retrofit retrofit;
@@ -48,85 +46,72 @@ public class RetrofitManager {
         service = retrofit.create(RestApi.class);
     }
 
-//    public void getWeatherForecastByCityName(LatLng latLng, Subscriber subscriber) {
-//        Observable<ForecastModel> observable = service.getWeatherForecastObs(String.valueOf(latLng.latitude),
-//                String.valueOf(latLng.longitude),
-//                APP_ID, UNIT);
-//
-//        Subscription subscription = observable.subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .unsubscribeOn(Schedulers.io())
-//                .subscribe(subscriber);
-//    }
-
-    public void getWeatherForecastDaily(LatLng latLng, Subscriber subscriber) {
+    /**
+     * fetches json from seven api ends and zips it into a single array list
+     *
+     * @param latLng       latitude and longitude of user
+     * @param onNextAction action to be performed in subscribers onNext
+     * @param onError      action to be performed in subscribers onNext
+     */
+    public void getWeatherForecastDaily(LatLng latLng, Action1 onNextAction, Action1 onError) {
         Calendar c = Calendar.getInstance();
 
-        Observable<WeatherModel> observable = service.getWeatherDaily("6bf45156088e2afa94ad4bd23f793252",
+        Observable<WeatherModel> observable = service.getWeatherDaily(API_KEY,
                 String.valueOf(latLng.latitude) + "," + String.valueOf(latLng.longitude) + ","
-                        + c.getTimeInMillis() / 1000L,"si");
+                        + c.getTimeInMillis() / UNIX_TIME_CONVERSION_CONSTANT, UNIT);
 
-        c.add(Calendar.DATE, 1);
-        Observable<WeatherModel> observable2 = service.getWeatherDaily("6bf45156088e2afa94ad4bd23f793252",
+        c.add(Calendar.DATE, DAY_INCREMENT);
+        Observable<WeatherModel> observable2 = service.getWeatherDaily(API_KEY,
                 String.valueOf(latLng.latitude) + "," + String.valueOf(latLng.longitude) + ","
-                        + c.getTimeInMillis() / 1000L,"si");
+                        + c.getTimeInMillis() / UNIX_TIME_CONVERSION_CONSTANT, UNIT);
 
-        c.add(Calendar.DATE, 1);
-        Observable<WeatherModel> observable3 = service.getWeatherDaily("6bf45156088e2afa94ad4bd23f793252",
+        c.add(Calendar.DATE, DAY_INCREMENT);
+        Observable<WeatherModel> observable3 = service.getWeatherDaily(API_KEY,
                 String.valueOf(latLng.latitude) + "," + String.valueOf(latLng.longitude) + ","
-                        + c.getTimeInMillis() / 1000L,"si");
+                        + c.getTimeInMillis() / UNIX_TIME_CONVERSION_CONSTANT, UNIT);
 
-        c.add(Calendar.DATE, 1);
-        Observable<WeatherModel> observable4 = service.getWeatherDaily("6bf45156088e2afa94ad4bd23f793252",
+        c.add(Calendar.DATE, DAY_INCREMENT);
+        Observable<WeatherModel> observable4 = service.getWeatherDaily(API_KEY,
                 String.valueOf(latLng.latitude) + "," + String.valueOf(latLng.longitude) + ","
-                        + c.getTimeInMillis()/1000L,"si");
+                        + c.getTimeInMillis() / UNIX_TIME_CONVERSION_CONSTANT, UNIT);
 
-        c.add(Calendar.DATE, 1);
-        Observable<WeatherModel> observable5 = service.getWeatherDaily("6bf45156088e2afa94ad4bd23f793252",
+        c.add(Calendar.DATE, DAY_INCREMENT);
+        Observable<WeatherModel> observable5 = service.getWeatherDaily(API_KEY,
                 String.valueOf(latLng.latitude) + "," + String.valueOf(latLng.longitude) + ","
-                        + c.getTimeInMillis()/1000L,"si");
+                        + c.getTimeInMillis() / UNIX_TIME_CONVERSION_CONSTANT, UNIT);
 
-        c.add(Calendar.DATE, 1);
-        Observable<WeatherModel> observable6 = service.getWeatherDaily("6bf45156088e2afa94ad4bd23f793252",
+        c.add(Calendar.DATE, DAY_INCREMENT);
+        Observable<WeatherModel> observable6 = service.getWeatherDaily(API_KEY,
                 String.valueOf(latLng.latitude) + "," + String.valueOf(latLng.longitude) + ","
-                        + c.getTimeInMillis()/1000L,"si");
+                        + c.getTimeInMillis() / UNIX_TIME_CONVERSION_CONSTANT, UNIT);
 
-        c.add(Calendar.DATE, 1);
-        Observable<WeatherModel> observable7 = service.getWeatherDaily("6bf45156088e2afa94ad4bd23f793252",
+        c.add(Calendar.DATE, DAY_INCREMENT);
+        Observable<WeatherModel> observable7 = service.getWeatherDaily(API_KEY,
                 String.valueOf(latLng.latitude) + "," + String.valueOf(latLng.longitude) + ","
-                        + c.getTimeInMillis()/1000L,"si");
+                        + c.getTimeInMillis() / UNIX_TIME_CONVERSION_CONSTANT, UNIT);
 
         Observable observable1 = Observable.zip(observable, observable2, observable3, observable4,
-                observable5,observable6,observable7,
-                new Func7<WeatherModel, WeatherModel,WeatherModel,WeatherModel,WeatherModel,WeatherModel,WeatherModel, ArrayList<WeatherModel>>() {
+                observable5, observable6, observable7, (weatherModel, weatherModel2,
+                                                        weatherModel3, weatherModel4,
+                                                        weatherModel5, weatherModel6,
+                                                        weatherModel7) -> {
 
-                    @Override
-                    public ArrayList<WeatherModel> call(WeatherModel weath, WeatherModel weath2, WeatherModel weath3, WeatherModel weath4, WeatherModel weath5, WeatherModel weath6, WeatherModel weath7) {
-                        Log.e("weath1"," "+weath.getDaily().getData().get(0).getCloudCover());
-                        Log.e("weath2"," "+weath2.getDaily().getData().get(0).getCloudCover());
-                        Log.e("weath3"," "+weath3.getDaily().getData().get(0).getCloudCover());
-                        Log.e("weath4"," "+weath4.getDaily().getData().get(0).getCloudCover());
-                        Log.e("weath5"," "+weath5.getDaily().getData().get(0).getCloudCover());
-                        Log.e("weath6"," "+weath6.getDaily().getData().get(0).getCloudCover());
-                        Log.e("weath7"," "+weath7.getDaily().getData().get(0).getCloudCover());
+                    ArrayList<WeatherModel> weatherModels = new ArrayList<>();
+                    weatherModels.add(weatherModel);
+                    weatherModels.add(weatherModel2);
+                    weatherModels.add(weatherModel3);
+                    weatherModels.add(weatherModel4);
+                    weatherModels.add(weatherModel5);
+                    weatherModels.add(weatherModel6);
+                    weatherModels.add(weatherModel7);
 
-                        ArrayList<WeatherModel> weatherModels = new ArrayList<WeatherModel>();
-                        weatherModels.add(weath);
-                        weatherModels.add(weath2);
-                        weatherModels.add(weath3);
-                        weatherModels.add(weath4);
-                        weatherModels.add(weath5);
-                        weatherModels.add(weath6);
-                        weatherModels.add(weath7);
+                    return weatherModels;
+                });
 
-                        return weatherModels;
-                    }
-        });
-
-        Subscription subscription = observable1.subscribeOn(Schedulers.io())
+        observable1.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .unsubscribeOn(Schedulers.io())
-                .subscribe(subscriber);
+                .subscribe(onNextAction, onError);
     }
 
 

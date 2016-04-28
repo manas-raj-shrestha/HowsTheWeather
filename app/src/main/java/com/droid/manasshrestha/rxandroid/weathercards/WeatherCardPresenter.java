@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.text.format.DateFormat;
 import android.view.ViewGroup;
 
+import com.droid.manasshrestha.rxandroid.R;
 import com.droid.manasshrestha.rxandroid.animatedicons.ClearWeather;
 import com.droid.manasshrestha.rxandroid.animatedicons.CloudyWeather;
 import com.droid.manasshrestha.rxandroid.animatedicons.FogWeather;
@@ -128,36 +129,45 @@ public class WeatherCardPresenter {
     private void setCardBackground() {
         String weatherCondition = forecastList.getDaily().getData().get(0).getIcon();
         int colorId = Color.parseColor("#ffeb3b");
+        int drawableId = R.drawable.clearsky_bg;
         switch (weatherCondition) {
             case "clear-day":
             case "clear-night":
                 colorId = Color.parseColor("#ffeb3b");
+                drawableId = R.drawable.clearsky_bg;
                 break;
             case "rain":
                 colorId = Color.parseColor("#3F51B5");
+                drawableId = R.drawable.rainy_bg;
                 break;
             case "snow":
                 colorId = Color.parseColor("#607d8b");
+                drawableId = R.drawable.snow_bg;
                 break;
             case "sleet":
                 colorId = Color.parseColor("#607d8b");
+                drawableId = R.drawable.sleet_bg;
                 break;
             case "wind":
                 colorId = Color.parseColor("#607d8b");
+                drawableId = R.drawable.clearsky_bg;
                 break;
             case "fog":
                 colorId = Color.parseColor("#607d8b");
+                drawableId = R.drawable.fog_bg;
                 break;
             case "cloudy":
                 colorId = Color.parseColor("#607d8b");
+                drawableId = R.drawable.cloudy_bg;
                 break;
             case "partly-cloudy-day":
             case "partly-cloudy-night":
                 colorId = Color.parseColor("#607d8b");
+                drawableId = R.drawable.partialcloud_bg;
                 break;
         }
 
-        weatherCardContract.setCardBackground(colorId);
+        weatherCardContract.setCardBackground(colorId,drawableId);
     }
 
     /**

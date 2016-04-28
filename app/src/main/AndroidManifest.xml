@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:name=".WeatherApplication"
         android:theme="@style/AppTheme">
-        <activity android:name=".weathercards.WidgetCardsActivity">
+        <activity android:name=".weathercards.WeatherCardsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
