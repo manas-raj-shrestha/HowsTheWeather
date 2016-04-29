@@ -24,25 +24,25 @@ public class FogWeather extends RelativeLayout {
     private static final int MSG_INVALIDATE_VIEW = 0;
     private static final int DELTA = 1;
     private static final int LINE_MARGIN = 10;
-    private static final int STROKE_WIDTH = 3;
+    private static final int STROKE_WIDTH = 2;
 
     private ImageView imageView;
     private Paint paint;
 
     private int lineOneX1 = 10;
-    private int lineOneX2 = 165;
-    private int lineOneY1 = 30;
-    private int lineOneY2 = 30;
+    private int lineOneX2 = 115;
+    private int lineOneY1 = 25;
+    private int lineOneY2 = 25;
 
     private int lineTwoX1 = 20;
-    private int lineTwoX2 = 175;
-    private int lineTwoY1 = 20;
-    private int lineTwoY2 = 20;
+    private int lineTwoX2 = 125;
+    private int lineTwoY1 = 18;
+    private int lineTwoY2 = 18;
 
     private int lineThreeX1 = 10;
-    private int lineThreeX2 = 165;
-    private int lineThreeY1 = 10;
-    private int lineThreeY2 = 10;
+    private int lineThreeX2 = 115;
+    private int lineThreeY1 = 11;
+    private int lineThreeY2 = 11;
 
     public FogWeather(Context context) {
         this(context, null, 0);

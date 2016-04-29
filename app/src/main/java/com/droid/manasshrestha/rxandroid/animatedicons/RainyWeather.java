@@ -38,13 +38,13 @@ public class RainyWeather extends RelativeLayout {
     private int lineOneStartY = 40;
     private int lineOneStopY = 20;
 
-    private int lineTwoStartX = 135;
-    private int lineTwoStopX = 120;
+    private int lineTwoStartX = 125;
+    private int lineTwoStopX = 110;
     private int lineTwoStartY = 80;
     private int lineTwoStopY = 60;
 
-    private int lineThreeStartX = 200;
-    private int lineThreeStopX = 185;
+    private int lineThreeStartX = 170;
+    private int lineThreeStopX = 155;
     private int lineThreeStartY = 80;
     private int lineThreeStopY = 60;
 
@@ -140,8 +140,8 @@ public class RainyWeather extends RelativeLayout {
                     lineTwoStartY = lineTwoStartY - LINE_TWO_DP_INCREMENT;
                     lineTwoStopY = lineTwoStopY - LINE_TWO_DP_INCREMENT;
                 } else {
-                    lineTwoStartX = 135;
-                    lineTwoStopX = 120;
+                    lineTwoStartX = 125;
+                    lineTwoStopX = 110;
                     lineTwoStartY = 80;
                     lineTwoStopY = 60;
                 }
@@ -152,8 +152,8 @@ public class RainyWeather extends RelativeLayout {
                     lineThreeStartY = lineThreeStartY - LINE_THREE_DP_INCREMENT;
                     lineThreeStopY = lineThreeStopY - LINE_THREE_DP_INCREMENT;
                 } else {
-                    lineThreeStartX = 200;
-                    lineThreeStopX = 185;
+                    lineThreeStartX = 170;
+                    lineThreeStopX = 155;
                     lineThreeStartY = 80;
                     lineThreeStopY = 60;
                 }

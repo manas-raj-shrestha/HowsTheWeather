@@ -64,6 +64,7 @@ public class PartlyCloudyWeather extends RelativeLayout {
 
         ImageView ivClouds = new ImageView(getContext());
         layoutParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        ivClouds.setPadding(0,(int)GeneralUtils.convertDpToPixel(30),0,0);
         ivClouds.setLayoutParams(layoutParams);
         this.addView(ivClouds);
         Glide.with(getContext()).load(R.drawable.clouds).into(ivClouds);

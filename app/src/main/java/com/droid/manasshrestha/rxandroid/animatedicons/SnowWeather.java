@@ -34,27 +34,27 @@ public class SnowWeather extends RelativeLayout {
     private ImageView imageView;
     private Paint paint = new Paint();
 
-    private int flakeOneStartX = 30;
-    private int flakeOneStopX = 40;
+    private int flakeOneStartX = 25;
+    private int flakeOneStopX = 35;
     private int flakeOneStartY = 40;
     private int flakeOneStopY = 30;
 
-    private int flakeTwoStartX = 90;
-    private int flakeTwoStopX = 100;
+    private int flakeTwoStartX = 65;
+    private int flakeTwoStopX = 75;
     private int flakeTwoStartY = 60;
     private int flakeTwoStopY = 50;
 
-    private int flakeThreeStartX = 150;
-    private int flakeThreeStopX = 160;
+    private int flakeThreeStartX = 115;
+    private int flakeThreeStopX = 125;
     private int flakeThreeStartY = 70;
     private int flakeThreeStopY = 60;
 
-    private int flakeOneXBoundaryLeft = 15;
-    private int flakeOneXBoundaryRight = 45;
-    private int flakeTwoXBoundaryLeft = 75;
-    private int flakeTwoXBoundaryRight = 105;
-    private int flakeThreeXBoundaryLeft = 135;
-    private int flakeThreeXBoundaryRight = 165;
+    private int flakeOneXBoundaryLeft = 10;
+    private int flakeOneXBoundaryRight = 40;
+    private int flakeTwoXBoundaryLeft = 50;
+    private int flakeTwoXBoundaryRight = 90;
+    private int flakeThreeXBoundaryLeft = 100;
+    private int flakeThreeXBoundaryRight = 130;
 
     private Bitmap bitmap;
     private RectF bitmapRect = new RectF();

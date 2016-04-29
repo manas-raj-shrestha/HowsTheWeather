@@ -46,6 +46,9 @@ public class WeatherCardPresenter {
      * process and set data to the views
      */
     public void setData() {
+
+        forecastList.getDaily().getData().get(0).setIcon("snow");
+
         parseDate();
         pickWeatherIcon();
         setAverageTemperature();
@@ -54,7 +57,6 @@ public class WeatherCardPresenter {
         setClouds();
         setTemperatures();
         setDataToChart();
-
 
         weatherCardContract.setAtmosphericPressure(forecastList.getDaily().getData().get(0).getPressure() + "hpa");
         weatherCardContract.setWindSpeed(forecastList.getDaily().getData().get(0).getWindSpeed() + "m/s");
@@ -167,7 +169,7 @@ public class WeatherCardPresenter {
                 break;
         }
 
-        weatherCardContract.setCardBackground(colorId,drawableId);
+        weatherCardContract.setCardBackground(colorId, drawableId);
     }
 
     /**
