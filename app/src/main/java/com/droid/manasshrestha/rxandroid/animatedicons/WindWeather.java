@@ -25,7 +25,7 @@ public class WindWeather extends RelativeLayout {
     private static final int POST_DELAY_TIME = 40;
     private static final int MSG_INVALIDATE_VIEW = 0;
     private static final int ANGLE_INCREMENT = 10;
-    private static final int FAKE_Y_ORIGIN = 150;
+    private static final int FAKE_Y_ORIGIN = 100;
 
     private static final int LINE_STROKE_WIDTH = 2;
 

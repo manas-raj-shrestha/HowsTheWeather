@@ -47,7 +47,7 @@ public class WeatherCardPresenter {
      */
     public void setData() {
 
-        forecastList.getDaily().getData().get(0).setIcon("snow");
+        forecastList.getDaily().getData().get(0).setIcon("cloudy");
 
         parseDate();
         pickWeatherIcon();

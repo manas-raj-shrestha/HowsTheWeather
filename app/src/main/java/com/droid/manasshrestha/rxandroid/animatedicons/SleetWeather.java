@@ -38,40 +38,40 @@ public class SleetWeather extends RelativeLayout {
     private ImageView imageView;
     private Paint paint = new Paint();
 
-    private int flakeOneStartX = 30;
-    private int flakeOneStopX = 40;
+    private int flakeOneStartX = 25;
+    private int flakeOneStopX = 35;
     private int flakeOneStartY = 40;
     private int flakeOneStopY = 30;
 
-    private int flakeTwoStartX = 90;
-    private int flakeTwoStopX = 100;
+    private int flakeTwoStartX = 65;
+    private int flakeTwoStopX = 75;
     private int flakeTwoStartY = 60;
     private int flakeTwoStopY = 50;
 
-    private int flakeThreeStartX = 150;
-    private int flakeThreeStopX = 160;
+    private int flakeThreeStartX = 115;
+    private int flakeThreeStopX = 125;
     private int flakeThreeStartY = 70;
     private int flakeThreeStopY = 60;
 
-    private int flakeOneXBoundaryLeft = 15;
-    private int flakeOneXBoundaryRight = 45;
-    private int flakeTwoXBoundaryLeft = 75;
-    private int flakeTwoXBoundaryRight = 105;
-    private int flakeThreeXBoundaryLeft = 135;
-    private int flakeThreeXBoundaryRight = 165;
+    private int flakeOneXBoundaryLeft = 10;
+    private int flakeOneXBoundaryRight = 40;
+    private int flakeTwoXBoundaryLeft = 50;
+    private int flakeTwoXBoundaryRight = 90;
+    private int flakeThreeXBoundaryLeft = 100;
+    private int flakeThreeXBoundaryRight = 130;
 
     private int lineOneStartX = 30;
     private int lineOneStopX = 15;
     private int lineOneStartY = 40;
     private int lineOneStopY = 20;
 
-    private int lineTwoStartX = 135;
-    private int lineTwoStopX = 120;
+    private int lineTwoStartX = 125;
+    private int lineTwoStopX = 110;
     private int lineTwoStartY = 80;
     private int lineTwoStopY = 60;
 
-    private int lineThreeStartX = 200;
-    private int lineThreeStopX = 185;
+    private int lineThreeStartX = 170;
+    private int lineThreeStopX = 155;
     private int lineThreeStartY = 80;
     private int lineThreeStopY = 60;
 
@@ -113,6 +113,7 @@ public class SleetWeather extends RelativeLayout {
 
         LayoutInflater.from(getContext()).inflate(R.layout.layout_card_front, this, false);
         paint.setColor(Color.WHITE);
+        paint.setStrokeCap(Paint.Cap.ROUND);
         paint.setStrokeWidth(GeneralUtils.convertDpToPixel(LINE_STROKE_WIDTH));
 
         bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.snowflake);
@@ -266,8 +267,8 @@ public class SleetWeather extends RelativeLayout {
                     lineTwoStartY = lineTwoStartY - LINE_TWO_DP_INCREMENT;
                     lineTwoStopY = lineTwoStopY - LINE_TWO_DP_INCREMENT;
                 } else {
-                    lineTwoStartX = 135;
-                    lineTwoStopX = 120;
+                    lineTwoStartX = 125;
+                    lineTwoStopX = 110;
                     lineTwoStartY = 80;
                     lineTwoStopY = 60;
                 }
@@ -278,8 +279,8 @@ public class SleetWeather extends RelativeLayout {
                     lineThreeStartY = lineThreeStartY - LINE_THREE_DP_INCREMENT;
                     lineThreeStopY = lineThreeStopY - LINE_THREE_DP_INCREMENT;
                 } else {
-                    lineThreeStartX = 200;
-                    lineThreeStopX = 185;
+                    lineThreeStartX = 170;
+                    lineThreeStopX = 155;
                     lineThreeStartY = 80;
                     lineThreeStopY = 60;
                 }

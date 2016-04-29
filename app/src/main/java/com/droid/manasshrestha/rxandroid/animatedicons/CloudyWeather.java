@@ -6,10 +6,12 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.os.Handler;
-import android.os.Message;
 import android.util.AttributeSet;
 import android.widget.RelativeLayout;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.droid.manasshrestha.rxandroid.GeneralUtils;
 import com.droid.manasshrestha.rxandroid.R;
 
@@ -34,6 +36,14 @@ public class CloudyWeather extends RelativeLayout {
     private int rectStartY = 20;
     private int rectStopY = 20;
 
+    private SimpleTarget target = new SimpleTarget<Bitmap>() {
+        @Override
+        public void onResourceReady(Bitmap bitmap, GlideAnimation glideAnimation) {
+            cloudBitmap = bitmap;
+            setWillNotDraw(false);
+        }
+    };
+
     public CloudyWeather(Context context) {
         this(context, null, 0);
     }
@@ -44,21 +54,18 @@ public class CloudyWeather extends RelativeLayout {
 
     public CloudyWeather(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        setWillNotDraw(false);
 
         paint.setStyle(Paint.Style.STROKE);
-        cloudBitmap = GeneralUtils.decodeSampledBitmapFromResource(getResources(), R.drawable.clouds, IMAGE_WIDTH, IMAGE_HEIGHT);
 
         CloudsAnimationThread cloudsAnimationThread = new CloudsAnimationThread();
         cloudsAnimationThread.start();
+
+        Glide.with(getContext()).load(R.drawable.clouds).asBitmap().into(target);
     }
 
-    Handler handler = new Handler(new Handler.Callback() {
-        @Override
-        public boolean handleMessage(Message message) {
-            invalidate();
-            return true;
-        }
+    Handler handler = new Handler((message) -> {
+        invalidate();
+        return true;
     });
 
     @Override
