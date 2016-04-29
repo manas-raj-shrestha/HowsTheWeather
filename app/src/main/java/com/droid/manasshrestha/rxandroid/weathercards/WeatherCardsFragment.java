@@ -101,6 +101,9 @@ public class WeatherCardsFragment extends Fragment implements WeatherCardContrac
     @Bind(R.id.iv_bg)
     ImageView ivBg;
 
+    @Bind(R.id.tv_weather_ticker)
+    TextView tvTicker;
+
     WeatherModel forecastList;
     WeatherCardPresenter weatherCardPresenter;
 
@@ -204,6 +207,11 @@ public class WeatherCardsFragment extends Fragment implements WeatherCardContrac
     public void setLineSetData(LineChartData lineChartData) {
         lineChartView.setLineChartData(lineChartData);
         lineChartView.setInteractive(true);
+    }
+
+    @Override
+    public void setWeatherTicker(String weatherTicker) {
+        tvTicker.setText(weatherTicker);
     }
 
     private void flipCard(final View currentView, final View nextView) {

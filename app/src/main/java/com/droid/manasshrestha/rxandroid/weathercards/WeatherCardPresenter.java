@@ -2,6 +2,7 @@ package com.droid.manasshrestha.rxandroid.weathercards;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
 import android.text.format.DateFormat;
 import android.view.ViewGroup;
 
@@ -14,6 +15,8 @@ import com.droid.manasshrestha.rxandroid.animatedicons.RainyWeather;
 import com.droid.manasshrestha.rxandroid.animatedicons.SleetWeather;
 import com.droid.manasshrestha.rxandroid.animatedicons.SnowWeather;
 import com.droid.manasshrestha.rxandroid.animatedicons.WindWeather;
+import com.droid.manasshrestha.rxandroid.data.Constants;
+import com.droid.manasshrestha.rxandroid.weathermodels.DailyData;
 import com.droid.manasshrestha.rxandroid.weathermodels.HourlyData;
 import com.droid.manasshrestha.rxandroid.weathermodels.Temp;
 import com.droid.manasshrestha.rxandroid.weathermodels.WeatherModel;
@@ -32,14 +35,20 @@ import lecho.lib.hellocharts.model.PointValue;
  */
 public class WeatherCardPresenter {
 
-    WeatherCardContract.Views weatherCardContract;
-    WeatherModel forecastList;
-    Context context;
+    private static final String DAY_FORMAT = "EEEE";
+    private static final String TIME_FORMAT = "HH:mm";
+    private static final int MS_CONSTANT = 1000;
+
+    private WeatherCardContract.Views weatherCardContract;
+    private WeatherModel forecastList;
+    private DailyData dailyData;
+    private Context context;
 
     public WeatherCardPresenter(Context context, WeatherCardContract.Views weatherCardContract, WeatherModel forecastList) {
         this.context = context;
         this.weatherCardContract = weatherCardContract;
         this.forecastList = forecastList;
+        dailyData = forecastList.getDaily().getData().get(0);
     }
 
     /**
@@ -47,22 +56,85 @@ public class WeatherCardPresenter {
      */
     public void setData() {
 
-        forecastList.getDaily().getData().get(0).setIcon("cloudy");
+        setWeatherVariants();
 
         parseDate();
-        pickWeatherIcon();
         setAverageTemperature();
-        setCardBackground();
         setHumidity();
         setClouds();
         setTemperatures();
         setDataToChart();
 
-        weatherCardContract.setAtmosphericPressure(forecastList.getDaily().getData().get(0).getPressure() + "hpa");
-        weatherCardContract.setWindSpeed(forecastList.getDaily().getData().get(0).getWindSpeed() + "m/s");
-        weatherCardContract.setWindDirection(forecastList.getDaily().getData().get(0).getWindBearing() + "degree");
+        weatherCardContract.setAtmosphericPressure(dailyData.getPressure() + "hpa");
+        weatherCardContract.setWindSpeed(dailyData.getWindSpeed() + "m/s");
+        weatherCardContract.setWindDirection(dailyData.getWindBearing() + "degree");
 
-        weatherCardContract.setWeatherDesc(forecastList.getDaily().getData().get(0).getSummary());
+        weatherCardContract.setWeatherDesc(dailyData.getSummary());
+    }
+
+    private void setWeatherVariants() {
+        String weatherCondition = dailyData.getIcon();
+        int colorId = Color.parseColor("#ffeb3b");
+        int drawableId = R.drawable.clearsky_bg;
+        String weatherTicker = "";
+        ViewGroup viewGroup = null;
+
+        switch (weatherCondition) {
+            case Constants.KEY_CLEAR_DAY:
+            case Constants.KEY_CLEAR_NIGHT:
+                colorId = ContextCompat.getColor(context, R.color.colorClear);
+                drawableId = R.drawable.clearsky_bg;
+                viewGroup = new ClearWeather(context);
+                weatherTicker = context.getString(R.string.txt_clear);
+                break;
+            case Constants.KEY_RAIN:
+                colorId = ContextCompat.getColor(context, R.color.colorRain);
+                drawableId = R.drawable.rainy_bg;
+                viewGroup = new RainyWeather(context);
+                weatherTicker = context.getString(R.string.txt_rainy);
+                break;
+            case Constants.KEY_SNOW:
+                colorId = ContextCompat.getColor(context, R.color.colorSnow);
+                drawableId = R.drawable.snow_bg;
+                viewGroup = new SnowWeather(context);
+                weatherTicker = context.getString(R.string.txt_snow);
+                break;
+            case Constants.KEY_SLEET:
+                colorId = ContextCompat.getColor(context, R.color.colorSleet);
+                drawableId = R.drawable.sleet_bg;
+                viewGroup = new SleetWeather(context);
+                weatherTicker = context.getString(R.string.txt_sleet);
+                break;
+            case Constants.KEY_WIND:
+                colorId = ContextCompat.getColor(context, R.color.colorWind);
+                drawableId = R.drawable.clearsky_bg;
+                viewGroup = new WindWeather(context);
+                weatherTicker = context.getString(R.string.txt_windy);
+                break;
+            case Constants.KEY_FOG:
+                colorId = ContextCompat.getColor(context, R.color.colorFog);
+                drawableId = R.drawable.fog_bg;
+                viewGroup = new FogWeather(context);
+                weatherTicker = context.getString(R.string.txt_foggy);
+                break;
+            case Constants.KEY_CLOUDY:
+                colorId = ContextCompat.getColor(context, R.color.colorCloudy);
+                drawableId = R.drawable.cloudy_bg;
+                viewGroup = new CloudyWeather(context);
+                weatherTicker = context.getString(R.string.txt_cloudy);
+                break;
+            case Constants.KEY_PARTLY_CLOUDY_DAY:
+            case Constants.KEY_PARTLY_CLOUDY_NIGHT:
+                colorId = ContextCompat.getColor(context, R.color.colorPartlyCloudy);
+                drawableId = R.drawable.partialcloud_bg;
+                viewGroup = new PartlyCloudyWeather(context);
+                weatherTicker = context.getString(R.string.txt_partly_cloudy);
+                break;
+        }
+
+        weatherCardContract.setCardBackground(colorId, drawableId);
+        weatherCardContract.setWeatherIcon(viewGroup);
+        weatherCardContract.setWeatherTicker(weatherTicker);
     }
 
     /**
@@ -87,8 +159,8 @@ public class WeatherCardPresenter {
         Axis axisX = new Axis();
         Axis axisY = new Axis().setHasLines(true);
 
-        axisX.setName("Time");
-        axisY.setName("Temperature");
+        axisX.setName(context.getString(R.string.txt_time));
+        axisY.setName(context.getString(R.string.txt_temperature));
         data.setAxisXBottom(axisX);
         data.setAxisYLeft(axisY);
 
@@ -100,11 +172,11 @@ public class WeatherCardPresenter {
      */
     private void setTemperatures() {
         Temp temp = new Temp();
-        temp.setMaxTemp(forecastList.getDaily().getData().get(0).getTemperatureMax());
-        temp.setMinTemp(forecastList.getDaily().getData().get(0).getTemperatureMin());
+        temp.setMaxTemp(dailyData.getTemperatureMax());
+        temp.setMinTemp(dailyData.getTemperatureMin());
 
-        temp.setMaxTempTime(parseTime(forecastList.getDaily().getData().get(0).getTemperatureMinTime()));
-        temp.setMinTempTime(parseTime(forecastList.getDaily().getData().get(0).getTemperatureMaxTime()));
+        temp.setMaxTempTime(parseTime(dailyData.getTemperatureMinTime()));
+        temp.setMinTempTime(parseTime(dailyData.getTemperatureMaxTime()));
 
         weatherCardContract.setTemperature(temp);
     }
@@ -113,122 +185,34 @@ public class WeatherCardPresenter {
      * Calculate cloud percentage
      */
     private void setClouds() {
-        Double d = new Double(forecastList.getDaily().getData().get(0).getCloudCover() * 100);
-        weatherCardContract.setClouds(d.intValue());
+        Double clouds = new Double(dailyData.getCloudCover() * 100);
+        weatherCardContract.setClouds(clouds.intValue());
     }
 
     /**
      * Calculate humidity percentage
      */
     private void setHumidity() {
-        Double d = new Double(forecastList.getDaily().getData().get(0).getHumidity() * 100);
-        weatherCardContract.setHumidity(d.intValue());
-    }
-
-    /**
-     * select background color according to weather code id
-     */
-    private void setCardBackground() {
-        String weatherCondition = forecastList.getDaily().getData().get(0).getIcon();
-        int colorId = Color.parseColor("#ffeb3b");
-        int drawableId = R.drawable.clearsky_bg;
-        switch (weatherCondition) {
-            case "clear-day":
-            case "clear-night":
-                colorId = Color.parseColor("#ffeb3b");
-                drawableId = R.drawable.clearsky_bg;
-                break;
-            case "rain":
-                colorId = Color.parseColor("#3F51B5");
-                drawableId = R.drawable.rainy_bg;
-                break;
-            case "snow":
-                colorId = Color.parseColor("#607d8b");
-                drawableId = R.drawable.snow_bg;
-                break;
-            case "sleet":
-                colorId = Color.parseColor("#607d8b");
-                drawableId = R.drawable.sleet_bg;
-                break;
-            case "wind":
-                colorId = Color.parseColor("#607d8b");
-                drawableId = R.drawable.clearsky_bg;
-                break;
-            case "fog":
-                colorId = Color.parseColor("#607d8b");
-                drawableId = R.drawable.fog_bg;
-                break;
-            case "cloudy":
-                colorId = Color.parseColor("#607d8b");
-                drawableId = R.drawable.cloudy_bg;
-                break;
-            case "partly-cloudy-day":
-            case "partly-cloudy-night":
-                colorId = Color.parseColor("#607d8b");
-                drawableId = R.drawable.partialcloud_bg;
-                break;
-        }
-
-        weatherCardContract.setCardBackground(colorId, drawableId);
+        Double humidity = new Double(dailyData.getHumidity() * 100);
+        weatherCardContract.setHumidity(humidity.intValue());
     }
 
     /**
      * calculate average temperature
      */
     private void setAverageTemperature() {
-        int averageTemp = (int) (forecastList.getDaily().getData().get(0).getTemperatureMin() +
-                forecastList.getDaily().getData().get(0).getTemperatureMax()) / 2;
+        int averageTemp = (int) (dailyData.getTemperatureMin() +
+                dailyData.getTemperatureMax()) / 2;
         weatherCardContract.setAvgTemp(averageTemp);
-    }
-
-    /**
-     * pick weather icon from weather id
-     */
-    private void pickWeatherIcon() {
-        String weatherCondition = forecastList.getDaily().getData().get(0).getIcon();
-        ViewGroup viewGroup = null;
-//        Drawable weatherIcon = ContextCompat.getDrawable(context, R.drawable.sunny);
-
-        switch (weatherCondition) {
-            case "clear-day":
-            case "clear-night":
-                viewGroup = new ClearWeather(context);
-                break;
-            case "rain":
-                viewGroup = new RainyWeather(context);
-                break;
-            case "snow":
-                viewGroup = new SnowWeather(context);
-                break;
-            case "sleet":
-                viewGroup = new SleetWeather(context);
-                break;
-            case "wind":
-                viewGroup = new WindWeather(context);
-                break;
-            case "fog":
-                viewGroup = new FogWeather(context);
-                break;
-            case "cloudy":
-                viewGroup = new CloudyWeather(context);
-                break;
-            case "partly-cloudy-day":
-            case "partly-cloudy-night":
-                viewGroup = new PartlyCloudyWeather(context);
-                break;
-        }
-
-        weatherCardContract.setWeatherIcon(viewGroup);
     }
 
     /**
      * convert long date to readable format
      */
     private void parseDate() {
-        String longV = String.valueOf(forecastList.getDaily().getData().get(0).getTime() * 1000);
+        String longV = String.valueOf(dailyData.getTime() * MS_CONSTANT);
         long millisecond = Long.parseLong(longV);
-        String dayString = DateFormat.format("EEEE", new Date(millisecond)).toString();
-        String dateString = DateFormat.format("MM/dd/yyyy", new Date(millisecond)).toString();
+        String dayString = DateFormat.format(DAY_FORMAT, new Date(millisecond)).toString();
 
         weatherCardContract.setWeekDay(dayString.toUpperCase());
     }
@@ -237,11 +221,9 @@ public class WeatherCardPresenter {
      * convert long time to readable format
      */
     private String parseTime(long unixTime) {
-        String longV = String.valueOf(unixTime * 1000);
-        long millisecond = Long.parseLong(longV);
-        String timeString = DateFormat.format("HH:mm", new Date(millisecond)).toString();
+        long millisecond = Long.parseLong(String.valueOf(unixTime * MS_CONSTANT));
 
-        return timeString;
+        return DateFormat.format(TIME_FORMAT, new Date(millisecond)).toString();
     }
 
 }

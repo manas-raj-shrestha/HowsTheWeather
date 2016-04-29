@@ -3,4 +3,13 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#212121</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="colorRain">#3F51B5</color>
+    <color name="colorClear">#FFEB3B</color>
+    <color name="colorSnow">#607D8B</color>
+    <color name="colorSleet">#607d8b</color>
+    <color name="colorFog">#607d8b</color>
+    <color name="colorWind">#607d8b</color>
+    <color name="colorPartlyCloudy">#607d8b</color>
+    <color name="colorCloudy">#607d8b</color>
 </resources>

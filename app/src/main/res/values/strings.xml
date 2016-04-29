@@ -1,4 +1,15 @@
 <resources>
     <string name="app_name">Weather Now</string>
-    <string name="app_key_open_weather">c18f5a141f0911f9867030a2d9ee1ea3</string>
+
+    <string name="txt_clear">Clear</string>
+    <string name="txt_rainy">Rainy</string>
+    <string name="txt_snow">Snow</string>
+    <string name="txt_sleet">Sleet</string>
+    <string name="txt_windy">Windy</string>
+    <string name="txt_foggy">Foggy</string>
+    <string name="txt_cloudy">Cloudy</string>
+    <string name="txt_partly_cloudy">Partly Cloudy</string>
+
+    <string name="txt_time">Time</string>
+    <string name="txt_temperature">Temperature</string>
 </resources>

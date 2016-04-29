@@ -37,6 +37,8 @@ public interface WeatherCardContract {
         void setWeatherDesc(String desc);
 
         void setLineSetData(LineChartData lineChartData);
+
+        void setWeatherTicker(String weatherTicker);
     }
 
 }

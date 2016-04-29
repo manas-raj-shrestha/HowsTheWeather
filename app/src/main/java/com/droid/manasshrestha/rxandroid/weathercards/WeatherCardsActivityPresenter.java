@@ -38,4 +38,5 @@ public class WeatherCardsActivityPresenter implements WeatherCardsActivityContra
         //TODO remove this line
         RetrofitManager.getInstance().getWeatherForecastDaily(new LatLng(27.712228, 85.324416), onNextAction, onErrorAction);
     }
+
 }
