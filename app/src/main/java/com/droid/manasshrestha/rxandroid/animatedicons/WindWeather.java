@@ -12,6 +12,7 @@ import android.graphics.RectF;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.widget.RelativeLayout;
 
 import com.droid.manasshrestha.rxandroid.GeneralUtils;
@@ -24,7 +25,6 @@ public class WindWeather extends RelativeLayout {
 
     private static final int POST_DELAY_TIME = 40;
     private static final int MSG_INVALIDATE_VIEW = 0;
-    private static final int ANGLE_INCREMENT = 10;
     private static final int FAKE_Y_ORIGIN = 100;
 
     private static final int LINE_STROKE_WIDTH = 2;
@@ -37,6 +37,7 @@ public class WindWeather extends RelativeLayout {
     private Bitmap scaledBitmap;
     private Path path;
 
+    private int angleIncrement;
     private float plottingX;
     private float plottingX2;
     private float plottingX3;
@@ -76,6 +77,16 @@ public class WindWeather extends RelativeLayout {
 
     public WindWeather(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+
+        switch (getResources().getDisplayMetrics().densityDpi) {
+            case DisplayMetrics.DENSITY_HIGH:
+                angleIncrement = 5;
+                break;
+            default:
+                angleIncrement = 10;
+                break;
+        }
+
         setWillNotDraw(false);
         setImageView();
     }
@@ -120,9 +131,9 @@ public class WindWeather extends RelativeLayout {
      */
     private Path drawCurve() {
 
-        x3 = x3 + ANGLE_INCREMENT;
-        x1 = x1 + ANGLE_INCREMENT;
-        x2 = x2 + ANGLE_INCREMENT;
+        x3 = x3 + angleIncrement;
+        x1 = x1 + angleIncrement;
+        x2 = x2 + angleIncrement;
 
         //sin wave equation y = A*sin(x) A is amplitude and x must be in radians
         y1 = (((float) Math.sin(Math.toRadians(x1))) * 100) / 4 + GeneralUtils.convertDpToPixel(FAKE_Y_ORIGIN);

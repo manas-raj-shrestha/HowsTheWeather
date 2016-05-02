@@ -4,12 +4,12 @@
     <color name="colorPrimaryDark">#212121</color>
     <color name="colorAccent">#FF4081</color>
 
-    <color name="colorRain">#3F51B5</color>
-    <color name="colorClear">#FFEB3B</color>
-    <color name="colorSnow">#607D8B</color>
-    <color name="colorSleet">#607d8b</color>
-    <color name="colorFog">#607d8b</color>
-    <color name="colorWind">#607d8b</color>
-    <color name="colorPartlyCloudy">#607d8b</color>
-    <color name="colorCloudy">#607d8b</color>
+    <color name="colorRain">#447BF2</color>
+    <color name="colorClear">#2095f2</color>
+    <color name="colorSnow">#6862F2</color>
+    <color name="colorSleet">#745AF2</color>
+    <color name="colorFog">#5C6AF2</color>
+    <color name="colorWind">#447BF2</color>
+    <color name="colorPartlyCloudy">#2C8CF2</color>
+    <color name="colorCloudy">#3884f2</color>
 </resources>

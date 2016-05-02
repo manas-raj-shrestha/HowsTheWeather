@@ -35,6 +35,7 @@ import lecho.lib.hellocharts.model.PointValue;
  */
 public class WeatherCardPresenter {
 
+    private static int count = 1;
     private static final String DAY_FORMAT = "EEEE";
     private static final String TIME_FORMAT = "HH:mm";
     private static final int MS_CONSTANT = 1000;
@@ -55,6 +56,29 @@ public class WeatherCardPresenter {
      * process and set data to the views
      */
     public void setData() {
+
+//        if (count == 1) {
+//            dailyData.setIcon(Constants.KEY_CLOUDY);
+//            count = count + 1;
+//        } else if (count == 2) {
+//            dailyData.setIcon(Constants.KEY_SNOW);
+//            count = count + 1;
+//        } else if (count == 3) {
+//            dailyData.setIcon(Constants.KEY_WIND);
+//            count = count + 1;
+//        } else if (count == 4) {
+//            dailyData.setIcon(Constants.KEY_SLEET);
+//            count = count + 1;
+//        }else if (count == 5) {
+//            dailyData.setIcon(Constants.KEY_CLEAR_DAY);
+//            count = count + 1;
+//        }else if (count == 6) {
+//            dailyData.setIcon(Constants.KEY_PARTLY_CLOUDY_DAY);
+//            count = count + 1;
+//        }else if (count == 7) {
+//            dailyData.setIcon(Constants.KEY_RAIN);
+//            count = count + 1;
+//        }
 
         setWeatherVariants();
 

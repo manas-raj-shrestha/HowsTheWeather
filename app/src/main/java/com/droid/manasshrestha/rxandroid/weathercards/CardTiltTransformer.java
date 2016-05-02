@@ -4,6 +4,9 @@ import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
 
+import com.droid.manasshrestha.rxandroid.R;
+import com.droid.manasshrestha.rxandroid.WeatherApplication;
+
 /**
  * Card tilt view pager animation
  */
@@ -30,7 +33,7 @@ public class CardTiltTransformer implements ViewPager.PageTransformer {
                 view.setRotation(0);
                 view.setTranslationX(0);
             } else {
-                view.setTranslationX(position * 250f);
+                view.setTranslationX(position * WeatherApplication.getContext().getResources().getDimension(R.dimen.card_x_translation));
                 view.setRotation((position) * 25f);
             }
         } else if (position <= 1) { // (0,1]
