@@ -34,16 +34,23 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/rl_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <pl.droidsonroids.gif.GifImageView
-            android:id="@+id/gif_cloud_load"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="-100dp"
-            android:background="@drawable/cloud" />
+        <com.droid.manasshrestha.rxandroid.animatedicons.AnimatedLoading
+            android:id="@+id/animated_loading"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_centerInParent="true" />
+
+        <!--<pl.droidsonroids.gif.GifImageView-->
+        <!--android:id="@+id/gif_cloud_load"-->
+        <!--android:layout_width="100dp"-->
+        <!--android:layout_height="100dp"-->
+        <!--android:layout_centerInParent="true"-->
+        <!--android:layout_marginTop="-100dp"-->
+        <!--android:background="@drawable/cloud" />-->
 
         <com.pixelcan.inkpageindicator.InkPageIndicator
             android:id="@+id/indicator"

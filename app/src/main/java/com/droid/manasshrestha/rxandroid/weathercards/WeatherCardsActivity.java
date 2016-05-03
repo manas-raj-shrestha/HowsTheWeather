@@ -4,11 +4,12 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.droid.manasshrestha.rxandroid.R;
+import com.droid.manasshrestha.rxandroid.animatedicons.AnimatedLoading;
 import com.droid.manasshrestha.rxandroid.weathermodels.WeatherModel;
 import com.pixelcan.inkpageindicator.InkPageIndicator;
 
@@ -16,7 +17,6 @@ import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import pl.droidsonroids.gif.GifImageView;
 
 /**
  * Contains view pager with daily weather info
@@ -26,8 +26,14 @@ public class WeatherCardsActivity extends AppCompatActivity implements WeatherCa
     @Bind(R.id.vp_cards)
     ViewPager viewPager;
 
-    @Bind(R.id.gif_cloud_load)
-    GifImageView cloudLoader;
+//    @Bind(R.id.gif_cloud_load)
+//    GifImageView cloudLoader;
+
+    @Bind(R.id.rl_container)
+    RelativeLayout rlContainer;
+
+    @Bind(R.id.animated_loading)
+    AnimatedLoading animatedLoading;
 
     @Bind(R.id.tv_city_name)
     TextView tvCityName;
@@ -55,7 +61,7 @@ public class WeatherCardsActivity extends AppCompatActivity implements WeatherCa
 
     @Override
     public void setViewPagerData(ArrayList<WeatherModel> weatherModels) {
-        cloudLoader.setVisibility(View.GONE);
+        rlContainer.removeView(animatedLoading);
         viewPager.setAdapter(new WeatherCardsAdapter(getSupportFragmentManager(), weatherModels));
         inkPageIndicator.setViewPager(viewPager);
     }
