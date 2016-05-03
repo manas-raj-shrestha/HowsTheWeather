@@ -11,8 +11,11 @@ public interface WeatherCardsActivityContract {
 
     void startNetworkRequest();
 
+    void checkPermissions();
+
     interface Views {
         void setViewPagerData(ArrayList<WeatherModel> weatherModels);
+
         void setUserLocation(String cityName);
     }
 

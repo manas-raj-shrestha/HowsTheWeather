@@ -1,8 +1,16 @@
 package com.droid.manasshrestha.rxandroid.weathercards;
 
+import android.Manifest;
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.Handler;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
+import com.droid.manasshrestha.rxandroid.data.PrefUtils;
+import com.droid.manasshrestha.rxandroid.locationhandlers.GpsInfo;
+import com.droid.manasshrestha.rxandroid.locationhandlers.LocationCatcher;
 import com.droid.manasshrestha.rxandroid.retrofit.RetrofitManager;
 import com.droid.manasshrestha.rxandroid.weathermodels.WeatherModel;
 import com.google.android.gms.maps.model.LatLng;
@@ -16,12 +24,18 @@ import rx.functions.Action1;
  */
 public class WeatherCardsActivityPresenter implements WeatherCardsActivityContract {
 
+    public static final int MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 101;
+
     private static final int ADAPTER_SET_DELAY = 1000;
 
     private WeatherCardsActivityContract.Views views;
+    private LocationCatcher locationCatcher;
+    private Context context;
 
-    WeatherCardsActivityPresenter(WeatherCardsActivityContract.Views views) {
-        this.views = views;
+    WeatherCardsActivityPresenter(Context context) {
+        this.context = context;
+        this.views = (WeatherCardsActivityContract.Views) context;
+        locationCatcher = new LocationCatcher(context);
     }
 
     @Override
@@ -35,8 +49,52 @@ public class WeatherCardsActivityPresenter implements WeatherCardsActivityContra
 
         Action1<Exception> onErrorAction = (exception) -> Log.e("Exception :: ", exception.toString());
 
-        //TODO remove this line
-        RetrofitManager.getInstance().getWeatherForecastDaily(new LatLng(27.712228, 85.324416), onNextAction, onErrorAction);
+        locationCatcher.getLocation(new LocationCatcher.LocationCallBack() {
+            @Override
+            public void onLocationNotFound() {
+                if (PrefUtils.getLastKnownLatitude() != 0.0) {
+                    //use the location from shared preferences if location was not found
+                    RetrofitManager.getInstance().getWeatherForecastDaily(new LatLng(PrefUtils.getLastKnownLatitude(), PrefUtils.getLastKnownLongitude()), onNextAction, onErrorAction);
+                } else {
+                    locationCatcher.showSettingsAlert();
+                }
+            }
+
+            @Override
+            public void onLocationFound(GpsInfo location) {
+                if (location != null) {
+                    locationCatcher.cancelLocationCallback();
+                    RetrofitManager.getInstance().getWeatherForecastDaily(new LatLng(location.getLatitude(), location.getLongitude()), onNextAction, onErrorAction);
+
+                    //save the new location as last known location
+                    PrefUtils.setLastKnownLocation(location);
+                }
+            }
+        });
+    }
+
+    @Override
+    public void checkPermissions() {
+
+        if (ContextCompat.checkSelfPermission(context,
+                Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            if (ActivityCompat.shouldShowRequestPermissionRationale((WeatherCardsActivity) context,
+                    Manifest.permission.ACCESS_COARSE_LOCATION)) {
+                ActivityCompat.requestPermissions((WeatherCardsActivity) context,
+                        new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
+                        MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
+            } else {
+                ActivityCompat.requestPermissions((WeatherCardsActivity) context,
+                        new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
+                        MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
+            }
+
+        } else {
+            //App already has permission to access fine location
+            startNetworkRequest();
+        }
     }
 
 }
