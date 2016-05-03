@@ -8,23 +8,32 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.RectF;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 
 import com.droid.manasshrestha.rxandroid.GeneralUtils;
 import com.droid.manasshrestha.rxandroid.R;
 
 /**
- * Created by Manas on 5/3/2016.
+ * Animated loading icon
  */
 public class AnimatedLoading extends View {
 
-    RectF rectF = new RectF();
-    Bitmap cloudBitmap;
-    Paint paint = new Paint();
-    int layout_width;
-    int layout_height;
-    Path path = new Path();
+    private static final float ANGLE_INCREMENT = 2f;
+    private static final int DEFAULT_WIDTH = 100;
+    private static final int DEFAULT_HEIGHT = 100;
+    private static final int MAX_ANGLE = 380;
+    private static final int MIN_ANGLE = 0;
+    private static final int DELAY_TIME = 10;
+
+    private RectF rectF = new RectF();
+    private Bitmap cloudBitmap;
+    private Paint paint = new Paint();
+    private int layout_width;
+    private int layout_height;
+    private Path path = new Path();
+
+    private float sweepAngle = 0;
+    private boolean reverse = false;
 
     public AnimatedLoading(Context context) {
         this(context, null, 0);
@@ -45,21 +54,18 @@ public class AnimatedLoading extends View {
         };
 
         TypedArray ta = context.obtainStyledAttributes(attrs, attrsArray);
-        layout_width = ta.getDimensionPixelSize(2, (int) GeneralUtils.convertDpToPixel(200));
-        layout_height = ta.getDimensionPixelSize(3, (int) GeneralUtils.convertDpToPixel(200));
+        layout_width = ta.getDimensionPixelSize(2, (int) GeneralUtils.convertDpToPixel(DEFAULT_WIDTH));
+        layout_height = ta.getDimensionPixelSize(3, (int) GeneralUtils.convertDpToPixel(DEFAULT_HEIGHT));
 
-        cloudBitmap = GeneralUtils.decodeSampledBitmapFromResource(getResources(), R.drawable.cloud_loading, 200, 200);
+        cloudBitmap = GeneralUtils.decodeSampledBitmapFromResource(getResources(), R.drawable.cloud_loading, DEFAULT_WIDTH, DEFAULT_HEIGHT);
 
-//        rectF.set(0, 0, layout_width, layout_height);
         rectF.set(getPaddingLeft(), getPaddingTop(), layout_width - getPaddingRight(), layout_height - getPaddingBottom());
     }
-
-    float sweepAngle = 0;
-    boolean reverse = false;
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        path.reset();
 
         path.moveTo(layout_width / 2, layout_height / 2);
         path.addArc(rectF, 0, sweepAngle);
@@ -67,28 +73,18 @@ public class AnimatedLoading extends View {
         path.close();
 
         canvas.clipPath(path);
-//        canvas.drawBitmap(cloudBitmap, null, rectF, paint);
         canvas.drawBitmap(cloudBitmap, null, rectF, paint);
         if (!reverse) {
-            Log.e("not reverse", "not reverse");
-            sweepAngle = sweepAngle + 2f;
-//            canvas.drawPath(path,paint);
+            sweepAngle = sweepAngle + ANGLE_INCREMENT;
         } else {
-            Log.e("reverse", "reverse");
-            sweepAngle = sweepAngle - 2f;
-
+            sweepAngle = sweepAngle - ANGLE_INCREMENT;
         }
 
-        if (sweepAngle >= 360) {
-//            sweepAngle = 0f;
+        if (sweepAngle >= MAX_ANGLE || sweepAngle <= MIN_ANGLE) {
             reverse = !reverse;
-            path.reset();
-        } else if (sweepAngle <= 0) {
-            reverse = !reverse;
-            path.reset();
         }
 
-        postInvalidateDelayed(10);
+        postInvalidateDelayed(DELAY_TIME);
 
     }
 }

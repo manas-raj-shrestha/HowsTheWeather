@@ -1,9 +1,12 @@
 package com.droid.manasshrestha.rxandroid.weathermodels;
 
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
-public class WeatherModel {
+public class WeatherModel implements Parcelable {
 
     @SerializedName("latitude")
     private Double latitude;
@@ -28,6 +31,27 @@ public class WeatherModel {
 
     @SerializedName("flags")
     private Flags flags;
+
+    protected WeatherModel(Parcel in) {
+        latitude = in.readDouble();
+        longitude = in.readDouble();
+        timezone = in.readString();
+        offset = in.readDouble();
+        currently = in.readParcelable(Currently.class.getClassLoader());
+        hourly = in.readParcelable(Hourly.class.getClassLoader());
+    }
+
+    public static final Creator<WeatherModel> CREATOR = new Creator<WeatherModel>() {
+        @Override
+        public WeatherModel createFromParcel(Parcel in) {
+            return new WeatherModel(in);
+        }
+
+        @Override
+        public WeatherModel[] newArray(int size) {
+            return new WeatherModel[size];
+        }
+    };
 
     /**
      * @return The latitude
@@ -139,6 +163,16 @@ public class WeatherModel {
      */
     public void setFlags(Flags flags) {
         this.flags = flags;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+
     }
 
 }
