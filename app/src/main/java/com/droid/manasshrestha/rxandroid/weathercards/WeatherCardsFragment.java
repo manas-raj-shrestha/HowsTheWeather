@@ -105,11 +105,8 @@ public class WeatherCardsFragment extends Fragment implements WeatherCardContrac
         this.forecastList = forecastList;
     }
 
-//    public static WeatherCardsFragment getInstance(Bundle params) {
-//        WeatherCardsFragment vexPhotoListFragment = new WeatherCardsFragment();
-//        vexPhotoListFragment.setArguments(params);
-//        return vexPhotoListFragment;
-//    }
+    public WeatherCardsFragment() {
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

@@ -1,5 +1,7 @@
 package com.droid.manasshrestha.rxandroid.weathercards;
 
+import android.view.View;
+
 import com.droid.manasshrestha.rxandroid.weathermodels.WeatherModel;
 
 import java.util.ArrayList;
@@ -17,6 +19,8 @@ public interface WeatherCardsActivityContract {
         void setViewPagerData(ArrayList<WeatherModel> weatherModels);
 
         void setUserLocation(String cityName);
+
+        void setError(View errorView, String error);
     }
 
 }

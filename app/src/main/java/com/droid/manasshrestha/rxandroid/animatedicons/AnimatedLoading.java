@@ -57,7 +57,8 @@ public class AnimatedLoading extends View {
         layout_width = ta.getDimensionPixelSize(2, (int) GeneralUtils.convertDpToPixel(DEFAULT_WIDTH));
         layout_height = ta.getDimensionPixelSize(3, (int) GeneralUtils.convertDpToPixel(DEFAULT_HEIGHT));
 
-        cloudBitmap = GeneralUtils.decodeSampledBitmapFromResource(getResources(), R.drawable.cloud_loading, DEFAULT_WIDTH, DEFAULT_HEIGHT);
+        cloudBitmap = GeneralUtils.decodeSampledBitmapFromResource(getResources(), R.drawable.cloud_loading,
+                (int) GeneralUtils.convertDpToPixel(DEFAULT_WIDTH), (int) GeneralUtils.convertDpToPixel(DEFAULT_HEIGHT));
 
         rectF.set(getPaddingLeft(), getPaddingTop(), layout_width - getPaddingRight(), layout_height - getPaddingBottom());
     }

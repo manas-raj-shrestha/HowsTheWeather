@@ -4,9 +4,11 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.droid.manasshrestha.rxandroid.R;
 import com.droid.manasshrestha.rxandroid.animatedicons.AnimatedLoading;
@@ -26,9 +28,6 @@ public class WeatherCardsActivity extends AppCompatActivity implements WeatherCa
     @Bind(R.id.vp_cards)
     ViewPager viewPager;
 
-//    @Bind(R.id.gif_cloud_load)
-//    GifImageView cloudLoader;
-
     @Bind(R.id.rl_container)
     RelativeLayout rlContainer;
 
@@ -40,6 +39,9 @@ public class WeatherCardsActivity extends AppCompatActivity implements WeatherCa
 
     @Bind(R.id.indicator)
     InkPageIndicator inkPageIndicator;
+
+    @Bind(R.id.tv_error)
+    TextView tvError;
 
     private WeatherCardsActivityPresenter weatherCardsActivityPresenter;
 
@@ -72,6 +74,15 @@ public class WeatherCardsActivity extends AppCompatActivity implements WeatherCa
     }
 
     @Override
+    public void setError(View view, String errorMessage) {
+        tvError.setText(errorMessage);
+        tvError.setVisibility(View.VISIBLE);
+
+        rlContainer.removeView(animatedLoading);
+        rlContainer.addView(view);
+    }
+
+    @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[], int[] grantResults) {
         switch (requestCode) {
@@ -80,13 +91,16 @@ public class WeatherCardsActivity extends AppCompatActivity implements WeatherCa
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     weatherCardsActivityPresenter.startNetworkRequest();
-
                 } else {
-                    Toast.makeText(this, "Application need access to GPS to function properly.", Toast.LENGTH_SHORT).show();
-                    finish();
+//                    setError("Application need access to GPS to function properly. Please go to settings and allow location for Weather Now.");
                 }
                 return;
             }
         }
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        return super.onTouchEvent(event);
     }
 }

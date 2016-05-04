@@ -8,6 +8,8 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
+import com.droid.manasshrestha.rxandroid.GeneralUtils;
+import com.droid.manasshrestha.rxandroid.animatedicons.AnimatedNoConnection;
 import com.droid.manasshrestha.rxandroid.data.PrefUtils;
 import com.droid.manasshrestha.rxandroid.locationhandlers.GpsInfo;
 import com.droid.manasshrestha.rxandroid.locationhandlers.LocationCatcher;
@@ -40,37 +42,42 @@ public class WeatherCardsActivityPresenter implements WeatherCardsActivityContra
 
     @Override
     public void startNetworkRequest() {
+        if (GeneralUtils.isNetworkOnline(context)) {
+            Action1<ArrayList<WeatherModel>> onNextAction = (weatherModels) -> new Handler().postDelayed(() -> {
+                views.setViewPagerData(weatherModels);
+                String[] strings = weatherModels.get(0).getTimezone().split("/");
+                views.setUserLocation(strings[1].toUpperCase());
+            }, ADAPTER_SET_DELAY);
 
-        Action1<ArrayList<WeatherModel>> onNextAction = (weatherModels) -> new Handler().postDelayed(() -> {
-            views.setViewPagerData(weatherModels);
-            String[] strings = weatherModels.get(0).getTimezone().split("/");
-            views.setUserLocation(strings[1].toUpperCase());
-        }, ADAPTER_SET_DELAY);
+            Action1<Exception> onErrorAction = (exception) -> Log.e("Exception :: ", exception.toString());
 
-        Action1<Exception> onErrorAction = (exception) -> Log.e("Exception :: ", exception.toString());
-
-        locationCatcher.getLocation(new LocationCatcher.LocationCallBack() {
-            @Override
-            public void onLocationNotFound() {
-                if (PrefUtils.getLastKnownLatitude() != 0.0) {
-                    //use the location from shared preferences if location was not found
-                    RetrofitManager.getInstance().getWeatherForecastDaily(new LatLng(PrefUtils.getLastKnownLatitude(), PrefUtils.getLastKnownLongitude()), onNextAction, onErrorAction);
-                } else {
-                    locationCatcher.showSettingsAlert();
+            locationCatcher.getLocation(new LocationCatcher.LocationCallBack() {
+                @Override
+                public void onLocationNotFound() {
+                    if (PrefUtils.getLastKnownLatitude() != 0.0) {
+                        //use the location from shared preferences if location was not found
+                        RetrofitManager.getInstance().getWeatherForecastDaily(new LatLng(PrefUtils.getLastKnownLatitude(),
+                                PrefUtils.getLastKnownLongitude()), onNextAction, onErrorAction);
+                    } else {
+                        locationCatcher.showSettingsAlert();
+                    }
                 }
-            }
 
-            @Override
-            public void onLocationFound(GpsInfo location) {
-                if (location != null) {
-                    locationCatcher.cancelLocationCallback();
-                    RetrofitManager.getInstance().getWeatherForecastDaily(new LatLng(location.getLatitude(), location.getLongitude()), onNextAction, onErrorAction);
+                @Override
+                public void onLocationFound(GpsInfo location) {
+                    if (location != null) {
+                        locationCatcher.cancelLocationCallback();
+                        RetrofitManager.getInstance().getWeatherForecastDaily(new LatLng(location.getLatitude(),
+                                location.getLongitude()), onNextAction, onErrorAction);
 
-                    //save the new location as last known location
-                    PrefUtils.setLastKnownLocation(location);
+                        //save the new location as last known location
+                        PrefUtils.setLastKnownLocation(location);
+                    }
                 }
-            }
-        });
+            });
+        } else {
+            views.setError(new AnimatedNoConnection(context), "Please Check network connection. \n Double tap to try again.");
+        }
     }
 
     @Override

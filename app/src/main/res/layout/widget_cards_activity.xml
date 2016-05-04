@@ -34,15 +34,31 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/rl_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.droid.manasshrestha.rxandroid.animatedicons.AnimatedLoading
-            android:id="@+id/animated_loading"
+        <RelativeLayout
+            android:id="@+id/rl_container"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_centerInParent="true" />
+            android:layout_centerInParent="true">
+
+            <com.droid.manasshrestha.rxandroid.animatedicons.AnimatedLoading
+                android:id="@+id/animated_loading"
+                android:layout_width="100dp"
+                android:layout_height="100dp" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rl_container"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"
+            android:textColor="#727272"
+            android:visibility="gone" />
 
         <com.pixelcan.inkpageindicator.InkPageIndicator
             android:id="@+id/indicator"
