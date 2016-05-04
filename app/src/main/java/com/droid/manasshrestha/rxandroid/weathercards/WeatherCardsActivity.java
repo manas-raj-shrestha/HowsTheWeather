@@ -4,14 +4,13 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.droid.manasshrestha.rxandroid.R;
 import com.droid.manasshrestha.rxandroid.animatedicons.AnimatedLoading;
+import com.droid.manasshrestha.rxandroid.animatedicons.AnimatedNoPermission;
 import com.droid.manasshrestha.rxandroid.weathermodels.WeatherModel;
 import com.pixelcan.inkpageindicator.InkPageIndicator;
 
@@ -19,6 +18,7 @@ import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Contains view pager with daily weather info
@@ -31,9 +31,6 @@ public class WeatherCardsActivity extends AppCompatActivity implements WeatherCa
     @Bind(R.id.rl_container)
     RelativeLayout rlContainer;
 
-    @Bind(R.id.animated_loading)
-    AnimatedLoading animatedLoading;
-
     @Bind(R.id.tv_city_name)
     TextView tvCityName;
 
@@ -41,7 +38,7 @@ public class WeatherCardsActivity extends AppCompatActivity implements WeatherCa
     InkPageIndicator inkPageIndicator;
 
     @Bind(R.id.tv_error)
-    TextView tvError;
+    TextView tvStatus;
 
     private WeatherCardsActivityPresenter weatherCardsActivityPresenter;
 
@@ -63,7 +60,8 @@ public class WeatherCardsActivity extends AppCompatActivity implements WeatherCa
 
     @Override
     public void setViewPagerData(ArrayList<WeatherModel> weatherModels) {
-        rlContainer.removeView(animatedLoading);
+        rlContainer.removeAllViews();
+        tvStatus.setVisibility(View.GONE);
         viewPager.setAdapter(new WeatherCardsAdapter(getSupportFragmentManager(), weatherModels));
         inkPageIndicator.setViewPager(viewPager);
     }
@@ -75,11 +73,19 @@ public class WeatherCardsActivity extends AppCompatActivity implements WeatherCa
 
     @Override
     public void setError(View view, String errorMessage) {
-        tvError.setText(errorMessage);
-        tvError.setVisibility(View.VISIBLE);
+        tvStatus.setText(errorMessage);
+        tvStatus.setVisibility(View.VISIBLE);
 
-        rlContainer.removeView(animatedLoading);
+        rlContainer.removeAllViews();
         rlContainer.addView(view);
+    }
+
+    @Override
+    public void showLoadingIcon() {
+        rlContainer.removeAllViews();
+        rlContainer.addView(new AnimatedLoading(this));
+        tvStatus.setVisibility(View.VISIBLE);
+        tvStatus.setText("Its just gonna take a minute.");
     }
 
     @Override
@@ -92,15 +98,16 @@ public class WeatherCardsActivity extends AppCompatActivity implements WeatherCa
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     weatherCardsActivityPresenter.startNetworkRequest();
                 } else {
-//                    setError("Application need access to GPS to function properly. Please go to settings and allow location for Weather Now.");
+                    setError(new AnimatedNoPermission(this), "Please go to settings and allow \nlocation permission for \n Weather Now.");
                 }
                 return;
             }
         }
     }
 
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        return super.onTouchEvent(event);
+
+    @OnClick(R.id.rl_container)
+    public void setOnClicks() {
+        weatherCardsActivityPresenter.checkIconClick(rlContainer);
     }
 }

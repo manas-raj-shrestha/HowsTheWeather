@@ -4,10 +4,10 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.os.Handler;
+import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -19,25 +19,31 @@ import com.droid.manasshrestha.rxandroid.R;
  */
 public class AnimatedNoConnection extends View {
 
+    private final static int MSG_INVALIDATE = 0;
+    private final static int POST_DELAY_INTERVAL = 10;
+    private final static int STROKE_WIDTH = 3;
     private static final int DEFAULT_WIDTH = 100;
     private static final int DEFAULT_HEIGHT = 100;
+    private static final int CROSS_SIZE = 25;
+    private static final int PADDING = 10;
+    private static final int LENGTH_INCREMENT = 1;
 
-    private RectF rectF = new RectF();
+    private RectF rectBitmap = new RectF();
     private RectF rectCross = new RectF();
     private Bitmap cloudBitmap;
     private Paint paint = new Paint();
     private int layout_width;
     private int layout_height;
 
-    float lineOneEndX;
-    float lineOneEndY;
-    double angle = 45 * Math.PI / 180;
-    int lengthX = 0;
+    private float lineOneEndX;
+    private float lineOneEndY;
+    private double angle = 45 * Math.PI / 180;
+    private int lengthX = 1;
 
-    float lineTwoEndX;
-    float lineTwoEndY;
-    double angleLineTwo = -(45 * Math.PI / 180);
-    int lengthY = 1;
+    private float lineTwoEndX;
+    private float lineTwoEndY;
+    private double angleLineTwo = -(45 * Math.PI / 180);
+    private int lengthY = 1;
 
     Handler handler = new Handler((message -> {
         invalidate();
@@ -66,25 +72,25 @@ public class AnimatedNoConnection extends View {
         layout_width = ta.getDimensionPixelSize(2, (int) GeneralUtils.convertDpToPixel(DEFAULT_WIDTH));
         layout_height = ta.getDimensionPixelSize(3, (int) GeneralUtils.convertDpToPixel(DEFAULT_HEIGHT));
 
-        setPadding((int) GeneralUtils.convertDpToPixel(10),
-                (int) GeneralUtils.convertDpToPixel(10),
-                (int) GeneralUtils.convertDpToPixel(10),
-                (int) GeneralUtils.convertDpToPixel(10));
+        setPadding((int) GeneralUtils.convertDpToPixel(PADDING),
+                (int) GeneralUtils.convertDpToPixel(PADDING),
+                (int) GeneralUtils.convertDpToPixel(PADDING),
+                (int) GeneralUtils.convertDpToPixel(PADDING));
 
         cloudBitmap = GeneralUtils.decodeSampledBitmapFromResource(getResources(), R.drawable.wifi,
                 (int) GeneralUtils.convertDpToPixel(DEFAULT_WIDTH), (int) GeneralUtils.convertDpToPixel(DEFAULT_HEIGHT));
 
-        rectF.set(getPaddingLeft(), getPaddingTop(), layout_width - getPaddingRight(), layout_height - getPaddingBottom());
-        rectCross.set(rectF.right - GeneralUtils.convertDpToPixel(25)
-                , rectF.bottom - GeneralUtils.convertDpToPixel(25)
-                , rectF.right, rectF.bottom);
+        rectBitmap.set(getPaddingLeft(), getPaddingTop(), layout_width - getPaddingRight(), layout_height - getPaddingBottom());
+        rectCross.set(rectBitmap.right - GeneralUtils.convertDpToPixel(CROSS_SIZE)
+                , rectBitmap.bottom - GeneralUtils.convertDpToPixel(CROSS_SIZE)
+                , rectBitmap.right, rectBitmap.bottom);
 
-        paint.setColor(Color.parseColor("#F44336"));
-        paint.setStrokeWidth(10);
+        paint.setColor(ContextCompat.getColor(context, R.color.colorRed));
+        paint.setStrokeWidth(GeneralUtils.convertDpToPixel(STROKE_WIDTH));
         paint.setStrokeCap(Paint.Cap.ROUND);
 
-        lineTwoEndX = rectCross.right + 1;
-        lineTwoEndY = rectCross.top + 1;
+        lineTwoEndX = rectCross.right + LENGTH_INCREMENT;
+        lineTwoEndY = rectCross.top + LENGTH_INCREMENT;
 
         new CrossAnimationThread().start();
     }
@@ -95,7 +101,7 @@ public class AnimatedNoConnection extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        canvas.drawBitmap(cloudBitmap, null, rectF, paint);
+        canvas.drawBitmap(cloudBitmap, null, rectBitmap, paint);
         canvas.drawLine(rectCross.left, rectCross.top, lineOneEndX, lineOneEndY, paint);
 
         if (animateLineTwo) {
@@ -106,6 +112,7 @@ public class AnimatedNoConnection extends View {
 
     /**
      * Logic for cross animation
+     * First draws the first diagonal cross then the second
      */
     private class CrossAnimationThread extends Thread {
 
@@ -118,11 +125,11 @@ public class AnimatedNoConnection extends View {
                 if (!animateLineTwo) {
                     lineOneEndX = (float) (rectCross.left + GeneralUtils.convertDpToPixel(lengthX) * Math.sin(angle));
                     lineOneEndY = (float) (rectCross.top + GeneralUtils.convertDpToPixel(lengthX) * Math.cos(angle));
-                    lengthX = lengthX + 1;
+                    lengthX = lengthX + LENGTH_INCREMENT;
                 } else {
                     lineTwoEndX = (float) (rectCross.right + GeneralUtils.convertDpToPixel(lengthY) * Math.sin(angleLineTwo));
                     lineTwoEndY = (float) (rectCross.top + GeneralUtils.convertDpToPixel(lengthY) * Math.cos(angleLineTwo));
-                    lengthY = lengthY + 1;
+                    lengthY = lengthY + LENGTH_INCREMENT;
                 }
 
                 if (lineOneEndX >= rectCross.right) {
@@ -135,12 +142,12 @@ public class AnimatedNoConnection extends View {
                 }
 
                 try {
-                    Thread.sleep(10);
+                    Thread.sleep(POST_DELAY_INTERVAL);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
 
-                handler.sendEmptyMessage(0);
+                handler.sendEmptyMessage(MSG_INVALIDATE);
             }
         }
     }

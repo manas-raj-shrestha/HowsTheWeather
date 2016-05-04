@@ -1,6 +1,7 @@
 package com.droid.manasshrestha.rxandroid.weathercards;
 
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.droid.manasshrestha.rxandroid.weathermodels.WeatherModel;
 
@@ -15,12 +16,16 @@ public interface WeatherCardsActivityContract {
 
     void checkPermissions();
 
+    void checkIconClick(ViewGroup viewGroup);
+
     interface Views {
         void setViewPagerData(ArrayList<WeatherModel> weatherModels);
 
         void setUserLocation(String cityName);
 
         void setError(View errorView, String error);
+
+        void showLoadingIcon();
     }
 
 }

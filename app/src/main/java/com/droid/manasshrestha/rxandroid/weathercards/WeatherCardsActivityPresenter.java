@@ -6,7 +6,7 @@ import android.content.pm.PackageManager;
 import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
+import android.view.ViewGroup;
 
 import com.droid.manasshrestha.rxandroid.GeneralUtils;
 import com.droid.manasshrestha.rxandroid.animatedicons.AnimatedNoConnection;
@@ -43,13 +43,16 @@ public class WeatherCardsActivityPresenter implements WeatherCardsActivityContra
     @Override
     public void startNetworkRequest() {
         if (GeneralUtils.isNetworkOnline(context)) {
+
+            views.showLoadingIcon();
+
             Action1<ArrayList<WeatherModel>> onNextAction = (weatherModels) -> new Handler().postDelayed(() -> {
                 views.setViewPagerData(weatherModels);
                 String[] strings = weatherModels.get(0).getTimezone().split("/");
                 views.setUserLocation(strings[1].toUpperCase());
             }, ADAPTER_SET_DELAY);
 
-            Action1<Exception> onErrorAction = (exception) -> Log.e("Exception :: ", exception.toString());
+            Action1<Exception> onErrorAction = (exception) -> views.setError(new AnimatedNoConnection(context), "Please Check network connection. \n Double tap to try again.");
 
             locationCatcher.getLocation(new LocationCatcher.LocationCallBack() {
                 @Override
@@ -76,7 +79,7 @@ public class WeatherCardsActivityPresenter implements WeatherCardsActivityContra
                 }
             });
         } else {
-            views.setError(new AnimatedNoConnection(context), "Please Check network connection. \n Double tap to try again.");
+            views.setError(new AnimatedNoConnection(context), "Please Check network connection.\nDouble tap to try again.");
         }
     }
 
@@ -103,5 +106,26 @@ public class WeatherCardsActivityPresenter implements WeatherCardsActivityContra
             startNetworkRequest();
         }
     }
+
+    int clickCount = 0;
+
+    @Override
+    public void checkIconClick(ViewGroup viewGroup) {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                clickCount = 0;
+            }
+        }, 500);
+
+        if (viewGroup.getChildAt(0) instanceof AnimatedNoConnection) {
+            clickCount++;
+            if (clickCount == 2) {
+                startNetworkRequest();
+            }
+        }
+    }
+
 
 }

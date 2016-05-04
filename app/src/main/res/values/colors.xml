@@ -12,4 +12,7 @@
     <color name="colorWind">#447BF2</color>
     <color name="colorPartlyCloudy">#2C8CF2</color>
     <color name="colorCloudy">#3884f2</color>
+
+    <color name="colorRed">#F44336</color>
+
 </resources>
