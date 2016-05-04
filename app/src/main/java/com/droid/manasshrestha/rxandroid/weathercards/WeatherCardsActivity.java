@@ -9,7 +9,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.droid.manasshrestha.rxandroid.R;
-import com.droid.manasshrestha.rxandroid.animatedicons.AnimatedLoading;
+import com.droid.manasshrestha.rxandroid.animatedicons.LoadingView;
 import com.droid.manasshrestha.rxandroid.animatedicons.AnimatedNoPermission;
 import com.droid.manasshrestha.rxandroid.weathermodels.WeatherModel;
 import com.pixelcan.inkpageindicator.InkPageIndicator;
@@ -83,7 +83,7 @@ public class WeatherCardsActivity extends AppCompatActivity implements WeatherCa
     @Override
     public void showLoadingIcon() {
         rlContainer.removeAllViews();
-        rlContainer.addView(new AnimatedLoading(this));
+        rlContainer.addView(new LoadingView(this));
         tvStatus.setVisibility(View.VISIBLE);
         tvStatus.setText("Its just gonna take a minute.");
     }

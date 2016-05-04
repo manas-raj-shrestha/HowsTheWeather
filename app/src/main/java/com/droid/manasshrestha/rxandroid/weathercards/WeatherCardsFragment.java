@@ -50,6 +50,9 @@ public class WeatherCardsFragment extends Fragment implements WeatherCardContrac
     @Bind(R.id.tv_humidity)
     TextView tvHumidity;
 
+    @Bind(R.id.iv_bg_back)
+    ImageView ivBgBack;
+
     @Bind(R.id.tv_clouds)
     TextView tvClouds;
 
@@ -93,10 +96,13 @@ public class WeatherCardsFragment extends Fragment implements WeatherCardContrac
     LineChartView lineChartView;
 
     @Bind(R.id.iv_bg)
-    ImageView ivBg;
+    ImageView ivBgFont;
 
     @Bind(R.id.tv_weather_ticker)
     TextView tvTicker;
+
+    @Bind(R.id.view_overlay)
+    View overlay;
 
     WeatherModel forecastList;
     WeatherCardPresenter weatherCardPresenter;
@@ -156,13 +162,18 @@ public class WeatherCardsFragment extends Fragment implements WeatherCardContrac
 
     @Override
     public void setCardBackground(int colorId, int drawableId) {
-        cardBack.setCardBackgroundColor(colorId);
+//        cardBack.setCardBackgroundColor(colorId);
+        overlay.setBackgroundColor(colorId);
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-            Glide.with(this).load(drawableId).into(ivBg);
+            Glide.with(this).load(drawableId).into(ivBgFont);
+            Glide.with(this).load(drawableId).into(ivBgBack);
         } else {
             Glide.with(this).load(drawableId).bitmapTransform(new RoundedCornersTransformation(getContext(),
-                    (int) getResources().getDimension(R.dimen.card_corner_radius), 0)).into(ivBg);
+                    (int) getResources().getDimension(R.dimen.card_corner_radius), 0)).into(ivBgFont);
+
+            Glide.with(this).load(drawableId).bitmapTransform(new RoundedCornersTransformation(getContext(),
+                    (int) getResources().getDimension(R.dimen.card_corner_radius), 0)).into(ivBgBack);
         }
 
     }

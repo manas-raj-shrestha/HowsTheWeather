@@ -16,7 +16,7 @@ import com.droid.manasshrestha.rxandroid.R;
 /**
  * Animated loading icon
  */
-public class AnimatedLoading extends View {
+public class LoadingView extends View {
 
     private static final float ANGLE_INCREMENT = 2f;
     private static final int DEFAULT_WIDTH = 100;
@@ -35,15 +35,15 @@ public class AnimatedLoading extends View {
     private float sweepAngle = 0;
     private boolean reverse = false;
 
-    public AnimatedLoading(Context context) {
+    public LoadingView(Context context) {
         this(context, null, 0);
     }
 
-    public AnimatedLoading(Context context, AttributeSet attrs) {
+    public LoadingView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public AnimatedLoading(Context context, AttributeSet attrs, int defStyleAttr) {
+    public LoadingView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
         int[] attrsArray = new int[]{

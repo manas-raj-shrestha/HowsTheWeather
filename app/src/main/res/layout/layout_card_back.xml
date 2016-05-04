@@ -9,6 +9,18 @@
     card_view:cardPreventCornerOverlap="false"
     card_view:cardUseCompatPadding="true">
 
+    <ImageView
+        android:id="@+id/iv_bg_back"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY" />
+
+    <View
+        android:id="@+id/view_overlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.5" />
+
     <LinearLayout
         android:id="@+id/ll_card_back"
         android:layout_width="match_parent"
@@ -17,6 +29,7 @@
         android:padding="16dp">
 
         <TextView
+            android:gravity="center"
             android:id="@+id/tv_weather_desc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -99,68 +112,68 @@
             <TableRow>
 
                 <TextView
-                    android:textSize="12sp"
                     android:layout_marginRight="80dp"
                     android:padding="2dp"
                     android:text="Max"
-                    android:textColor="@android:color/white" />
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp" />
 
                 <TextView
-                    android:textSize="12sp"
                     android:id="@+id/tv_max_temp"
                     android:gravity="left"
                     android:padding="2dp"
-                    android:textColor="@android:color/white" />
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp" />
 
             </TableRow>
 
             <TableRow>
 
                 <TextView
-                    android:textSize="12sp"
                     android:padding="2dp"
                     android:text="Max Time"
-                    android:textColor="@android:color/white" />
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp" />
 
                 <TextView
-                    android:textSize="12sp"
                     android:id="@+id/tv_max_temp_time"
                     android:gravity="left"
                     android:padding="2dp"
-                    android:textColor="@android:color/white" />
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp" />
 
             </TableRow>
 
             <TableRow>
 
                 <TextView
-                    android:textSize="12sp"
                     android:padding="2dp"
                     android:text="Min"
-                    android:textColor="@android:color/white" />
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp" />
 
                 <TextView
-                    android:textSize="12sp"
                     android:id="@+id/tv_min_temp"
                     android:gravity="left"
-                    android:textColor="@android:color/white" />
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp" />
 
             </TableRow>
 
             <TableRow>
 
                 <TextView
-                    android:textSize="12sp"
                     android:padding="2dp"
                     android:text="Min Time"
-                    android:textColor="@android:color/white" />
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp" />
 
                 <TextView
-                    android:textSize="12sp"
                     android:id="@+id/tv_temp_min_time"
                     android:gravity="left"
                     android:padding="2dp"
-                    android:textColor="@android:color/white" />
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp" />
 
             </TableRow>
 
