@@ -20,8 +20,11 @@ import com.droid.manasshrestha.rxandroid.R;
  */
 public class NoPermissionView extends View {
 
+    private static final int POST_INVALIDATE_DELAY = 20;
     private static final int DEFAULT_WIDTH = 100;
     private static final int DEFAULT_HEIGHT = 100;
+    private static final int MSG_INVALIDATE = 0;
+    private static final int INCREMENT = 1;
 
     private RectF mapRect = new RectF();
     private RectF clippedRect = new RectF();
@@ -32,6 +35,12 @@ public class NoPermissionView extends View {
     private int layout_width;
     private int layout_height;
     private Path path = new Path();
+    private  int clipXEnd = 0;
+
+    Handler handler = new Handler((message -> {
+        invalidate();
+        return true;
+    }));
 
     public NoPermissionView(Context context) {
         this(context, null, 0);
@@ -82,13 +91,6 @@ public class NoPermissionView extends View {
         canvas.drawBitmap(pathBitmap, null, pathRect, paint);
     }
 
-    int clipXEnd = 0;
-
-    Handler handler = new Handler((message -> {
-        invalidate();
-        return true;
-    }));
-
     /**
      * changes the right bounds of clipped rect
      */
@@ -100,7 +102,7 @@ public class NoPermissionView extends View {
         public void run() {
             super.run();
             while (animate) {
-                clipXEnd = clipXEnd + 1;
+                clipXEnd = clipXEnd + INCREMENT;
                 clippedRect.set(getPaddingLeft(), getPaddingTop(), GeneralUtils.convertDpToPixel(clipXEnd), mapRect.bottom);
 
                 if (GeneralUtils.convertDpToPixel(clipXEnd) >= mapRect.right) {
@@ -108,12 +110,12 @@ public class NoPermissionView extends View {
                 }
 
                 try {
-                    Thread.sleep(20);
+                    Thread.sleep(POST_INVALIDATE_DELAY);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
 
-                handler.sendEmptyMessage(0);
+                handler.sendEmptyMessage(MSG_INVALIDATE);
             }
         }
     }
