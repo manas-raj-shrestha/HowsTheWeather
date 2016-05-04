@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.droid.manasshrestha.rxandroid.R;
 import com.droid.manasshrestha.rxandroid.animatedicons.LoadingView;
-import com.droid.manasshrestha.rxandroid.animatedicons.AnimatedNoPermission;
+import com.droid.manasshrestha.rxandroid.animatedicons.NoPermissionView;
 import com.droid.manasshrestha.rxandroid.weathermodels.WeatherModel;
 import com.pixelcan.inkpageindicator.InkPageIndicator;
 
@@ -98,7 +98,7 @@ public class WeatherCardsActivity extends AppCompatActivity implements WeatherCa
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     weatherCardsActivityPresenter.startNetworkRequest();
                 } else {
-                    setError(new AnimatedNoPermission(this), "Please go to settings and allow \nlocation permission for \n Weather Now.");
+                    setError(new NoPermissionView(this), "Please go to settings and allow \nlocation permission for \n Weather Now.");
                 }
                 return;
             }

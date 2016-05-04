@@ -53,6 +53,7 @@ public class LoadingView extends View {
                 android.R.attr.layout_height // 3
         };
 
+        //get defined dimens. if not available assign default values
         TypedArray ta = context.obtainStyledAttributes(attrs, attrsArray);
         layout_width = ta.getDimensionPixelSize(2, (int) GeneralUtils.convertDpToPixel(DEFAULT_WIDTH));
         layout_height = ta.getDimensionPixelSize(3, (int) GeneralUtils.convertDpToPixel(DEFAULT_HEIGHT));
