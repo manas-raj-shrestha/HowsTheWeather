@@ -1,8 +1,11 @@
 package com.droid.manasshrestha.rxandroid.weathermodels;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
-public class HourlyData {
+public class HourlyData implements Parcelable {
 
     @SerializedName("time")
     private Long timeUnix;
@@ -45,6 +48,35 @@ public class HourlyData {
 
     @SerializedName("ozone")
     private Double ozone;
+
+    protected HourlyData(Parcel in) {
+        timeUnix = in.readLong();
+        summary = in.readString();
+        icon = in.readString();
+        precipIntensity = in.readDouble();
+        precipProbability = in.readDouble();
+        temperature = in.readDouble();
+        apparentTemperature = in.readDouble();
+        dewPoint = in.readDouble();
+        humidity = in.readDouble();
+        windSpeed = in.readDouble();
+        windBearing = in.readDouble();
+        cloudCover = in.readDouble();
+        pressure = in.readDouble();
+        ozone = in.readDouble();
+    }
+
+    public static final Creator<HourlyData> CREATOR = new Creator<HourlyData>() {
+        @Override
+        public HourlyData createFromParcel(Parcel in) {
+            return new HourlyData(in);
+        }
+
+        @Override
+        public HourlyData[] newArray(int size) {
+            return new HourlyData[size];
+        }
+    };
 
     /**
      * @return The timeUnix
@@ -242,4 +274,26 @@ public class HourlyData {
         this.ozone = ozone;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeLong(timeUnix);
+        parcel.writeString(summary);
+        parcel.writeString(icon);
+        parcel.writeDouble(precipIntensity);
+        parcel.writeDouble(precipProbability);
+        parcel.writeDouble(temperature);
+        parcel.writeDouble(apparentTemperature);
+        parcel.writeDouble(dewPoint);
+        parcel.writeDouble(humidity);
+        parcel.writeDouble(windSpeed);
+        parcel.writeDouble(windBearing);
+        parcel.writeDouble(cloudCover);
+        parcel.writeDouble(pressure);
+        parcel.writeDouble(ozone);
+    }
 }

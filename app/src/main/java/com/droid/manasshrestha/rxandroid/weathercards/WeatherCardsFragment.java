@@ -107,8 +107,12 @@ public class WeatherCardsFragment extends Fragment implements WeatherCardContrac
     WeatherModel forecastList;
     WeatherCardPresenter weatherCardPresenter;
 
-    public WeatherCardsFragment(WeatherModel forecastList) {
-        this.forecastList = forecastList;
+    public static WeatherCardsFragment newInstance(WeatherModel forecastList) {
+        WeatherCardsFragment fragmentPackageConfirmation = new WeatherCardsFragment();
+        Bundle args = new Bundle();
+        args.putParcelable("bundle", forecastList);
+        fragmentPackageConfirmation.setArguments(args);
+        return fragmentPackageConfirmation;
     }
 
     public WeatherCardsFragment() {
@@ -123,6 +127,8 @@ public class WeatherCardsFragment extends Fragment implements WeatherCardContrac
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
+
+        forecastList = getArguments().getParcelable("bundle");
         weatherCardPresenter = new WeatherCardPresenter(getActivity(), this, forecastList);
         weatherCardPresenter.setData();
 

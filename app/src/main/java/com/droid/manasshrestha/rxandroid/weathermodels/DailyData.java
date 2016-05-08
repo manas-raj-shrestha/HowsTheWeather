@@ -1,8 +1,11 @@
 package com.droid.manasshrestha.rxandroid.weathermodels;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
-public class DailyData {
+public class DailyData implements Parcelable {
 
     @SerializedName("time")
     private Long time;
@@ -75,6 +78,45 @@ public class DailyData {
 
     @SerializedName("ozone")
     private Double ozone;
+
+    protected DailyData(Parcel in) {
+        time = in.readLong();
+        summary = in.readString();
+        icon = in.readString();
+        sunriseTime = in.readLong();
+        sunsetTime = in.readLong();
+        moonPhase = in.readDouble();
+        precipIntensity = in.readDouble();
+        precipIntensityMax = in.readDouble();
+        precipProbability = in.readDouble();
+        temperatureMin = in.readDouble();
+        temperatureMinTime = in.readLong();
+        temperatureMax = in.readDouble();
+        temperatureMaxTime = in.readLong();
+        apparentTemperatureMin = in.readDouble();
+        apparentTemperatureMinTime = in.readLong();
+        apparentTemperatureMax = in.readDouble();
+        apparentTemperatureMaxTime = in.readDouble();
+        dewPoint = in.readDouble();
+        humidity = in.readDouble();
+        windSpeed = in.readDouble();
+        windBearing = in.readDouble();
+        cloudCover = in.readDouble();
+        pressure = in.readDouble();
+        ozone = in.readDouble();
+    }
+
+    public static final Creator<DailyData> CREATOR = new Creator<DailyData>() {
+        @Override
+        public DailyData createFromParcel(Parcel in) {
+            return new DailyData(in);
+        }
+
+        @Override
+        public DailyData[] newArray(int size) {
+            return new DailyData[size];
+        }
+    };
 
     /**
      * @return The time
@@ -412,4 +454,37 @@ public class DailyData {
         this.ozone = ozone;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeLong(time);
+        parcel.writeString(summary);
+        parcel.writeString(icon);
+        parcel.writeLong(sunriseTime);
+        parcel.writeLong(sunsetTime);
+        parcel.writeDouble(moonPhase);
+        parcel.writeDouble(precipIntensity);
+        parcel.writeDouble(precipIntensityMax);
+        parcel.writeDouble(precipProbability);
+        parcel.writeDouble(temperatureMin);
+        parcel.writeLong(temperatureMinTime);
+        parcel.writeDouble(temperatureMax);
+        parcel.writeLong(temperatureMaxTime);
+        parcel.writeDouble(apparentTemperatureMin);
+        parcel.writeLong(apparentTemperatureMinTime);
+
+        parcel.writeDouble(apparentTemperatureMax);
+        parcel.writeDouble(apparentTemperatureMaxTime);
+        parcel.writeDouble(dewPoint);
+        parcel.writeDouble(humidity);
+        parcel.writeDouble(windSpeed);
+        parcel.writeDouble(windBearing);
+        parcel.writeDouble(cloudCover);
+        parcel.writeDouble(pressure);
+        parcel.writeDouble(ozone);
+    }
 }

@@ -3,7 +3,6 @@ package com.droid.manasshrestha.rxandroid.weathercards;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.droid.manasshrestha.rxandroid.weathermodels.WeatherModel;
 
@@ -26,7 +25,7 @@ public class WeatherCardsAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        return new WeatherCardsFragment(forecastLists.get(position));
+        return WeatherCardsFragment.newInstance(forecastLists.get(position));
     }
 
     @Override

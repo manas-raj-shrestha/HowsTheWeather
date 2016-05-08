@@ -9,7 +9,7 @@ import android.support.v4.content.ContextCompat;
 import android.view.ViewGroup;
 
 import com.droid.manasshrestha.rxandroid.GeneralUtils;
-import com.droid.manasshrestha.rxandroid.animatedicons.AnimatedNoConnection;
+import com.droid.manasshrestha.rxandroid.animatedicons.NoConnectionView;
 import com.droid.manasshrestha.rxandroid.data.PrefUtils;
 import com.droid.manasshrestha.rxandroid.locationhandlers.GpsInfo;
 import com.droid.manasshrestha.rxandroid.locationhandlers.LocationCatcher;
@@ -52,7 +52,7 @@ public class WeatherCardsActivityPresenter implements WeatherCardsActivityContra
                 views.setUserLocation(strings[1].toUpperCase());
             }, ADAPTER_SET_DELAY);
 
-            Action1<Exception> onErrorAction = (exception) -> views.setError(new AnimatedNoConnection(context), "Please Check network connection. \n Double tap to try again.");
+            Action1<Exception> onErrorAction = (exception) -> views.setError(new NoConnectionView(context), "Please Check network connection. \n Double tap to try again.");
 
             locationCatcher.getLocation(new LocationCatcher.LocationCallBack() {
                 @Override
@@ -79,7 +79,7 @@ public class WeatherCardsActivityPresenter implements WeatherCardsActivityContra
                 }
             });
         } else {
-            views.setError(new AnimatedNoConnection(context), "Please Check network connection.\nDouble tap to try again.");
+            views.setError(new NoConnectionView(context), "Please Check network connection.\nDouble tap to try again.");
         }
     }
 
@@ -119,7 +119,7 @@ public class WeatherCardsActivityPresenter implements WeatherCardsActivityContra
             }
         }, 500);
 
-        if (viewGroup.getChildAt(0) instanceof AnimatedNoConnection) {
+        if (viewGroup.getChildAt(0) instanceof NoConnectionView) {
             clickCount++;
             if (clickCount == 2) {
                 startNetworkRequest();

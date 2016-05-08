@@ -39,6 +39,7 @@ public class WeatherModel implements Parcelable {
         offset = in.readDouble();
         currently = in.readParcelable(Currently.class.getClassLoader());
         hourly = in.readParcelable(Hourly.class.getClassLoader());
+        daily = in.readParcelable(Daily.class.getClassLoader());
     }
 
     public static final Creator<WeatherModel> CREATOR = new Creator<WeatherModel>() {

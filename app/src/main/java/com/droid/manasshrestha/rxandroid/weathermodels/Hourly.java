@@ -1,10 +1,13 @@
 package com.droid.manasshrestha.rxandroid.weathermodels;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
-public class Hourly {
+public class Hourly implements Parcelable {
 
     @SerializedName("summary")
     private String summary;
@@ -14,6 +17,24 @@ public class Hourly {
 
     @SerializedName("data")
     private ArrayList<HourlyData> data = new ArrayList<HourlyData>();
+
+    protected Hourly(Parcel in) {
+        summary = in.readString();
+        icon = in.readString();
+        data = in.readArrayList(HourlyData.class.getClassLoader());
+    }
+
+    public static final Creator<Hourly> CREATOR = new Creator<Hourly>() {
+        @Override
+        public Hourly createFromParcel(Parcel in) {
+            return new Hourly(in);
+        }
+
+        @Override
+        public Hourly[] newArray(int size) {
+            return new Hourly[size];
+        }
+    };
 
     /**
      * @return The summary
@@ -57,4 +78,15 @@ public class Hourly {
         this.data = data;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(summary);
+        parcel.writeString(icon);
+        parcel.writeList(data);
+    }
 }

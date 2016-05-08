@@ -17,7 +17,7 @@ import com.droid.manasshrestha.rxandroid.R;
 /**
  * Animated loading icon
  */
-public class AnimatedNoConnection extends View {
+public class NoConnectionView extends View {
 
     private final static int MSG_INVALIDATE = 0;
     private final static int POST_DELAY_INTERVAL = 10;
@@ -50,15 +50,15 @@ public class AnimatedNoConnection extends View {
         return true;
     }));
 
-    public AnimatedNoConnection(Context context) {
+    public NoConnectionView(Context context) {
         this(context, null, 0);
     }
 
-    public AnimatedNoConnection(Context context, AttributeSet attrs) {
+    public NoConnectionView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public AnimatedNoConnection(Context context, AttributeSet attrs, int defStyleAttr) {
+    public NoConnectionView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
         int[] attrsArray = new int[]{
