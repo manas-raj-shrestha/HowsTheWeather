@@ -58,8 +58,8 @@ public class SwipeTutorialFragment extends Fragment implements PageChangeListene
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
 
-        Glide.with(this).load(R.drawable.snow_front).override((int) GeneralUtils.convertDpToPixel(200), (int) GeneralUtils.convertDpToPixel(200)).into(ivDummyCard);
-        Glide.with(getActivity()).load(R.drawable.clear_weather).override((int) GeneralUtils.convertDpToPixel(200), (int) GeneralUtils.convertDpToPixel(200)).into(ivDummyCard2);
+        Glide.with(this).load(R.drawable.snow_front).override((int) GeneralUtils.convertDpToPixel(300), (int) GeneralUtils.convertDpToPixel(300)).into(ivDummyCard);
+        Glide.with(getActivity()).load(R.drawable.clear_weather).override((int) GeneralUtils.convertDpToPixel(300), (int) GeneralUtils.convertDpToPixel(300)).into(ivDummyCard2);
 
         this.position = getArguments().getInt(KEY_POSITION);
 

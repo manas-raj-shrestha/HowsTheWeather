@@ -10,4 +10,8 @@
     <dimen name="temperature_margin">16dp</dimen>
     <dimen name="weather_desc_bottom_margin">16dp</dimen>
     <dimen name="chart_margin_top">24dp</dimen>
+    <dimen name="help_text_size">24sp</dimen>
+    <dimen name="help_text_margin_top">36dp</dimen>
+    <dimen name="dummy_card_width">200dp</dimen>
+    <dimen name="dummy_card_height">350dp</dimen>
 </resources>

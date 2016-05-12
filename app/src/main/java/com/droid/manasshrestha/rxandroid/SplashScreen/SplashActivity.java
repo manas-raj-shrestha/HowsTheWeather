@@ -59,12 +59,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onPageSelected(int position) {
 
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        ((PageChangeListener) getActiveFragment(viewPager, position)).onPageChangeListener(position);
-                    }
-                }, 100);
+                new Handler().postDelayed(() -> ((PageChangeListener) getActiveFragment(viewPager, position)).onPageChangeListener(position), 200);
 
             }
 

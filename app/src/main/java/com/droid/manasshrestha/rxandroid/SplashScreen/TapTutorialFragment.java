@@ -47,8 +47,8 @@ public class TapTutorialFragment extends Fragment implements PageChangeListener 
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
 
-        Glide.with(this).load(R.drawable.snow_front).override((int) GeneralUtils.convertDpToPixel(200), (int) GeneralUtils.convertDpToPixel(200)).into(ivDummyFront);
-        Glide.with(getActivity()).load(R.drawable.snow_back).override((int) GeneralUtils.convertDpToPixel(200), (int) GeneralUtils.convertDpToPixel(200)).into(ivDummyBack);
+        Glide.with(this).load(R.drawable.snow_front).override((int) GeneralUtils.convertDpToPixel(300), (int) GeneralUtils.convertDpToPixel(300)).into(ivDummyFront);
+        Glide.with(getActivity()).load(R.drawable.snow_back).override((int) GeneralUtils.convertDpToPixel(300), (int) GeneralUtils.convertDpToPixel(300)).into(ivDummyBack);
 
         this.position = getArguments().getInt(KEY_POSITION);
     }

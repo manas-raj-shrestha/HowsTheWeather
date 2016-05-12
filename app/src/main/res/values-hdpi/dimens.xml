@@ -12,5 +12,9 @@
     <dimen name="weather_desc_bottom_margin">8dp</dimen>
     <dimen name="chart_margin_top">8dp</dimen>
     <dimen name="card_x_translation">100px</dimen>
+    <dimen name="help_text_size">24sp</dimen>
+    <dimen name="help_text_margin_top">16dp</dimen>
+    <dimen name="dummy_card_width">150dp</dimen>
+    <dimen name="dummy_card_height">300dp</dimen>
 
 </resources>

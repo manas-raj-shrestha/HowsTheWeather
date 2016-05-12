@@ -16,7 +16,7 @@
         android:text="Change permission in your device's app settings. Give Weather Now access to location."
         android:textColor="@android:color/white"
         android:id="@+id/tv_help_text"
-        android:textSize="24sp" />
+        android:textSize="@dimen/help_text_size" />
 
     <ImageView
         android:layout_marginTop="16dp"
