@@ -215,7 +215,7 @@ public class WeatherCardsFragment extends Fragment implements WeatherCardContrac
     @Override
     public void setLineSetData(LineChartData lineChartData) {
         lineChartView.setLineChartData(lineChartData);
-        lineChartView.setInteractive(true);
+        lineChartView.setInteractive(false);
     }
 
     @Override

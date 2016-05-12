@@ -56,7 +56,6 @@ public class WeatherCardPresenter {
      * process and set data to the views
      */
     public void setData() {
-
         setWeatherVariants();
 
         parseDate();

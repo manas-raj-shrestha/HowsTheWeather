@@ -2,24 +2,28 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.droid.manasshrestha.rxandroid">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
+        android:name=".WeatherApplication"
         android:allowBackup="true"
         android:icon="@drawable/app_icon"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:name=".WeatherApplication"
         android:theme="@style/AppTheme">
-        <activity android:name=".weathercards.WeatherCardsActivity">
+
+        <activity android:name=".splashscreen.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".weathercards.WeatherCardsActivity" />
+
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="82c61e5bab7c0eb26afa11da1bb2252c02a85dc2" />
