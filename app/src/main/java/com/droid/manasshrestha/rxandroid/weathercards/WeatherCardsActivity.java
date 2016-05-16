@@ -4,6 +4,7 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -49,11 +50,6 @@ public class WeatherCardsActivity extends AppCompatActivity implements WeatherCa
         ButterKnife.bind(this);
 
         weatherCardsActivityPresenter = new WeatherCardsActivityPresenter(this);
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-            weatherCardsActivityPresenter.checkPermissions();
-        } else {
-            weatherCardsActivityPresenter.startNetworkRequest();
-        }
 
         viewPager.setPageTransformer(true, new CardTiltTransformer());
     }
@@ -96,7 +92,7 @@ public class WeatherCardsActivity extends AppCompatActivity implements WeatherCa
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    weatherCardsActivityPresenter.startNetworkRequest();
+//                    weatherCardsActivityPresenter.startNetworkRequest();
                 } else {
                     setError(new NoPermissionView(this), "Please go to settings and allow \nlocation permission for \n Weather Now.");
                 }
@@ -105,6 +101,19 @@ public class WeatherCardsActivity extends AppCompatActivity implements WeatherCa
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.e("onRes called", "onRes called");
+        if (viewPager.getAdapter() == null) {
+            Log.e("onResumee", "onResume");
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                weatherCardsActivityPresenter.checkPermissions();
+            } else {
+                weatherCardsActivityPresenter.startNetworkRequest();
+            }
+        }
+    }
 
     @OnClick(R.id.rl_container)
     public void setOnClicks() {

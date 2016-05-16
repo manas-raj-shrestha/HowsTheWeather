@@ -27,6 +27,14 @@
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="82c61e5bab7c0eb26afa11da1bb2252c02a85dc2" />
+
+        <receiver android:name=".GpsLocationReceiver">
+            <intent-filter>
+                <action android:name="android.location.PROVIDERS_CHANGED" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>

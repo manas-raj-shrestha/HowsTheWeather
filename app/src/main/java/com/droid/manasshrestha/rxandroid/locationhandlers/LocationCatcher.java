@@ -177,11 +177,11 @@ public class LocationCatcher implements LocationInterface, LocationListener, com
             alertDialog.setPositiveButton("Settings",
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
                             Intent intent = new Intent(
                                     Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                             context.startActivity(intent);
-                            dialog.cancel();
-                            System.exit(0);
+
                         }
                     });
 
