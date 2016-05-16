@@ -2,6 +2,7 @@ package com.droid.manasshrestha.rxandroid.weathercards;
 
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -105,14 +106,17 @@ public class WeatherCardsActivity extends AppCompatActivity implements WeatherCa
     protected void onResume() {
         super.onResume();
         Log.e("onRes called", "onRes called");
-        if (viewPager.getAdapter() == null) {
-            Log.e("onResumee", "onResume");
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-                weatherCardsActivityPresenter.checkPermissions();
-            } else {
-                weatherCardsActivityPresenter.startNetworkRequest();
+        new Handler().postDelayed(() -> {
+            if (viewPager.getAdapter() == null) {
+                Log.e("onResumee", "onResume");
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                    weatherCardsActivityPresenter.checkPermissions();
+                } else {
+                    weatherCardsActivityPresenter.startNetworkRequest();
+                }
             }
-        }
+        },2000);
+
     }
 
     @OnClick(R.id.rl_container)

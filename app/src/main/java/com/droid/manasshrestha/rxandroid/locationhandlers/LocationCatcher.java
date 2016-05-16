@@ -80,7 +80,6 @@ public class LocationCatcher implements LocationInterface, LocationListener, com
         this.context = context;
 
         createLocationRequest();
-
     }
 
     public void setLocationUpdateTimeInterval(long updateTimeInterval) {
@@ -129,9 +128,9 @@ public class LocationCatcher implements LocationInterface, LocationListener, com
                     /**only for Lollipop and older versions
                      * as permission check does not work for them
                      */
-                    showSettingsAlert();
+//                    showSettingsAlert();
                 }
-                Log.e("null", "null mLastLocationNull");
+                Log.e("null", "null mLastLocation Null");
                 locationCallBack.onLocationNotFound();
             } else {
                 double latitude = mLastLocation.getLatitude();
@@ -175,23 +174,19 @@ public class LocationCatcher implements LocationInterface, LocationListener, com
 
             // On pressing Settings button
             alertDialog.setPositiveButton("Settings",
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.cancel();
-                            Intent intent = new Intent(
-                                    Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                            context.startActivity(intent);
+                    (dialog, which) -> {
+                        dialog.cancel();
+                        Intent intent = new Intent(
+                                Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                        context.startActivity(intent);
 
-                        }
                     });
 
             // on pressing cancel button
             alertDialog.setNegativeButton("Cancel",
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            System.exit(0);
-                            dialog.cancel();
-                        }
+                    (dialog, which) -> {
+                        System.exit(0);
+                        dialog.cancel();
                     });
 
             // Showing Alert Message
