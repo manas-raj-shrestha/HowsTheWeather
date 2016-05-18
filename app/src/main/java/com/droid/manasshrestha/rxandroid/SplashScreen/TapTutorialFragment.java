@@ -19,11 +19,14 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
- * Created by Manas on 5/12/2016.
+ * tap tutorial fragment
  */
 public class TapTutorialFragment extends Fragment implements PageChangeListener {
 
     private static final String KEY_POSITION = "position";
+    private static final int IMG_HEIGHT = 300;
+    private static final int IMG_WIDTH = 300;
+    private static final int ANIMATION_DELAY = 1000;
     private int position;
 
     @Bind(R.id.iv_dummy_back)
@@ -35,24 +38,6 @@ public class TapTutorialFragment extends Fragment implements PageChangeListener 
     @Bind(R.id.rl_card_container)
     RelativeLayout relativeLayout;
 
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.second_screen_fragment, container, false);
-        return view;
-    }
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        ButterKnife.bind(this, view);
-
-        Glide.with(this).load(R.drawable.snow_front).override((int) GeneralUtils.convertDpToPixel(300), (int) GeneralUtils.convertDpToPixel(300)).into(ivDummyFront);
-        Glide.with(getActivity()).load(R.drawable.snow_back).override((int) GeneralUtils.convertDpToPixel(300), (int) GeneralUtils.convertDpToPixel(300)).into(ivDummyBack);
-
-        this.position = getArguments().getInt(KEY_POSITION);
-    }
-
     public static TapTutorialFragment getInstance(int position) {
         TapTutorialFragment firstScreenFragment = new TapTutorialFragment();
 
@@ -63,6 +48,23 @@ public class TapTutorialFragment extends Fragment implements PageChangeListener 
         return firstScreenFragment;
     }
 
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.second_screen_fragment, container, false);
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        ButterKnife.bind(this, view);
+
+        Glide.with(this).load(R.drawable.snow_front).override((int) GeneralUtils.convertDpToPixel(IMG_WIDTH),
+                (int) GeneralUtils.convertDpToPixel(IMG_HEIGHT)).into(ivDummyFront);
+        Glide.with(getActivity()).load(R.drawable.snow_back).override((int) GeneralUtils.convertDpToPixel(IMG_WIDTH),
+                (int) GeneralUtils.convertDpToPixel(IMG_HEIGHT)).into(ivDummyBack);
+
+        this.position = getArguments().getInt(KEY_POSITION);
+    }
 
     @Override
     public void onPageChangeListener(int position) {
@@ -75,7 +77,8 @@ public class TapTutorialFragment extends Fragment implements PageChangeListener 
             }
 
             relativeLayout.startAnimation(flipAnimation);
-        }, 1000);
+        }, ANIMATION_DELAY);
 
     }
+
 }

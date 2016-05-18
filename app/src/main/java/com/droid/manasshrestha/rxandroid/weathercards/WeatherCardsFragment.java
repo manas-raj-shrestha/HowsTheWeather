@@ -32,6 +32,8 @@ import lecho.lib.hellocharts.view.LineChartView;
  */
 public class WeatherCardsFragment extends Fragment implements WeatherCardContract.Views {
 
+    private final static String KEY_BUNDLE = "bundle";
+
     @Bind(R.id.tv_week_day)
     TextView tvWeekDay;
 
@@ -110,7 +112,7 @@ public class WeatherCardsFragment extends Fragment implements WeatherCardContrac
     public static WeatherCardsFragment newInstance(WeatherModel forecastList) {
         WeatherCardsFragment fragmentPackageConfirmation = new WeatherCardsFragment();
         Bundle args = new Bundle();
-        args.putParcelable("bundle", forecastList);
+        args.putParcelable(KEY_BUNDLE, forecastList);
         fragmentPackageConfirmation.setArguments(args);
         return fragmentPackageConfirmation;
     }
@@ -128,7 +130,7 @@ public class WeatherCardsFragment extends Fragment implements WeatherCardContrac
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
 
-        forecastList = getArguments().getParcelable("bundle");
+        forecastList = getArguments().getParcelable(KEY_BUNDLE);
         weatherCardPresenter = new WeatherCardPresenter(getActivity(), this, forecastList);
         weatherCardPresenter.setData();
 
@@ -168,7 +170,6 @@ public class WeatherCardsFragment extends Fragment implements WeatherCardContrac
 
     @Override
     public void setCardBackground(int colorId, int drawableId) {
-//        cardBack.setCardBackgroundColor(colorId);
         overlay.setBackgroundColor(colorId);
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
@@ -228,12 +229,9 @@ public class WeatherCardsFragment extends Fragment implements WeatherCardContrac
         ValueAnimator animator = new ValueAnimator().ofFloat(rvMainRoot.getScaleX(), 0.6f);
         animator.setDuration(250);
 
-        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                rvMainRoot.setScaleX((Float) (valueAnimator.getAnimatedValue()));
-                rvMainRoot.setScaleY((Float) (valueAnimator.getAnimatedValue()));
-            }
+        animator.addUpdateListener(valueAnimator -> {
+            rvMainRoot.setScaleX((Float) (valueAnimator.getAnimatedValue()));
+            rvMainRoot.setScaleY((Float) (valueAnimator.getAnimatedValue()));
         });
 
         animator.start();

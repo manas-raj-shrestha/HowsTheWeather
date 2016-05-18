@@ -10,12 +10,11 @@ import android.view.ViewGroup;
 import com.droid.manasshrestha.rxandroid.R;
 
 /**
- * Created by Manas on 5/12/2016.
+ * shows the permission required for app to function
  */
 public class PermissionRequestFragment extends Fragment implements PageChangeListener {
 
     private static final String KEY_POSITION = "position";
-    private int position;
 
     public static PermissionRequestFragment getInstance(int position) {
         PermissionRequestFragment firstScreenFragment = new PermissionRequestFragment();
@@ -41,6 +40,6 @@ public class PermissionRequestFragment extends Fragment implements PageChangeLis
 
     @Override
     public void onPageChangeListener(int position) {
-
+        //there is no animation right now
     }
 }

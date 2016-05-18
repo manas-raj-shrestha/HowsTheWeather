@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -26,6 +25,8 @@ import butterknife.OnClick;
  * Contains view pager with daily weather info
  */
 public class WeatherCardsActivity extends AppCompatActivity implements WeatherCardsActivityContract.Views {
+
+    private static int FETCH_LOCATION_DELAY = 6800;
 
     @Bind(R.id.vp_cards)
     ViewPager viewPager;
@@ -82,7 +83,7 @@ public class WeatherCardsActivity extends AppCompatActivity implements WeatherCa
         rlContainer.removeAllViews();
         rlContainer.addView(new LoadingView(this));
         tvStatus.setVisibility(View.VISIBLE);
-        tvStatus.setText("Its just gonna take a minute.");
+        tvStatus.setText(getString(R.string.txt_loading_ticker));
     }
 
     @Override
@@ -95,7 +96,7 @@ public class WeatherCardsActivity extends AppCompatActivity implements WeatherCa
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 //                    weatherCardsActivityPresenter.startNetworkRequest();
                 } else {
-                    setError(new NoPermissionView(this), "Please go to settings and allow \nlocation permission for \n Weather Now.");
+                    setError(new NoPermissionView(this), getString(R.string.txt_allow_permission));
                 }
                 return;
             }
@@ -105,17 +106,18 @@ public class WeatherCardsActivity extends AppCompatActivity implements WeatherCa
     @Override
     protected void onResume() {
         super.onResume();
-        Log.e("onRes called", "onRes called");
+
+        /*fetching location takes time. if we start location request as soon as we turn on the location, it will return null
+        * hence the delay*/
         new Handler().postDelayed(() -> {
             if (viewPager.getAdapter() == null) {
-                Log.e("onResumee", "onResume");
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
                     weatherCardsActivityPresenter.checkPermissions();
                 } else {
                     weatherCardsActivityPresenter.startNetworkRequest();
                 }
             }
-        },2000);
+        }, FETCH_LOCATION_DELAY);
 
     }
 

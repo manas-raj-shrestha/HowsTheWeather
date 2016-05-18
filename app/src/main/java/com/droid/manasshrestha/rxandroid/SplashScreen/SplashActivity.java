@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -20,9 +19,13 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * Created by Manas on 5/11/2016.
+ * Splash screen with tutorial
  */
 public class SplashActivity extends AppCompatActivity {
+
+    private static final int ANIMATION_DELAY = 200;
+    private static final int IMG_WIDTH = 250;
+    private static final int IMG_HEIGHT = 250;
 
     @Bind(R.id.iv_bg)
     ImageView ivBg;
@@ -30,14 +33,8 @@ public class SplashActivity extends AppCompatActivity {
     @Bind(R.id.indicator)
     InkPageIndicator inkPageIndicator;
 
-    @Bind(R.id.btn_skip)
-    Button btnSkip;
-
     @Bind(R.id.view_pager)
     ViewPager viewPager;
-
-    @Bind(R.id.iv_next_arrow)
-    ImageView ivNextArrow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +43,7 @@ public class SplashActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        Glide.with(this).load(R.drawable.clearsky_bg).override(500, 500).into(ivBg);
+        Glide.with(this).load(R.drawable.clearsky_bg).override(IMG_WIDTH, IMG_HEIGHT).into(ivBg);
 
         viewPager.setAdapter(new SplashScreenPagerAdapter(getSupportFragmentManager()));
 
@@ -58,9 +55,7 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
-
-                new Handler().postDelayed(() -> ((PageChangeListener) getActiveFragment(viewPager, position)).onPageChangeListener(position), 200);
-
+                new Handler().postDelayed(() -> ((PageChangeListener) getActiveFragment(viewPager, position)).onPageChangeListener(position), ANIMATION_DELAY);
             }
 
             @Override
@@ -87,8 +82,7 @@ public class SplashActivity extends AppCompatActivity {
     public void setOnClicks(View view) {
         switch (view.getId()) {
             case R.id.btn_skip:
-                startActivity(new Intent(this, WeatherCardsActivity.class));
-                finish();
+                System.exit(0);
                 break;
             case R.id.iv_next_arrow:
                 if (viewPager.getCurrentItem() != 2) {
