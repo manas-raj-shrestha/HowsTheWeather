@@ -12,6 +12,6 @@
 
     <string name="txt_time">Time</string>
     <string name="txt_temperature">Temperature</string>
-    <string name="txt_loading_ticker">It's just gonna take a minute.</string>
+    <string name="txt_loading_ticker">Just a moment.</string>
     <string name="txt_allow_permission">Please go to settings and allow \nlocation permission for \n Weather Now.</string>
 </resources>

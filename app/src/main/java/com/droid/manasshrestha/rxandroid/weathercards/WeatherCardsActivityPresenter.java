@@ -38,6 +38,7 @@ public class WeatherCardsActivityPresenter implements WeatherCardsActivityContra
         this.context = context;
         this.views = (WeatherCardsActivityContract.Views) context;
         locationCatcher = new LocationCatcher(context);
+        PrefUtils.setFirstRun(false);
     }
 
     @Override

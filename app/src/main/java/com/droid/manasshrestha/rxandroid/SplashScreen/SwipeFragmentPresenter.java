@@ -43,7 +43,7 @@ public class SwipeFragmentPresenter implements SwipeTutorialView.PresenterAction
         rotationAnimator.addUpdateListener(animation -> {
             Integer value = (Integer) animation.getAnimatedValue();
 
-            swipeTutorialView.animateFrontCard(value, view.getTranslationX() - TRANSLATION_INCREMENT);
+            swipeTutorialView.animateFrontCard(value, view.getTranslationX() + TRANSLATION_INCREMENT);
         });
     }
 

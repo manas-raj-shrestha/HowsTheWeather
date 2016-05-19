@@ -11,6 +11,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.droid.manasshrestha.rxandroid.R;
+import com.droid.manasshrestha.rxandroid.data.PrefUtils;
 import com.droid.manasshrestha.rxandroid.weathercards.WeatherCardsActivity;
 import com.pixelcan.inkpageindicator.InkPageIndicator;
 
@@ -23,7 +24,7 @@ import butterknife.OnClick;
  */
 public class SplashActivity extends AppCompatActivity {
 
-    private static final int ANIMATION_DELAY = 200;
+    private static final int ANIMATION_DELAY = 500;
     private static final int IMG_WIDTH = 250;
     private static final int IMG_HEIGHT = 250;
 
@@ -41,6 +42,12 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash_screen);
         ButterKnife.bind(this);
+
+        if (!PrefUtils.getFirstRun()) {
+            startActivity(new Intent(this, WeatherCardsActivity.class));
+            finish();
+            return;
+        }
 
         Glide.with(this).load(R.drawable.clearsky_bg).override(IMG_WIDTH, IMG_HEIGHT).into(ivBg);
 
