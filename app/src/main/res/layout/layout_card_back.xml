@@ -1,5 +1,6 @@
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card_back"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -29,6 +30,7 @@
         android:padding="16dp">
 
         <TextView
+            tools:text = "Mastering Tools"
             android:gravity="center"
             android:id="@+id/tv_weather_desc"
             android:layout_width="wrap_content"

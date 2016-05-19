@@ -4,7 +4,7 @@ import android.view.View;
 import android.widget.RelativeLayout;
 
 /**
- * Created by Manas on 5/17/2016.
+ * contract for swipe tutorial
  */
 public interface SwipeTutorialView {
 

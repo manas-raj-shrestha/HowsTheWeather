@@ -1,7 +1,6 @@
 package com.droid.manasshrestha.rxandroid.splashscreen;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,17 +25,10 @@ public class PermissionRequestFragment extends Fragment implements PageChangeLis
         return firstScreenFragment;
     }
 
-    @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.third_splash_screen, container, false);
+        return inflater.inflate(R.layout.permission_request_fragment, container, false);
     }
-
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-    }
-
 
     @Override
     public void onPageChangeListener(int position) {

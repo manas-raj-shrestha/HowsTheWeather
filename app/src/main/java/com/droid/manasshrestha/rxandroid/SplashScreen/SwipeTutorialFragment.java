@@ -46,8 +46,8 @@ public class SwipeTutorialFragment extends Fragment implements PageChangeListene
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.from(getContext()).inflate(R.layout.first_splash_fragment, container, false);
-        return view;
+
+        return inflater.from(getContext()).inflate(R.layout.swipe_tutorial_fragment, container, false);
     }
 
     @Override

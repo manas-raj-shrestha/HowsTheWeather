@@ -27,7 +27,6 @@ public class TapTutorialFragment extends Fragment implements PageChangeListener 
     private static final int IMG_HEIGHT = 300;
     private static final int IMG_WIDTH = 300;
     private static final int ANIMATION_DELAY = 1000;
-    private int position;
 
     @Bind(R.id.iv_dummy_back)
     ImageView ivDummyBack;
@@ -50,7 +49,7 @@ public class TapTutorialFragment extends Fragment implements PageChangeListener 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.second_screen_fragment, container, false);
+        return inflater.inflate(R.layout.tap_tutorial_fragment, container, false);
     }
 
     @Override
@@ -63,7 +62,6 @@ public class TapTutorialFragment extends Fragment implements PageChangeListener 
         Glide.with(getActivity()).load(R.drawable.snow_back).override((int) GeneralUtils.convertDpToPixel(IMG_WIDTH),
                 (int) GeneralUtils.convertDpToPixel(IMG_HEIGHT)).into(ivDummyBack);
 
-        this.position = getArguments().getInt(KEY_POSITION);
     }
 
     @Override

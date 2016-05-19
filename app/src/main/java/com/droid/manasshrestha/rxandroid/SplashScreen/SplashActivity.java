@@ -40,12 +40,11 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash_screen);
-
         ButterKnife.bind(this);
 
         Glide.with(this).load(R.drawable.clearsky_bg).override(IMG_WIDTH, IMG_HEIGHT).into(ivBg);
 
-        viewPager.setAdapter(new SplashScreenPagerAdapter(getSupportFragmentManager()));
+        viewPager.setAdapter(new TutorialScreenPagerAdapter(getSupportFragmentManager()));
 
         ViewPager.OnPageChangeListener onPageChangeListener = new ViewPager.OnPageChangeListener() {
             @Override
@@ -69,11 +68,25 @@ public class SplashActivity extends AppCompatActivity {
         onPageChangeListener.onPageSelected(0);
     }
 
-    public Fragment getActiveFragment(ViewPager container, int position) {
+    /**
+     * returns fragment at given position
+     *
+     * @param container {@link ViewPager} instance
+     * @param position  position
+     * @return {@link Fragment}
+     */
+    private Fragment getActiveFragment(ViewPager container, int position) {
         String name = makeFragmentName(container.getId(), position);
         return getSupportFragmentManager().findFragmentByTag(name);
     }
 
+    /**
+     * constructs the fragment name
+     *
+     * @param viewId viewpager id
+     * @param index  fragment position
+     * @return fragment name
+     */
     private static String makeFragmentName(int viewId, int index) {
         return "android:switcher:" + viewId + ":" + index;
     }
