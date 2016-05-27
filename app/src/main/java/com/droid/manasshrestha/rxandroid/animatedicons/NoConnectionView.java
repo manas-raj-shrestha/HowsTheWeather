@@ -30,7 +30,7 @@ public class NoConnectionView extends View {
 
     private RectF rectBitmap = new RectF();
     private RectF rectCross = new RectF();
-    private Bitmap cloudBitmap;
+    private Bitmap networkBitmap;
     private Paint paint = new Paint();
     private int layout_width;
     private int layout_height;
@@ -44,6 +44,7 @@ public class NoConnectionView extends View {
     private float lineTwoEndY;
     private double angleLineTwo = -(45 * Math.PI / 180);
     private int lengthY = 1;
+    private boolean animateLineTwo = false;
 
     Handler handler = new Handler((message -> {
         invalidate();
@@ -77,13 +78,15 @@ public class NoConnectionView extends View {
                 (int) GeneralUtils.convertDpToPixel(PADDING),
                 (int) GeneralUtils.convertDpToPixel(PADDING));
 
-        cloudBitmap = GeneralUtils.decodeSampledBitmapFromResource(getResources(), R.drawable.wifi,
+        networkBitmap = GeneralUtils.decodeSampledBitmapFromResource(getResources(), R.drawable.wifi,
                 (int) GeneralUtils.convertDpToPixel(DEFAULT_WIDTH), (int) GeneralUtils.convertDpToPixel(DEFAULT_HEIGHT));
 
-        rectBitmap.set(getPaddingLeft(), getPaddingTop(), layout_width - getPaddingRight(), layout_height - getPaddingBottom());
-        rectCross.set(rectBitmap.right - GeneralUtils.convertDpToPixel(CROSS_SIZE)
-                , rectBitmap.bottom - GeneralUtils.convertDpToPixel(CROSS_SIZE)
-                , rectBitmap.right, rectBitmap.bottom);
+        rectBitmap.set(getPaddingLeft(), getPaddingTop(), layout_width - getPaddingRight(),
+                layout_height - getPaddingBottom());
+
+        rectCross.set(rectBitmap.right - GeneralUtils.convertDpToPixel(CROSS_SIZE),
+                rectBitmap.bottom - GeneralUtils.convertDpToPixel(CROSS_SIZE),
+                rectBitmap.right, rectBitmap.bottom);
 
         paint.setColor(ContextCompat.getColor(context, R.color.colorRed));
         paint.setStrokeWidth(GeneralUtils.convertDpToPixel(STROKE_WIDTH));
@@ -95,13 +98,11 @@ public class NoConnectionView extends View {
         new CrossAnimationThread().start();
     }
 
-    boolean animateLineTwo = false;
-
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        canvas.drawBitmap(cloudBitmap, null, rectBitmap, paint);
+        canvas.drawBitmap(networkBitmap, null, rectBitmap, paint);
         canvas.drawLine(rectCross.left, rectCross.top, lineOneEndX, lineOneEndY, paint);
 
         if (animateLineTwo) {
