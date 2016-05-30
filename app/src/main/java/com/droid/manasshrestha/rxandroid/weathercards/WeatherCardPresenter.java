@@ -35,7 +35,6 @@ import lecho.lib.hellocharts.model.PointValue;
  */
 public class WeatherCardPresenter {
 
-    private static int count = 1;
     private static final String DAY_FORMAT = "EEEE";
     private static final String TIME_FORMAT = "HH:mm";
     private static final int MS_CONSTANT = 1000;
@@ -56,6 +55,7 @@ public class WeatherCardPresenter {
      * process and set data to the views
      */
     public void setData() {
+
         setWeatherVariants();
 
         parseDate();

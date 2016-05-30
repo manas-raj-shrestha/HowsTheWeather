@@ -15,7 +15,7 @@ import com.droid.manasshrestha.rxandroid.GeneralUtils;
 import com.droid.manasshrestha.rxandroid.R;
 
 /**
- * Animated loading icon
+ * Animated no connection icon
  */
 public class NoConnectionView extends View {
 
