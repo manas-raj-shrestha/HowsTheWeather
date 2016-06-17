@@ -2,9 +2,14 @@ package com.droid.manasshrestha.rxandroid.data;
 
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 import com.droid.manasshrestha.rxandroid.WeatherApplication;
 import com.droid.manasshrestha.rxandroid.locationhandlers.GpsInfo;
+import com.droid.manasshrestha.rxandroid.weathermodels.WeatherModel;
+import com.orhanobut.hawk.Hawk;
+
+import java.util.ArrayList;
 
 /**
  * Shared preferences handler
@@ -70,6 +75,11 @@ public class PrefUtils {
      */
     public static boolean getFirstRun() {
         return getSharedPreferences().getBoolean(KEY_FIRST_RUN, true);
+    }
+
+    public static void setWeatherCache(ArrayList<WeatherModel> weatherCache) {
+        Hawk.put("asd", weatherCache);
+        Log.e("test", ((ArrayList<WeatherModel>) Hawk.get("asd")).get(0).getTimezone());
     }
 
 }

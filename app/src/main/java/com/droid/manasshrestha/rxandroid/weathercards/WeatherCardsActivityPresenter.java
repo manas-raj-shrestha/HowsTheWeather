@@ -51,6 +51,7 @@ public class WeatherCardsActivityPresenter implements WeatherCardsActivityContra
                 views.setViewPagerData(weatherModels);
                 String[] strings = weatherModels.get(0).getTimezone().split("/");
                 views.setUserLocation(strings[1].toUpperCase());
+                PrefUtils.setWeatherCache(weatherModels);
             }, ADAPTER_SET_DELAY);
 
             Action1<Exception> onErrorAction = (exception) -> views.setError(new NoConnectionView(context), "Please Check network connection. \n Double tap to try again.");
@@ -112,12 +113,9 @@ public class WeatherCardsActivityPresenter implements WeatherCardsActivityContra
 
     @Override
     public void checkIconClick(ViewGroup viewGroup) {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                //Do something after 100ms
-                clickCount = 0;
-            }
+        new Handler().postDelayed(() -> {
+            //Do something after 100ms
+            clickCount = 0;
         }, 500);
 
         if (viewGroup.getChildAt(0) instanceof NoConnectionView) {
