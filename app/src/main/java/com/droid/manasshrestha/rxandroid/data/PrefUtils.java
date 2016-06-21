@@ -82,4 +82,8 @@ public class PrefUtils {
         Log.e("test", ((ArrayList<WeatherModel>) Hawk.get("asd")).get(0).getTimezone());
     }
 
+    public static ArrayList<WeatherModel> getWeatherCache() {
+      return (ArrayList<WeatherModel>) Hawk.get("asd");
+    }
+
 }

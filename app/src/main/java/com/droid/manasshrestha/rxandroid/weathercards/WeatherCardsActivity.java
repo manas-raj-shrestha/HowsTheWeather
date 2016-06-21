@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.droid.manasshrestha.rxandroid.R;
 import com.droid.manasshrestha.rxandroid.animatedicons.LoadingView;
 import com.droid.manasshrestha.rxandroid.animatedicons.NoPermissionView;
+import com.droid.manasshrestha.rxandroid.data.PrefUtils;
 import com.droid.manasshrestha.rxandroid.weathermodels.WeatherModel;
 import com.pixelcan.inkpageindicator.InkPageIndicator;
 
@@ -109,15 +110,20 @@ public class WeatherCardsActivity extends AppCompatActivity implements WeatherCa
 
         /*fetching location takes time. if we start location request as soon as we turn on the location, it will return null
         * hence the delay*/
-        new Handler().postDelayed(() -> {
-            if (viewPager.getAdapter() == null) {
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-                    weatherCardsActivityPresenter.checkPermissions();
-                } else {
-                    weatherCardsActivityPresenter.startNetworkRequest();
+        if (PrefUtils.getWeatherCache() != null) {
+            weatherCardsActivityPresenter.startNetworkRequest();
+        } else {
+            new Handler().postDelayed(() -> {
+                if (viewPager.getAdapter() == null) {
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                        weatherCardsActivityPresenter.checkPermissions();
+                    } else {
+                        weatherCardsActivityPresenter.startNetworkRequest();
+                    }
                 }
-            }
-        }, FETCH_LOCATION_DELAY);
+            }, FETCH_LOCATION_DELAY);
+        }
+
 
     }
 

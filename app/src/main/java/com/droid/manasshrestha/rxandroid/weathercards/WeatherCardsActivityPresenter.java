@@ -43,7 +43,11 @@ public class WeatherCardsActivityPresenter implements WeatherCardsActivityContra
 
     @Override
     public void startNetworkRequest() {
-        if (GeneralUtils.isNetworkOnline(context)) {
+        if (PrefUtils.getWeatherCache() != null) {
+            views.setViewPagerData(PrefUtils.getWeatherCache());
+            String[] strings = PrefUtils.getWeatherCache().get(0).getTimezone().split("/");
+            views.setUserLocation(strings[1].toUpperCase());
+        } else if (GeneralUtils.isNetworkOnline(context)) {
 
             views.showLoadingIcon();
 
