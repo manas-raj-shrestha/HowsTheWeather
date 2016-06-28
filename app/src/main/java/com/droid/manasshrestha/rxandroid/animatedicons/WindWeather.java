@@ -19,7 +19,7 @@ import com.droid.manasshrestha.rxandroid.GeneralUtils;
 import com.droid.manasshrestha.rxandroid.R;
 
 /**
- * Animated wind weather icon
+ * Animated widget_wind weather icon
  */
 public class WindWeather extends RelativeLayout {
 

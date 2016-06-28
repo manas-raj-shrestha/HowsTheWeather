@@ -2,7 +2,6 @@ package com.droid.manasshrestha.rxandroid.splashscreen;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
-import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,7 +19,6 @@ import com.droid.manasshrestha.rxandroid.R;
 import com.droid.manasshrestha.rxandroid.data.PrefUtils;
 import com.droid.manasshrestha.rxandroid.update.UpdateService;
 import com.droid.manasshrestha.rxandroid.weathercards.WeatherCardsActivity;
-import com.droid.manasshrestha.rxandroid.widget.BroadCastText;
 import com.pixelcan.inkpageindicator.InkPageIndicator;
 
 import java.util.Calendar;
@@ -53,13 +51,12 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.splash_screen);
         ButterKnife.bind(this);
 
-//        if (!PrefUtils.getFirstRun()) {
-//            startActivity(new Intent(this, WeatherCardsActivity.class));
-//            finish();
-//            return;
-//        }
+        if (!PrefUtils.getFirstRun()) {
+            startActivity(new Intent(this, WeatherCardsActivity.class));
+            finish();
+            return;
+        }
 
-        createAlarm(this);
         Log.e("check","log");
         Glide.with(this).load(R.drawable.clearsky_bg).override(IMG_WIDTH, IMG_HEIGHT).into(ivBg);
 
@@ -127,20 +124,4 @@ public class SplashActivity extends AppCompatActivity {
         }
     }
 
-    private void createAlarm(Context context) {
-        
-        AlarmManager alarmManager = (AlarmManager) context.getSystemService(context.ALARM_SERVICE);
-        Intent intent = new Intent(context,  UpdateService.class);
-
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.add(Calendar.DATE, 1);
-
-        calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH), 6, 0, 0);
-        Log.e("Calendar before", String.valueOf(calendar.getTime()) + " " + System.currentTimeMillis());
-        Toast.makeText(SplashActivity.this, "created", Toast.LENGTH_SHORT).show();
-
-        PendingIntent pendingIntent = PendingIntent.getService(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),AlarmManager.INTERVAL_DAY,pendingIntent);
-    }
 }

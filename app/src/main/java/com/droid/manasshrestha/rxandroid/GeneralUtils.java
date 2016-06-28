@@ -6,7 +6,12 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.text.format.DateFormat;
 import android.util.DisplayMetrics;
+
+import com.droid.manasshrestha.rxandroid.data.Constants;
+
+import java.util.Date;
 
 /**
  * general functionality used throughout application
@@ -123,5 +128,62 @@ public class GeneralUtils {
         }
         return status;
 
+    }
+
+    /**
+     * parse date according to date format provided
+     *
+     * @param dateFormat date format
+     * @param timeStamp  timestamp to be converted
+     * @return formated date
+     */
+    public static String parseDate(String dateFormat, long timeStamp) {
+        final int MS_CONSTANT = 1000;
+
+        String longV = String.valueOf(timeStamp * MS_CONSTANT);
+        long millisecond = Long.parseLong(longV);
+        String dayString = DateFormat.format(dateFormat, new Date(millisecond)).toString();
+        return dayString;
+    }
+
+    /**
+     * provides the widget icon according to the weather
+     *
+     * @param iconName weather icon key
+     * @return resource id of respective icon
+     */
+    public static int getWidgetIcons(String iconName) {
+        int drawableId = R.drawable.clear_weather;
+
+        switch (iconName) {
+            case Constants.KEY_CLEAR_DAY:
+            case Constants.KEY_CLEAR_NIGHT:
+                drawableId = R.drawable.widget_sun;
+                break;
+            case Constants.KEY_RAIN:
+                drawableId = R.drawable.widget_rain;
+                break;
+            case Constants.KEY_SNOW:
+                drawableId = R.drawable.widget_snow;
+                break;
+            case Constants.KEY_SLEET:
+                drawableId = R.drawable.widget_sleet;
+                break;
+            case Constants.KEY_WIND:
+                drawableId = R.drawable.widget_wind;
+                break;
+            case Constants.KEY_FOG:
+                drawableId = R.drawable.widget_fog;
+                break;
+            case Constants.KEY_CLOUDY:
+                drawableId = R.drawable.widget_clouds;
+                break;
+            case Constants.KEY_PARTLY_CLOUDY_DAY:
+            case Constants.KEY_PARTLY_CLOUDY_NIGHT:
+                drawableId = R.drawable.widget_sun_cloud;
+                break;
+        }
+
+        return drawableId;
     }
 }

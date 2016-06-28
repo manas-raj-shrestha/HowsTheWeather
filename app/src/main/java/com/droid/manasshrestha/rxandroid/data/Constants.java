@@ -15,5 +15,8 @@ public class Constants {
     public static final String KEY_CLOUDY = "cloudy";
     public static final String KEY_PARTLY_CLOUDY_DAY = "partly-cloudy-day";
     public static final String KEY_PARTLY_CLOUDY_NIGHT = "partly-cloudy-night";
-    
+
+    public static final String DATE_FORMAT_DAY = "EEEE";
+    public static final String DATE_FORMAT_DAY_MONTH = "dd MMMM";
+
 }

@@ -35,16 +35,17 @@
             </intent-filter>
         </receiver>
 
-        <receiver android:name=".widget.SimpleWidgetProvider" >
+        <receiver android:name=".widget.AppWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
-            <meta-data android:name="android.appwidget.provider"
+            <meta-data
+                android:name="android.appwidget.provider"
                 android:resource="@xml/widget_provider" />
         </receiver>
 
-        <service android:name=".update.UpdateService"/>
-        <receiver android:name=".widget.BroadCastText"/>
+        <service android:name=".update.UpdateService" />
+        <service android:name=".widget.UpdateWidget" />
     </application>
 
 </manifest>

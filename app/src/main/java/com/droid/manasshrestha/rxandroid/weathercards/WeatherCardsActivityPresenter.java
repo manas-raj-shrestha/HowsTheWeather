@@ -1,7 +1,10 @@
 package com.droid.manasshrestha.rxandroid.weathercards;
 
 import android.Manifest;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
@@ -14,10 +17,13 @@ import com.droid.manasshrestha.rxandroid.data.PrefUtils;
 import com.droid.manasshrestha.rxandroid.locationhandlers.GpsInfo;
 import com.droid.manasshrestha.rxandroid.locationhandlers.LocationCatcher;
 import com.droid.manasshrestha.rxandroid.retrofit.RetrofitManager;
+import com.droid.manasshrestha.rxandroid.update.UpdateService;
 import com.droid.manasshrestha.rxandroid.weathermodels.WeatherModel;
+import com.droid.manasshrestha.rxandroid.widget.UpdateWidget;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import rx.functions.Action1;
 
@@ -56,6 +62,11 @@ public class WeatherCardsActivityPresenter implements WeatherCardsActivityContra
                 String[] strings = weatherModels.get(0).getTimezone().split("/");
                 views.setUserLocation(strings[1].toUpperCase());
                 PrefUtils.setWeatherCache(weatherModels);
+
+                Intent updateWidgetIntent = new Intent(context, UpdateWidget.class);
+                context.startService(updateWidgetIntent);
+                createAlarm(context);
+
             }, ADAPTER_SET_DELAY);
 
             Action1<Exception> onErrorAction = (exception) -> views.setError(new NoConnectionView(context), "Please Check network connection. \n Double tap to try again.");
@@ -128,6 +139,20 @@ public class WeatherCardsActivityPresenter implements WeatherCardsActivityContra
                 startNetworkRequest();
             }
         }
+    }
+
+    private void createAlarm(Context context) {
+
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(context.ALARM_SERVICE);
+        Intent intent = new Intent(context, UpdateService.class);
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.add(Calendar.DATE, 1);
+
+        calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH), 6, 0, 0);
+        PendingIntent pendingIntent = PendingIntent.getService(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
     }
 
 

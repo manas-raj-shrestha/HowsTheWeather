@@ -2,8 +2,8 @@ package com.droid.manasshrestha.rxandroid.data;
 
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.util.Log;
 
+import com.droid.manasshrestha.rxandroid.GeneralUtils;
 import com.droid.manasshrestha.rxandroid.WeatherApplication;
 import com.droid.manasshrestha.rxandroid.locationhandlers.GpsInfo;
 import com.droid.manasshrestha.rxandroid.weathermodels.WeatherModel;
@@ -19,6 +19,7 @@ public class PrefUtils {
     private static final String KEY_LATITUDE = "latitude";
     private static final String KEY_LONGITUDE = "longitude";
     private static final String KEY_FIRST_RUN = "first_run";
+    private static String KEY_LAST_UPDATED = "last_updated";
 
     private static SharedPreferences getSharedPreferences() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(WeatherApplication.getContext());
@@ -79,11 +80,19 @@ public class PrefUtils {
 
     public static void setWeatherCache(ArrayList<WeatherModel> weatherCache) {
         Hawk.put("asd", weatherCache);
-        Log.e("test", ((ArrayList<WeatherModel>) Hawk.get("asd")).get(0).getTimezone());
+        setLastUpdated(GeneralUtils.parseDate(Constants.DATE_FORMAT_DAY_MONTH, weatherCache.get(0).getDaily().getData().get(0).getTime()));
     }
 
     public static ArrayList<WeatherModel> getWeatherCache() {
-      return (ArrayList<WeatherModel>) Hawk.get("asd");
+        return (ArrayList<WeatherModel>) Hawk.get("asd");
+    }
+
+    public static void setLastUpdated(String lastUpdated) {
+        Hawk.put(KEY_LAST_UPDATED, lastUpdated);
+    }
+
+    public static String getLastUpdated() {
+        return Hawk.get(KEY_LAST_UPDATED, "App hasn't been initialized yet");
     }
 
 }
