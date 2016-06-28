@@ -14,4 +14,14 @@
     <string name="txt_temperature">Temperature</string>
     <string name="txt_loading_ticker">Just a moment.</string>
     <string name="txt_allow_permission">Please go to settings and allow \nlocation permission for \n Weather Now.</string>
+
+    <string name="txt_notification_sunny">The weather looks clear today. Have a nice day.</string>
+    <string name="txt_notification_rain">Looks like it is going to rain today. Do not forget to carry an umbrella.</string>
+    <string name="txt_notification_snow">Looks like it is going to snow today. Do not forget to carry an umbrella.</string>
+    <string name="txt_notification_sleet">Sleet expected today.</string>
+    <string name="txt_notification_wind">It is going to be windy today.</string>
+    <string name="txt_notification_fog">It is going to be foggy today.</string>
+    <string name="txt_notification_cloudy">It is going to be cloudy today.</string>
+    <string name="txt_notification_partly_cloudy">There are going to be some clouds in the sky.</string>
+
 </resources>

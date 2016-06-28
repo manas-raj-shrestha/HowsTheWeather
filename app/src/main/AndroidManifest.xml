@@ -22,7 +22,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".weathercards.WeatherCardsActivity" />
+        <activity android:name=".weathercards.WeatherCardsActivity"
+            android:launchMode="singleTask"/>
 
         <meta-data
             android:name="io.fabric.ApiKey"

@@ -1,8 +1,5 @@
 package com.droid.manasshrestha.rxandroid.splashscreen;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,16 +9,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.droid.manasshrestha.rxandroid.R;
 import com.droid.manasshrestha.rxandroid.data.PrefUtils;
-import com.droid.manasshrestha.rxandroid.update.UpdateService;
 import com.droid.manasshrestha.rxandroid.weathercards.WeatherCardsActivity;
 import com.pixelcan.inkpageindicator.InkPageIndicator;
-
-import java.util.Calendar;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

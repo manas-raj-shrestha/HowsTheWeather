@@ -186,4 +186,39 @@ public class GeneralUtils {
 
         return drawableId;
     }
+
+    public static String getNotificationTicker(String iconName) {
+        String tickerText = "";
+        Context context = WeatherApplication.getContext();
+        switch (iconName) {
+            case Constants.KEY_CLEAR_DAY:
+            case Constants.KEY_CLEAR_NIGHT:
+                tickerText = context.getString(R.string.txt_notification_sunny);
+                break;
+            case Constants.KEY_RAIN:
+                tickerText = context.getString(R.string.txt_notification_rain);
+                break;
+            case Constants.KEY_SNOW:
+                tickerText = context.getString(R.string.txt_notification_snow);
+                break;
+            case Constants.KEY_SLEET:
+                tickerText = context.getString(R.string.txt_notification_sleet);
+                break;
+            case Constants.KEY_WIND:
+                tickerText = context.getString(R.string.txt_notification_wind);
+                break;
+            case Constants.KEY_FOG:
+                tickerText = context.getString(R.string.txt_notification_fog);
+                break;
+            case Constants.KEY_CLOUDY:
+                tickerText = context.getString(R.string.txt_notification_cloudy);
+                break;
+            case Constants.KEY_PARTLY_CLOUDY_DAY:
+            case Constants.KEY_PARTLY_CLOUDY_NIGHT:
+                tickerText = context.getString(R.string.txt_notification_partly_cloudy);
+                break;
+        }
+
+        return tickerText;
+    }
 }

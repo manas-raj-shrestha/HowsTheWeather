@@ -41,7 +41,7 @@ public class UpdateService extends IntentService {
         };
 
         RetrofitManager.getInstance()
-                .getWeatherForecastDaily(new LatLng(PrefUtils.getLastKnownLatitude(), PrefUtils.getLastKnownLatitude()),
+                .getWeatherForecastDaily(new LatLng(PrefUtils.getLastKnownLatitude(), PrefUtils.getLastKnownLongitude()),
                         onNextAction, onErrorAction);
     }
 
