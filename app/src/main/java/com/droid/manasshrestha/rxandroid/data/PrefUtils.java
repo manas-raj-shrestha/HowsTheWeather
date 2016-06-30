@@ -36,7 +36,9 @@ public class PrefUtils {
         SharedPreferences.Editor editor = getSharedPreferences().edit();
         editor.putString(KEY_LATITUDE, String.valueOf(location.getLatitude()));
         editor.putString(KEY_LONGITUDE, String.valueOf(location.getLongitude()));
+
         editor.commit();
+
     }
 
     /**

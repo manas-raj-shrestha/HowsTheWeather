@@ -17,6 +17,7 @@ import com.droid.manasshrestha.rxandroid.WeatherApplication;
 import com.droid.manasshrestha.rxandroid.data.Constants;
 import com.droid.manasshrestha.rxandroid.data.PrefUtils;
 import com.droid.manasshrestha.rxandroid.splashscreen.SplashActivity;
+import com.droid.manasshrestha.rxandroid.update.UpdateService;
 import com.droid.manasshrestha.rxandroid.weathermodels.DailyData;
 import com.droid.manasshrestha.rxandroid.weathermodels.WeatherModel;
 
@@ -38,8 +39,8 @@ public class UpdateWidget extends IntentService {
         ArrayList<WeatherModel> weatherModels = PrefUtils.getWeatherCache();
 
         Context context = getApplicationContext();
-        Intent notificationIntent = new Intent(context, SplashActivity.class);
-        PendingIntent contentIntent = PendingIntent.getActivity(context, 0, notificationIntent, 0);
+        Intent notificationIntent = new Intent(context, UpdateService.class);
+        PendingIntent contentIntent = PendingIntent.getService(context, 0, notificationIntent, 0);
         ComponentName name = new ComponentName(context, AppWidget.class);
         int[] ids = AppWidgetManager.getInstance(context).getAppWidgetIds(name);
 
@@ -84,6 +85,7 @@ public class UpdateWidget extends IntentService {
                 int widgetId = ids[i];
 
                 RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.widget);
+                remoteViews.setOnClickPendingIntent(R.id.rl_widget, contentIntent);
                 remoteViews.setViewVisibility(R.id.tv_error, View.VISIBLE);
                 remoteViews.setViewVisibility(R.id.iv_widget_icon, View.GONE);
                 remoteViews.setViewVisibility(R.id.tc_digital, View.GONE);

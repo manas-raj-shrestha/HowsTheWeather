@@ -3,6 +3,7 @@ package com.droid.manasshrestha.rxandroid.update;
 import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
 import com.droid.manasshrestha.rxandroid.data.PrefUtils;
 import com.droid.manasshrestha.rxandroid.retrofit.RetrofitManager;
@@ -28,7 +29,6 @@ public class UpdateService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-
         Action1<ArrayList<WeatherModel>> onNextAction = weatherModel -> {
             PrefUtils.setWeatherCache(weatherModel);
 
