@@ -1,18 +1,35 @@
 package com.droid.manasshrestha.rxandroid.weathercards;
 
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
+import android.view.animation.RotateAnimation;
+import android.view.animation.ScaleAnimation;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.droid.manasshrestha.rxandroid.GeneralUtils;
 import com.droid.manasshrestha.rxandroid.R;
 import com.droid.manasshrestha.rxandroid.animatedicons.LoadingView;
 import com.droid.manasshrestha.rxandroid.animatedicons.NoPermissionView;
 import com.droid.manasshrestha.rxandroid.data.PrefUtils;
+import com.droid.manasshrestha.rxandroid.update.UpdateFetcher;
+import com.droid.manasshrestha.rxandroid.update.UpdateResultReceiver;
+import com.droid.manasshrestha.rxandroid.update.UpdateService;
 import com.droid.manasshrestha.rxandroid.weathermodels.WeatherModel;
 import com.pixelcan.inkpageindicator.InkPageIndicator;
 
@@ -25,8 +42,12 @@ import butterknife.OnClick;
 /**
  * Contains view pager with daily weather info
  */
-public class WeatherCardsActivity extends AppCompatActivity implements WeatherCardsActivityContract.Views {
-
+public class WeatherCardsActivity extends AppCompatActivity implements WeatherCardsActivityContract.Views, UpdateFetcher {
+    private static final int ANIM_DURATION = 5000;
+    private static final float START_ANGLE = 0.0f;
+    private static final float END_ANGLE = 360.0f;
+    private static final float PIVOT_VALUE = 0.5f;
+    private static final int REPEAT_COUNT = -1;
     private static int FETCH_LOCATION_DELAY = 6800;
 
     @Bind(R.id.vp_cards)
@@ -44,7 +65,11 @@ public class WeatherCardsActivity extends AppCompatActivity implements WeatherCa
     @Bind(R.id.tv_error)
     TextView tvStatus;
 
+    @Bind(R.id.iv_update)
+    ImageView ivUpdate;
+
     private WeatherCardsActivityPresenter weatherCardsActivityPresenter;
+    WeatherCardsAdapter weatherCardsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,8 +86,12 @@ public class WeatherCardsActivity extends AppCompatActivity implements WeatherCa
     public void setViewPagerData(ArrayList<WeatherModel> weatherModels) {
         rlContainer.removeAllViews();
         tvStatus.setVisibility(View.GONE);
-        viewPager.setAdapter(new WeatherCardsAdapter(getSupportFragmentManager(), weatherModels));
+        viewPager.setAdapter(null);
+        weatherCardsAdapter = new WeatherCardsAdapter(getSupportFragmentManager(), weatherModels);
+        viewPager.setAdapter(weatherCardsAdapter);
         inkPageIndicator.setViewPager(viewPager);
+        ivUpdate.setVisibility(View.VISIBLE);
+
     }
 
     @Override
@@ -124,11 +153,45 @@ public class WeatherCardsActivity extends AppCompatActivity implements WeatherCa
             }, FETCH_LOCATION_DELAY);
         }
 
+    }
+
+    UpdateResultReceiver updateResultReceiver;
+
+    @OnClick({R.id.rl_container, R.id.iv_update})
+    public void setOnClicks(View view) {
+        switch (view.getId()) {
+            case R.id.rl_card_container:
+                weatherCardsActivityPresenter.checkIconClick(rlContainer);
+                break;
+            case R.id.iv_update:
+                updateResultReceiver = new UpdateResultReceiver(new Handler(), WeatherCardsActivity.this);
+                Intent intent = new Intent(this, UpdateService.class);
+                intent.putExtra(UpdateService.KEY_RESULT_RECEIVER, updateResultReceiver);
+                startService(intent);
+
+                Animation animation = new RotateAnimation(START_ANGLE, END_ANGLE,
+                        Animation.RELATIVE_TO_SELF, PIVOT_VALUE, Animation.RELATIVE_TO_SELF,
+                        PIVOT_VALUE);
+                animation.setInterpolator(new LinearInterpolator());
+                animation.setDuration(ANIM_DURATION);
+
+                animation.setRepeatCount(REPEAT_COUNT);
+                ivUpdate.startAnimation(animation);
+
+                break;
+        }
 
     }
 
-    @OnClick(R.id.rl_container)
-    public void setOnClicks() {
-        weatherCardsActivityPresenter.checkIconClick(rlContainer);
+    @Override
+    public void getUpdatedWeatherModel(ArrayList<WeatherModel> weatherModelArrayList) {
+
+        if (weatherModelArrayList != null) {
+                viewPager.setAdapter(new WeatherCardsAdapter(getSupportFragmentManager(), weatherModelArrayList));
+        } else {
+            Toast.makeText(this, "Error connecting. Please check your internet connection.", Toast.LENGTH_SHORT).show();
+        }
+
+        ivUpdate.clearAnimation();
     }
 }

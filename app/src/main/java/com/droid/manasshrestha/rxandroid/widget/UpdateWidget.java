@@ -7,6 +7,7 @@ import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.MainThread;
 import android.support.v4.app.NotificationCompat;
 import android.view.View;
 import android.widget.RemoteViews;
@@ -18,6 +19,7 @@ import com.droid.manasshrestha.rxandroid.data.Constants;
 import com.droid.manasshrestha.rxandroid.data.PrefUtils;
 import com.droid.manasshrestha.rxandroid.splashscreen.SplashActivity;
 import com.droid.manasshrestha.rxandroid.update.UpdateService;
+import com.droid.manasshrestha.rxandroid.weathercards.WeatherCardsActivity;
 import com.droid.manasshrestha.rxandroid.weathermodels.DailyData;
 import com.droid.manasshrestha.rxandroid.weathermodels.WeatherModel;
 
@@ -39,8 +41,8 @@ public class UpdateWidget extends IntentService {
         ArrayList<WeatherModel> weatherModels = PrefUtils.getWeatherCache();
 
         Context context = getApplicationContext();
-        Intent notificationIntent = new Intent(context, UpdateService.class);
-        PendingIntent contentIntent = PendingIntent.getService(context, 0, notificationIntent, 0);
+        Intent notificationIntent = new Intent(context, WeatherCardsActivity.class);
+        PendingIntent contentIntent = PendingIntent.getActivity(context, 0, notificationIntent, 0);
         ComponentName name = new ComponentName(context, AppWidget.class);
         int[] ids = AppWidgetManager.getInstance(context).getAppWidgetIds(name);
 
