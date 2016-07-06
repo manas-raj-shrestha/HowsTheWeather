@@ -43,6 +43,7 @@ public class LoadingView extends View {
         this(context, attrs, 0);
     }
 
+    @SuppressWarnings("ResourceType")
     public LoadingView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 

@@ -16,4 +16,11 @@
     <dimen name="dummy_card_height">350dp</dimen>
     <dimen name="dimen_8_2x">16dp</dimen>
     <dimen name="dimen_8_1x">8dp</dimen>
+
+    <!--widget-->
+    <dimen name="text_clock_text_size">18sp</dimen>
+    <dimen name="widget_temp_text_size">28sp</dimen>
+    <dimen name="text_clock_margin_top">5dp</dimen>
+    <dimen name="temp_margin_top">5dp</dimen>
+
 </resources>

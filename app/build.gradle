@@ -27,11 +27,11 @@ android {
 
     defaultConfig {
         applicationId "com.droid.manasshrestha.rxandroid"
-        minSdkVersion 16
+        minSdkVersion 17
         multiDexEnabled true
         targetSdkVersion 23
-        versionCode 1
-        versionName "1.0"
+        versionCode 3
+        versionName "2.1"
     }
     buildTypes {
         release {

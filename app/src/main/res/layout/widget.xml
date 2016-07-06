@@ -21,53 +21,72 @@
         android:layout_centerHorizontal="true"
         android:src="@drawable/widget_snow" />
 
-    <TextView
-        android:id="@+id/tv_widget_temp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/iv_bg"
+    <LinearLayout
         android:layout_marginRight="20dp"
-        android:layout_marginTop="5dp"
-        android:textColor="@android:color/white"
-        android:textSize="34sp"
-        tools:text="22 C" />
-
-    <TextView
-        android:id="@+id/tv_widget_last_updated"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/tv_widget_temp"
-        android:layout_below="@+id/tv_widget_temp"
-        android:textSize="10sp"
-        tools:text="Last Updated : 28 June" />
-
-    <TextClock
-        android:id="@+id/tc_digital"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_alignTop="@+id/iv_bg"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="5dp"
-        android:textSize="24sp" />
+        android:gravity="center_vertical"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tv_widget_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tc_digital"
-        android:layout_marginLeft="20dp"
-        android:text="21 DEC"
-        android:textSize="10sp" />
+        <TextView
+            android:id="@+id/tv_widget_temp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/iv_bg"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/widget_temp_text_size"
+            tools:text="22 C" />
 
-    <TextView
-        android:id="@+id/tv_widget_day"
+        <TextView
+            android:textSize="10sp"
+            android:id="@+id/tv_widget_last_updated"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/tv_widget_temp"
+            android:layout_below="@+id/tv_widget_temp"
+            tools:text="Last Updated : 28 June" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_widget_date"
-        android:layout_marginLeft="20dp"
-        android:text="WEDNESDAY"
-        android:textSize="10sp" />
+        android:layout_height="match_parent"
+        android:layout_alignTop="@+id/iv_bg"
+        android:layout_centerVertical="true"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <TextClock
+            android:id="@+id/tc_digital"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/iv_bg"
+            android:textSize="@dimen/text_clock_text_size"
+            android:layout_marginLeft="20dp" />
+
+        <TextView
+            android:id="@+id/tv_widget_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tc_digital"
+            android:textSize="10sp"
+            android:layout_marginLeft="20dp"
+            android:text="21 DEC" />
+
+        <TextView
+            android:textSize="10sp"
+            android:id="@+id/tv_widget_day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_widget_date"
+            android:layout_marginLeft="20dp"
+            android:text="WEDNESDAY" />
+
+    </LinearLayout>
+
 
     <TextView
         android:id="@+id/tv_error"

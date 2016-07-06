@@ -44,13 +44,15 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.splash_screen);
         ButterKnife.bind(this);
 
+
+        Log.e("check","log "+getResources().getDisplayMetrics().density);
+
         if (!PrefUtils.getFirstRun()) {
             startActivity(new Intent(this, WeatherCardsActivity.class));
             finish();
             return;
         }
 
-        Log.e("check","log");
         Glide.with(this).load(R.drawable.clearsky_bg).override(IMG_WIDTH, IMG_HEIGHT).into(ivBg);
 
         viewPager.setAdapter(new TutorialScreenPagerAdapter(getSupportFragmentManager()));

@@ -7,7 +7,7 @@ import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.MainThread;
+import android.graphics.BitmapFactory;
 import android.support.v4.app.NotificationCompat;
 import android.view.View;
 import android.widget.RemoteViews;
@@ -18,7 +18,6 @@ import com.droid.manasshrestha.rxandroid.WeatherApplication;
 import com.droid.manasshrestha.rxandroid.data.Constants;
 import com.droid.manasshrestha.rxandroid.data.PrefUtils;
 import com.droid.manasshrestha.rxandroid.splashscreen.SplashActivity;
-import com.droid.manasshrestha.rxandroid.update.UpdateService;
 import com.droid.manasshrestha.rxandroid.weathercards.WeatherCardsActivity;
 import com.droid.manasshrestha.rxandroid.weathermodels.DailyData;
 import com.droid.manasshrestha.rxandroid.weathermodels.WeatherModel;
@@ -113,7 +112,7 @@ public class UpdateWidget extends IntentService {
 
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
-                        .setSmallIcon(R.drawable.app_icon)
+                        .setSmallIcon(getNotificationIcon()).setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.drawable.app_icon))
                         .setContentTitle(getResources().getString(R.string.app_name))
                         .setContentText(GeneralUtils.getNotificationTicker(dailyData.getIcon()))
                         .setStyle(new NotificationCompat.BigTextStyle()
@@ -122,5 +121,16 @@ public class UpdateWidget extends IntentService {
                         .setAutoCancel(true);
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(NOTIFICATION_ID, mBuilder.build());
+    }
+
+    /**
+     * check the version code and load white icon if the os version is lollipop or greater
+     * else returns the app icon
+     *
+     * @return small nofitication icon
+     */
+    private int getNotificationIcon() {
+        boolean useWhiteIcon = (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP);
+        return useWhiteIcon ? R.drawable.app_icon_white_tint : R.drawable.app_icon;
     }
 }
