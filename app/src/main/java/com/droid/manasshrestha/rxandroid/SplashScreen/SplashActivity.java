@@ -44,7 +44,6 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.splash_screen);
         ButterKnife.bind(this);
 
-
         Log.e("check","log "+getResources().getDisplayMetrics().density);
 
         if (!PrefUtils.getFirstRun()) {
@@ -60,7 +59,7 @@ public class SplashActivity extends AppCompatActivity {
         ViewPager.OnPageChangeListener onPageChangeListener = new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
+                //no action required on page scrolled
             }
 
             @Override
@@ -70,7 +69,7 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onPageScrollStateChanged(int state) {
-
+                //no action required on scroll state changed
             }
         };
 

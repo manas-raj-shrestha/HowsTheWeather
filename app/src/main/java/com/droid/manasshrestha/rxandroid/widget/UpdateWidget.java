@@ -31,6 +31,9 @@ public class UpdateWidget extends IntentService {
 
     private static final int NOTIFICATION_ID = 0X1;
 
+    /**
+     * intent service requires a default constructor
+     */
     public UpdateWidget() {
         super(UpdateWidget.class.getSimpleName());
     }
@@ -104,7 +107,7 @@ public class UpdateWidget extends IntentService {
      *
      * @param dailyData {@link DailyData}
      */
-    public void createNotification(DailyData dailyData) {
+    private void createNotification(DailyData dailyData) {
         Context context = WeatherApplication.getContext();
         Intent notificationIntent = new Intent(context, SplashActivity.class);
         notificationIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -130,7 +133,7 @@ public class UpdateWidget extends IntentService {
      * @return small nofitication icon
      */
     private int getNotificationIcon() {
-        boolean useWhiteIcon = (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP);
+        boolean useWhiteIcon = android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP;
         return useWhiteIcon ? R.drawable.app_icon_white_tint : R.drawable.app_icon;
     }
 }
