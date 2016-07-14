@@ -22,8 +22,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".weathercards.WeatherCardsActivity"
-            android:launchMode="singleTask"/>
+        <activity
+            android:name=".weathercards.WeatherCardsActivity"
+            android:launchMode="singleTask" />
 
         <meta-data
             android:name="io.fabric.ApiKey"
@@ -46,8 +47,15 @@
                 android:resource="@xml/widget_provider" />
         </receiver>
 
+        <receiver android:name=".update.NetworkBroadcastReceiver">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+
         <service android:name=".update.UpdateService" />
         <service android:name=".widget.UpdateWidget" />
+
     </application>
 
 </manifest>

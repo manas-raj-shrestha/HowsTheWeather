@@ -33,6 +33,7 @@ public class UpdateService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
+        Log.e("alarm fired","alarm fired");
         Action1<ArrayList<WeatherModel>> onNextAction = weatherModel -> {
             PrefUtils.setWeatherCache(weatherModel);
 

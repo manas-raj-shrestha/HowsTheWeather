@@ -19,6 +19,7 @@ public class PrefUtils {
     private static final String KEY_LATITUDE = "latitude";
     private static final String KEY_LONGITUDE = "longitude";
     private static final String KEY_FIRST_RUN = "first_run";
+    private static final String KEY_LAST_UPDATED_LONG = "time_in_long";
     private static String KEY_LAST_UPDATED = "last_updated";
 
     private static SharedPreferences getSharedPreferences() {
@@ -83,6 +84,15 @@ public class PrefUtils {
     public static void setWeatherCache(ArrayList<WeatherModel> weatherCache) {
         Hawk.put("asd", weatherCache);
         setLastUpdated(GeneralUtils.parseDate(Constants.DATE_FORMAT_DAY_MONTH, weatherCache.get(0).getDaily().getData().get(0).getTime()));
+        setLastUpdatedLong(System.currentTimeMillis());
+    }
+
+    private static void setLastUpdatedLong(Long time) {
+        Hawk.put(KEY_LAST_UPDATED_LONG, time);
+    }
+
+    public static Long getLastUpdatedLong() {
+        return Hawk.get(KEY_LAST_UPDATED_LONG,0l);
     }
 
     public static ArrayList<WeatherModel> getWeatherCache() {
