@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.ViewGroup;
 
 import com.droid.manasshrestha.rxandroid.R;
@@ -22,7 +23,9 @@ import com.droid.manasshrestha.rxandroid.weathermodels.Temp;
 import com.droid.manasshrestha.rxandroid.weathermodels.WeatherModel;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import lecho.lib.hellocharts.model.Axis;
@@ -206,6 +209,7 @@ public class WeatherCardPresenter {
         weatherCardContract.setAvgTemp(averageTemp);
     }
 
+
     /**
      * convert long date to readable format
      */
@@ -214,7 +218,19 @@ public class WeatherCardPresenter {
         long millisecond = Long.parseLong(longV);
         String dayString = DateFormat.format(DAY_FORMAT, new Date(millisecond)).toString();
 
-        weatherCardContract.setWeekDay(dayString.toUpperCase());
+        Date date = new Date(Long.parseLong(longV));
+        Calendar calendar = new GregorianCalendar();
+        calendar.setTime(date);
+
+        Log.e("time",millisecond + " " + System.currentTimeMillis() + " "+ calendar.get(Calendar.DAY_OF_MONTH));
+
+        if (calendar.get(Calendar.DAY_OF_MONTH)==Calendar.getInstance().get(Calendar.DAY_OF_MONTH)) {
+            weatherCardContract.setWeekDay("TODAY");
+        }else if (calendar.get(Calendar.DAY_OF_MONTH)==(Calendar.getInstance().get(Calendar.DAY_OF_MONTH)+1)){
+            weatherCardContract.setWeekDay("TOMORROW");
+        }else {
+            weatherCardContract.setWeekDay(dayString.toUpperCase());
+        }
     }
 
     /**

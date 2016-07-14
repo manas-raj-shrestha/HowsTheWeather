@@ -160,7 +160,7 @@ public class WeatherCardsFragment extends Fragment implements WeatherCardContrac
 
     @Override
     public void setAvgTemp(int temp) {
-        tvAvgTemp.setText(temp + "\u00B0");
+        tvAvgTemp.setText(temp + "\u00B0"+"C");
     }
 
     @Override

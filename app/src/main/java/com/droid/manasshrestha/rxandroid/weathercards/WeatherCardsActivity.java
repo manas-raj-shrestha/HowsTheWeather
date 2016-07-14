@@ -2,27 +2,19 @@ package com.droid.manasshrestha.rxandroid.weathercards;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
-import android.view.animation.ScaleAnimation;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.droid.manasshrestha.rxandroid.GeneralUtils;
 import com.droid.manasshrestha.rxandroid.R;
 import com.droid.manasshrestha.rxandroid.animatedicons.LoadingView;
 import com.droid.manasshrestha.rxandroid.animatedicons.NoPermissionView;
@@ -160,7 +152,7 @@ public class WeatherCardsActivity extends AppCompatActivity implements WeatherCa
     @OnClick({R.id.rl_container, R.id.iv_update})
     public void setOnClicks(View view) {
         switch (view.getId()) {
-            case R.id.rl_card_container:
+            case R.id.rl_container:
                 weatherCardsActivityPresenter.checkIconClick(rlContainer);
                 break;
             case R.id.iv_update:
@@ -186,8 +178,8 @@ public class WeatherCardsActivity extends AppCompatActivity implements WeatherCa
     @Override
     public void getUpdatedWeatherModel(ArrayList<WeatherModel> weatherModelArrayList) {
 
-        if (weatherModelArrayList != null) {
-                viewPager.setAdapter(new WeatherCardsAdapter(getSupportFragmentManager(), weatherModelArrayList));
+        if (weatherModelArrayList != null && viewPager != null) {
+            viewPager.setAdapter(new WeatherCardsAdapter(getSupportFragmentManager(), weatherModelArrayList));
         } else {
             Toast.makeText(this, "Error connecting. Please check your internet connection.", Toast.LENGTH_SHORT).show();
         }
