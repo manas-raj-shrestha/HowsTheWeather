@@ -40,10 +40,19 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="@dimen/weather_ticker_marin_bottom"
             android:text="Sunny"
             android:textColor="@android:color/white"
             android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/weather_ticker_marin_bottom"
+            android:text="2/02/2016"
+            android:textColor="@android:color/white"
+            android:textSize="12sp" />
 
         <FrameLayout
             android:id="@+id/fl_animated_icons"

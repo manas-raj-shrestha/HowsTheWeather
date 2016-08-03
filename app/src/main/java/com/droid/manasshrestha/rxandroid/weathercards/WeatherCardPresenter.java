@@ -7,6 +7,7 @@ import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.ViewGroup;
 
+import com.droid.manasshrestha.rxandroid.GeneralUtils;
 import com.droid.manasshrestha.rxandroid.R;
 import com.droid.manasshrestha.rxandroid.animatedicons.ClearWeather;
 import com.droid.manasshrestha.rxandroid.animatedicons.CloudyWeather;
@@ -40,6 +41,7 @@ public class WeatherCardPresenter {
 
     private static final String DAY_FORMAT = "EEEE";
     private static final String TIME_FORMAT = "HH:mm";
+    private static final String DATE_FORMAT = "dd/MM/yyyy";
     private static final int MS_CONSTANT = 1000;
 
     private WeatherCardContract.Views weatherCardContract;
@@ -61,7 +63,7 @@ public class WeatherCardPresenter {
 
         setWeatherVariants();
 
-        parseDate();
+        parseDay();
         setAverageTemperature();
         setHumidity();
         setClouds();
@@ -73,6 +75,7 @@ public class WeatherCardPresenter {
         weatherCardContract.setWindDirection(dailyData.getWindBearing() + "degree");
 
         weatherCardContract.setWeatherDesc(dailyData.getSummary());
+        weatherCardContract.setDate(GeneralUtils.parseDate(DATE_FORMAT, dailyData.getTime()));
     }
 
     private void setWeatherVariants() {
@@ -178,8 +181,8 @@ public class WeatherCardPresenter {
         temp.setMaxTemp(dailyData.getTemperatureMax());
         temp.setMinTemp(dailyData.getTemperatureMin());
 
-        temp.setMaxTempTime(parseTime(dailyData.getTemperatureMinTime()));
-        temp.setMinTempTime(parseTime(dailyData.getTemperatureMaxTime()));
+        temp.setMaxTempTime(GeneralUtils.parseDate(TIME_FORMAT, dailyData.getTemperatureMinTime()));
+        temp.setMinTempTime(GeneralUtils.parseDate(TIME_FORMAT, dailyData.getTemperatureMaxTime()));
 
         weatherCardContract.setTemperature(temp);
     }
@@ -209,11 +212,10 @@ public class WeatherCardPresenter {
         weatherCardContract.setAvgTemp(averageTemp);
     }
 
-
     /**
      * convert long date to readable format
      */
-    private void parseDate() {
+    private void parseDay() {
         String longV = String.valueOf(dailyData.getTime() * MS_CONSTANT);
         long millisecond = Long.parseLong(longV);
         String dayString = DateFormat.format(DAY_FORMAT, new Date(millisecond)).toString();
@@ -222,24 +224,15 @@ public class WeatherCardPresenter {
         Calendar calendar = new GregorianCalendar();
         calendar.setTime(date);
 
-        Log.e("time",millisecond + " " + System.currentTimeMillis() + " "+ calendar.get(Calendar.DAY_OF_MONTH));
+        Log.e("time", millisecond + " " + System.currentTimeMillis() + " " + calendar.get(Calendar.DAY_OF_MONTH));
 
-        if (calendar.get(Calendar.DAY_OF_MONTH)==Calendar.getInstance().get(Calendar.DAY_OF_MONTH)) {
+        if (calendar.get(Calendar.DAY_OF_MONTH) == Calendar.getInstance().get(Calendar.DAY_OF_MONTH)) {
             weatherCardContract.setWeekDay("TODAY");
-        }else if (calendar.get(Calendar.DAY_OF_MONTH)==(Calendar.getInstance().get(Calendar.DAY_OF_MONTH)+1)){
+        } else if (calendar.get(Calendar.DAY_OF_MONTH) == (Calendar.getInstance().get(Calendar.DAY_OF_MONTH) + 1)) {
             weatherCardContract.setWeekDay("TOMORROW");
-        }else {
+        } else {
             weatherCardContract.setWeekDay(dayString.toUpperCase());
         }
-    }
-
-    /**
-     * convert long time to readable format
-     */
-    private String parseTime(long unixTime) {
-        long millisecond = Long.parseLong(String.valueOf(unixTime * MS_CONSTANT));
-
-        return DateFormat.format(TIME_FORMAT, new Date(millisecond)).toString();
     }
 
 }

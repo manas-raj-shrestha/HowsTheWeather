@@ -82,6 +82,9 @@ public class WeatherCardsFragment extends Fragment implements WeatherCardContrac
     @Bind(R.id.tv_max_temp_time)
     TextView tvMaxTempTime;
 
+    @Bind(R.id.tv_date)
+    TextView tvDate;
+
     @Bind(R.id.tv_max_temp)
     TextView tvMaxTemp;
 
@@ -160,7 +163,7 @@ public class WeatherCardsFragment extends Fragment implements WeatherCardContrac
 
     @Override
     public void setAvgTemp(int temp) {
-        tvAvgTemp.setText(temp + "\u00B0"+"C");
+        tvAvgTemp.setText(temp + "\u00B0" + "C");
     }
 
     @Override
@@ -222,6 +225,11 @@ public class WeatherCardsFragment extends Fragment implements WeatherCardContrac
     @Override
     public void setWeatherTicker(String weatherTicker) {
         tvTicker.setText(weatherTicker);
+    }
+
+    @Override
+    public void setDate(String s) {
+        tvDate.setText(s);
     }
 
     private void flipCard(final View currentView, final View nextView) {

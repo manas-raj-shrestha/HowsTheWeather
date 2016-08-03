@@ -1,8 +1,6 @@
 package com.droid.manasshrestha.rxandroid.weathercards;
 
-import android.graphics.drawable.Drawable;
 import android.view.ViewGroup;
-
 
 import com.droid.manasshrestha.rxandroid.weathermodels.Temp;
 
@@ -24,7 +22,7 @@ public interface WeatherCardContract {
 
         void setClouds(int clouds);
 
-        void setCardBackground(int colorId,int drawableId);
+        void setCardBackground(int colorId, int drawableId);
 
         void setAtmosphericPressure(String pressure);
 
@@ -39,6 +37,8 @@ public interface WeatherCardContract {
         void setLineSetData(LineChartData lineChartData);
 
         void setWeatherTicker(String weatherTicker);
+
+        void setDate(String s);
     }
 
 }

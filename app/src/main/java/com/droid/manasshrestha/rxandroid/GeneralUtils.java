@@ -18,6 +18,8 @@ import java.util.Date;
  */
 public class GeneralUtils {
 
+    private static final long MS_CONSTANT = 1000;
+
     /**
      * This method converts dp unit to equivalent pixels, depending on device density.
      *
@@ -138,8 +140,6 @@ public class GeneralUtils {
      * @return formated date
      */
     public static String parseDate(String dateFormat, long timeStamp) {
-        final int MS_CONSTANT = 1000;
-
         String longV = String.valueOf(timeStamp * MS_CONSTANT);
         long millisecond = Long.parseLong(longV);
         String dayString = DateFormat.format(dateFormat, new Date(millisecond)).toString();
@@ -221,4 +221,5 @@ public class GeneralUtils {
 
         return tickerText;
     }
+
 }
