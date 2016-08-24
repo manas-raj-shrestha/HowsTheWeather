@@ -3,22 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/rl_widget"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <ImageView
-        android:id="@+id/iv_bg"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="35dp"
-        android:background="@drawable/layout_rounded_bg" />
+    android:background="@drawable/layout_rounded_bg"
+    android:orientation="vertical" android:layout_height="match_parent">
 
     <ImageView
         android:id="@+id/iv_widget_icon"
         android:layout_width="75dp"
         android:layout_height="75dp"
-        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"
         android:src="@drawable/widget_snow" />
 
     <LinearLayout
@@ -27,7 +19,7 @@
         android:layout_alignParentRight="true"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_alignTop="@+id/iv_bg"
+        android:layout_alignParentBottom="true"
         android:gravity="center_vertical"
         android:orientation="vertical">
 
@@ -54,8 +46,8 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_alignTop="@+id/iv_bg"
         android:layout_centerVertical="true"
+        android:layout_alignParentBottom="true"
         android:gravity="center_vertical"
         android:orientation="vertical">
 
@@ -86,7 +78,6 @@
             android:text="WEDNESDAY" />
 
     </LinearLayout>
-
 
     <TextView
         android:id="@+id/tv_error"

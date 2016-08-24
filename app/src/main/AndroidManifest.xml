@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.droid.manasshrestha.rxandroid">
+    package="com.droid.manasshrestha.weathernow">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
-        android:name=".WeatherApplication"
+        android:name="com.lftechnology.leapfrog.weathernow.WeatherApplication"
         android:allowBackup="true"
         android:icon="@drawable/app_icon"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".splashscreen.SplashActivity">
+        <activity android:name="com.lftechnology.leapfrog.weathernow.splashscreen.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,21 +23,21 @@
         </activity>
 
         <activity
-            android:name=".weathercards.WeatherCardsActivity"
+            android:name="com.lftechnology.leapfrog.weathernow.weathercards.WeatherCardsActivity"
             android:launchMode="singleTask" />
 
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="82c61e5bab7c0eb26afa11da1bb2252c02a85dc2" />
 
-        <receiver android:name=".GpsLocationReceiver">
+        <receiver android:name="com.lftechnology.leapfrog.weathernow.GpsLocationReceiver">
             <intent-filter>
                 <action android:name="android.location.PROVIDERS_CHANGED" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </receiver>
 
-        <receiver android:name=".widget.AppWidget">
+        <receiver android:name="com.lftechnology.leapfrog.weathernow.widget.AppWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_ENABLED" />
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -47,14 +47,14 @@
                 android:resource="@xml/widget_provider" />
         </receiver>
 
-        <receiver android:name=".update.NetworkBroadcastReceiver">
+        <receiver android:name="com.lftechnology.leapfrog.weathernow.update.NetworkBroadcastReceiver">
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
 
-        <service android:name=".update.UpdateService" />
-        <service android:name=".widget.UpdateWidget" />
+        <service android:name="com.lftechnology.leapfrog.weathernow.update.UpdateService" />
+        <service android:name="com.lftechnology.leapfrog.weathernow.widget.UpdateWidget" />
 
     </application>
 

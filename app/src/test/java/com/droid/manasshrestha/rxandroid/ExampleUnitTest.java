@@ -1,4 +1,4 @@
-package com.droid.manasshrestha.rxandroid;
+package com.droid.manasshrestha.weathernow;
 
 import org.junit.Test;
 
