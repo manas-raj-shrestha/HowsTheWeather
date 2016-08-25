@@ -9,8 +9,10 @@ import android.content.pm.PackageManager;
 import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.ViewGroup;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.lftechnology.leapfrog.weathernow.GeneralUtils;
 import com.lftechnology.leapfrog.weathernow.animatedicons.NoConnectionView;
 import com.lftechnology.leapfrog.weathernow.data.PrefUtils;
@@ -20,7 +22,6 @@ import com.lftechnology.leapfrog.weathernow.retrofit.RetrofitManager;
 import com.lftechnology.leapfrog.weathernow.update.UpdateService;
 import com.lftechnology.leapfrog.weathernow.weathermodels.WeatherModel;
 import com.lftechnology.leapfrog.weathernow.widget.UpdateWidget;
-import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -48,12 +49,12 @@ public class WeatherCardsActivityPresenter implements WeatherCardsActivityContra
     }
 
     @Override
-    public void startNetworkRequest() {
-        if (PrefUtils.getWeatherCache() != null) {
+    public void startNetworkRequest(boolean locationChanged) {
+        if (PrefUtils.getWeatherCache() != null && !locationChanged) {
             views.setViewPagerData(PrefUtils.getWeatherCache());
             String[] strings = PrefUtils.getWeatherCache().get(0).getTimezone().split("/");
             views.setUserLocation(strings[1].toUpperCase());
-        } else if (GeneralUtils.isNetworkOnline(context)) {
+        } else if (GeneralUtils.isNetworkOnline(context) && !locationChanged) {
 
             views.showLoadingIcon();
 
@@ -62,6 +63,8 @@ public class WeatherCardsActivityPresenter implements WeatherCardsActivityContra
                 String[] strings = weatherModels.get(0).getTimezone().split("/");
                 views.setUserLocation(strings[1].toUpperCase());
                 PrefUtils.setWeatherCache(weatherModels);
+
+                Log.e("got location","" + weatherModels.get(0).getLatitude() + " " + weatherModels.get(0).getLongitude());
 
                 Intent updateWidgetIntent = new Intent(context, UpdateWidget.class);
                 context.startService(updateWidgetIntent);
@@ -95,6 +98,27 @@ public class WeatherCardsActivityPresenter implements WeatherCardsActivityContra
                     }
                 }
             });
+        } else if (GeneralUtils.isNetworkOnline(context) && locationChanged) {
+            views.showLoadingIcon();
+
+            Action1<ArrayList<WeatherModel>> onNextAction = (weatherModels) -> new Handler().postDelayed(() -> {
+                Log.e("asdasdas","asdasdasd");
+                views.setViewPagerData(weatherModels);
+                String[] strings = weatherModels.get(0).getTimezone().split("/");
+                views.setUserLocation(strings[1].toUpperCase());
+                PrefUtils.setWeatherCache(weatherModels);
+
+                Log.e("got location", "" + weatherModels.get(0).getLatitude() + " " + weatherModels.get(0).getLongitude());
+
+                Intent updateWidgetIntent = new Intent(context, UpdateWidget.class);
+                context.startService(updateWidgetIntent);
+
+            }, ADAPTER_SET_DELAY);
+
+            Action1<Exception> onErrorAction = (exception) -> views.setError(new NoConnectionView(context), "Please Check network connection. \n Double tap to try again.");
+
+            RetrofitManager.getInstance().getWeatherForecastDaily(new LatLng(PrefUtils.getLastKnownLatitude(),
+                    PrefUtils.getLastKnownLongitude()), onNextAction, onErrorAction);
         } else {
             views.setError(new NoConnectionView(context), "Please Check network connection.\nDouble tap to try again.");
         }
@@ -120,7 +144,7 @@ public class WeatherCardsActivityPresenter implements WeatherCardsActivityContra
 
         } else {
             //App already has permission to access fine location
-            startNetworkRequest();
+            startNetworkRequest(false);
         }
     }
 
@@ -136,7 +160,7 @@ public class WeatherCardsActivityPresenter implements WeatherCardsActivityContra
         if (viewGroup.getChildAt(0) instanceof NoConnectionView) {
             clickCount++;
             if (clickCount == 2) {
-                startNetworkRequest();
+                startNetworkRequest(false);
             }
         }
     }

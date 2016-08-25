@@ -56,6 +56,10 @@
         <service android:name="com.lftechnology.leapfrog.weathernow.update.UpdateService" />
         <service android:name="com.lftechnology.leapfrog.weathernow.widget.UpdateWidget" />
 
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyA9JfkY9lC22iWTcZxzZS7D7Wk2nWuVBMU"/>
+
     </application>
 
 </manifest>

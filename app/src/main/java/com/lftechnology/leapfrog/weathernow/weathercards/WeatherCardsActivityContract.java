@@ -12,7 +12,7 @@ import java.util.ArrayList;
  */
 public interface WeatherCardsActivityContract {
 
-    void startNetworkRequest();
+    void startNetworkRequest(boolean locationChanged);
 
     void checkPermissions();
 
