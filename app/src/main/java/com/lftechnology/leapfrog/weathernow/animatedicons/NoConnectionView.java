@@ -11,7 +11,7 @@ import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.lftechnology.leapfrog.weathernow.GeneralUtils;
+import com.lftechnology.leapfrog.weathernow.utils.GeneralUtils;
 import com.droid.manasshrestha.weathernow.R;
 
 /**

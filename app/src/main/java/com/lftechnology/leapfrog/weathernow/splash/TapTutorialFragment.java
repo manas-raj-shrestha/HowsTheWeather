@@ -1,4 +1,4 @@
-package com.lftechnology.leapfrog.weathernow.splashscreen;
+package com.lftechnology.leapfrog.weathernow.splash;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
-import com.lftechnology.leapfrog.weathernow.GeneralUtils;
+import com.lftechnology.leapfrog.weathernow.utils.GeneralUtils;
 import com.droid.manasshrestha.weathernow.R;
 import com.lftechnology.leapfrog.weathernow.weathercards.FlipAnimation;
 

@@ -1,4 +1,4 @@
-package com.lftechnology.leapfrog.weathernow.weathercards;
+package com.lftechnology.leapfrog.weathernow.weathercards.transformer;
 
 import android.support.v4.view.ViewPager;
 import android.util.Log;

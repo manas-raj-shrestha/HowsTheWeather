@@ -22,6 +22,8 @@ import com.lftechnology.leapfrog.weathernow.data.PrefUtils;
 import com.lftechnology.leapfrog.weathernow.update.UpdateFetcher;
 import com.lftechnology.leapfrog.weathernow.update.UpdateResultReceiver;
 import com.lftechnology.leapfrog.weathernow.update.UpdateService;
+import com.lftechnology.leapfrog.weathernow.weathercards.contracts.WeatherCardsActivityContract;
+import com.lftechnology.leapfrog.weathernow.weathercards.transformer.CardTiltTransformer;
 import com.lftechnology.leapfrog.weathernow.weathermodels.WeatherModel;
 import com.pixelcan.inkpageindicator.InkPageIndicator;
 

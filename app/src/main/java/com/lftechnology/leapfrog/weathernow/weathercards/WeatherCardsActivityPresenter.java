@@ -11,13 +11,14 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.view.ViewGroup;
 
-import com.lftechnology.leapfrog.weathernow.GeneralUtils;
+import com.lftechnology.leapfrog.weathernow.utils.GeneralUtils;
 import com.lftechnology.leapfrog.weathernow.animatedicons.NoConnectionView;
 import com.lftechnology.leapfrog.weathernow.data.PrefUtils;
-import com.lftechnology.leapfrog.weathernow.locationhandlers.GpsInfo;
-import com.lftechnology.leapfrog.weathernow.locationhandlers.LocationCatcher;
+import com.lftechnology.leapfrog.weathernow.location.GpsInfo;
+import com.lftechnology.leapfrog.weathernow.location.LocationCatcher;
 import com.lftechnology.leapfrog.weathernow.retrofit.RetrofitManager;
 import com.lftechnology.leapfrog.weathernow.update.UpdateService;
+import com.lftechnology.leapfrog.weathernow.weathercards.contracts.WeatherCardsActivityContract;
 import com.lftechnology.leapfrog.weathernow.weathermodels.WeatherModel;
 import com.lftechnology.leapfrog.weathernow.widget.UpdateWidget;
 import com.google.android.gms.maps.model.LatLng;

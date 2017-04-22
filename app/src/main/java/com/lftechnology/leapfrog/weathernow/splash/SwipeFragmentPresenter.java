@@ -1,11 +1,11 @@
-package com.lftechnology.leapfrog.weathernow.splashscreen;
+package com.lftechnology.leapfrog.weathernow.splash;
 
 import android.animation.ValueAnimator;
 import android.os.Handler;
 import android.view.View;
 import android.widget.RelativeLayout;
 
-import com.lftechnology.leapfrog.weathernow.GeneralUtils;
+import com.lftechnology.leapfrog.weathernow.utils.GeneralUtils;
 
 /**
  * handles animation logic for swipe fragment

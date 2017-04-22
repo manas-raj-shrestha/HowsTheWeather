@@ -1,4 +1,4 @@
-package com.lftechnology.leapfrog.weathernow.splashscreen;
+package com.lftechnology.leapfrog.weathernow.splash;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

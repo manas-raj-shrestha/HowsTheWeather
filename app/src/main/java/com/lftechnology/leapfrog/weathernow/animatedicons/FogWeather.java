@@ -5,15 +5,14 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Handler;
-import android.os.Message;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
-import com.lftechnology.leapfrog.weathernow.GeneralUtils;
 import com.droid.manasshrestha.weathernow.R;
+import com.lftechnology.leapfrog.weathernow.utils.GeneralUtils;
 
 /**
  * Animated foggy weather view
@@ -58,12 +57,9 @@ public class FogWeather extends RelativeLayout {
         setWillNotDraw(false);
     }
 
-    Handler handler = new Handler(new Handler.Callback() {
-        @Override
-        public boolean handleMessage(Message message) {
-            invalidate();
-            return true;
-        }
+    Handler handler = new Handler(message -> {
+        invalidate();
+        return true;
     });
 
     /**

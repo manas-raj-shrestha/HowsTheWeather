@@ -15,7 +15,7 @@ import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.widget.RelativeLayout;
 
-import com.lftechnology.leapfrog.weathernow.GeneralUtils;
+import com.lftechnology.leapfrog.weathernow.utils.GeneralUtils;
 import com.droid.manasshrestha.weathernow.R;
 
 /**

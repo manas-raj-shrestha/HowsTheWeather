@@ -1,4 +1,4 @@
-package com.lftechnology.leapfrog.weathernow.locationhandlers;
+package com.lftechnology.leapfrog.weathernow.location;
 
 public class GpsInfo {
     private double latitude;

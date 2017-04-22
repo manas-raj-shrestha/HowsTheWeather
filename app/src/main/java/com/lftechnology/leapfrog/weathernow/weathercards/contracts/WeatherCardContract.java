@@ -1,4 +1,4 @@
-package com.lftechnology.leapfrog.weathernow.weathercards;
+package com.lftechnology.leapfrog.weathernow.weathercards.contracts;
 
 import android.view.ViewGroup;
 
@@ -6,9 +6,6 @@ import com.lftechnology.leapfrog.weathernow.weathermodels.Temp;
 
 import lecho.lib.hellocharts.model.LineChartData;
 
-/**
- * Created by ManasShrestha on 3/29/16.
- */
 public interface WeatherCardContract {
 
     interface Views {

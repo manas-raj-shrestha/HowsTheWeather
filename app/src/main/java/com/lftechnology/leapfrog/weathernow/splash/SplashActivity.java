@@ -1,4 +1,4 @@
-package com.lftechnology.leapfrog.weathernow.splashscreen;
+package com.lftechnology.leapfrog.weathernow.splash;
 
 import android.content.Intent;
 import android.os.Bundle;

@@ -3,9 +3,9 @@ package com.lftechnology.leapfrog.weathernow.data;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import com.lftechnology.leapfrog.weathernow.GeneralUtils;
+import com.lftechnology.leapfrog.weathernow.utils.GeneralUtils;
 import com.lftechnology.leapfrog.weathernow.WeatherApplication;
-import com.lftechnology.leapfrog.weathernow.locationhandlers.GpsInfo;
+import com.lftechnology.leapfrog.weathernow.location.GpsInfo;
 import com.lftechnology.leapfrog.weathernow.weathermodels.WeatherModel;
 import com.orhanobut.hawk.Hawk;
 

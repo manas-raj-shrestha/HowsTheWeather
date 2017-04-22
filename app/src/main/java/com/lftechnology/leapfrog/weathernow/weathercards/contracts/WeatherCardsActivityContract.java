@@ -1,8 +1,10 @@
-package com.lftechnology.leapfrog.weathernow.weathercards;
+package com.lftechnology.leapfrog.weathernow.weathercards.contracts;
 
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.lftechnology.leapfrog.weathernow.weathercards.WeatherCardsActivity;
+import com.lftechnology.leapfrog.weathernow.weathercards.WeatherCardsActivityPresenter;
 import com.lftechnology.leapfrog.weathernow.weathermodels.WeatherModel;
 
 import java.util.ArrayList;

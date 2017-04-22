@@ -1,4 +1,4 @@
-package com.lftechnology.leapfrog.weathernow;
+package com.lftechnology.leapfrog.weathernow.utils;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -10,6 +10,7 @@ import android.text.format.DateFormat;
 import android.util.DisplayMetrics;
 
 import com.droid.manasshrestha.weathernow.R;
+import com.lftechnology.leapfrog.weathernow.WeatherApplication;
 import com.lftechnology.leapfrog.weathernow.data.Constants;
 
 import java.util.Date;

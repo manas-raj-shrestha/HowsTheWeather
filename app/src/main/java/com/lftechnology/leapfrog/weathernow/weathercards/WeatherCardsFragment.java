@@ -18,6 +18,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.droid.manasshrestha.weathernow.R;
+import com.lftechnology.leapfrog.weathernow.weathercards.contracts.WeatherCardContract;
+import com.lftechnology.leapfrog.weathernow.weathercards.transformer.RoundedCornersTransformation;
 import com.lftechnology.leapfrog.weathernow.weathermodels.Temp;
 import com.lftechnology.leapfrog.weathernow.weathermodels.WeatherModel;
 

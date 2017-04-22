@@ -7,7 +7,7 @@ import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.ViewGroup;
 
-import com.lftechnology.leapfrog.weathernow.GeneralUtils;
+import com.lftechnology.leapfrog.weathernow.utils.GeneralUtils;
 import com.droid.manasshrestha.weathernow.R;
 import com.lftechnology.leapfrog.weathernow.animatedicons.ClearWeather;
 import com.lftechnology.leapfrog.weathernow.animatedicons.CloudyWeather;
@@ -18,6 +18,7 @@ import com.lftechnology.leapfrog.weathernow.animatedicons.SleetWeather;
 import com.lftechnology.leapfrog.weathernow.animatedicons.SnowWeather;
 import com.lftechnology.leapfrog.weathernow.animatedicons.WindWeather;
 import com.lftechnology.leapfrog.weathernow.data.Constants;
+import com.lftechnology.leapfrog.weathernow.weathercards.contracts.WeatherCardContract;
 import com.lftechnology.leapfrog.weathernow.weathermodels.DailyData;
 import com.lftechnology.leapfrog.weathernow.weathermodels.HourlyData;
 import com.lftechnology.leapfrog.weathernow.weathermodels.Temp;

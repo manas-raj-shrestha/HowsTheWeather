@@ -1,4 +1,4 @@
-package com.lftechnology.leapfrog.weathernow.locationhandlers;
+package com.lftechnology.leapfrog.weathernow.location;
 
 
 import android.app.Activity;

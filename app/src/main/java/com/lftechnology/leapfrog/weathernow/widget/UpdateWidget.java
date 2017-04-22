@@ -12,12 +12,12 @@ import android.support.v4.app.NotificationCompat;
 import android.view.View;
 import android.widget.RemoteViews;
 
-import com.lftechnology.leapfrog.weathernow.GeneralUtils;
+import com.lftechnology.leapfrog.weathernow.utils.GeneralUtils;
 import com.droid.manasshrestha.weathernow.R;
 import com.lftechnology.leapfrog.weathernow.WeatherApplication;
 import com.lftechnology.leapfrog.weathernow.data.Constants;
 import com.lftechnology.leapfrog.weathernow.data.PrefUtils;
-import com.lftechnology.leapfrog.weathernow.splashscreen.SplashActivity;
+import com.lftechnology.leapfrog.weathernow.splash.SplashActivity;
 import com.lftechnology.leapfrog.weathernow.weathercards.WeatherCardsActivity;
 import com.lftechnology.leapfrog.weathernow.weathermodels.DailyData;
 import com.lftechnology.leapfrog.weathernow.weathermodels.WeatherModel;
