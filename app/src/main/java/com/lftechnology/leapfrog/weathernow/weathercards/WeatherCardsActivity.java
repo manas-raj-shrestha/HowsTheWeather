@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
@@ -29,7 +30,7 @@ import com.pixelcan.inkpageindicator.InkPageIndicator;
 
 import java.util.ArrayList;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -44,22 +45,22 @@ public class WeatherCardsActivity extends AppCompatActivity implements WeatherCa
     private static final int REPEAT_COUNT = -1;
     private static int FETCH_LOCATION_DELAY = 6800;
 
-    @Bind(R.id.vp_cards)
+    @BindView(R.id.vp_cards)
     ViewPager viewPager;
 
-    @Bind(R.id.rl_container)
+    @BindView(R.id.rl_container)
     RelativeLayout rlContainer;
 
-    @Bind(R.id.tv_city_name)
+    @BindView(R.id.tv_city_name)
     TextView tvCityName;
 
-    @Bind(R.id.indicator)
+    @BindView(R.id.indicator)
     InkPageIndicator inkPageIndicator;
 
-    @Bind(R.id.tv_error)
+    @BindView(R.id.tv_error)
     TextView tvStatus;
 
-    @Bind(R.id.iv_update)
+    @BindView(R.id.iv_update)
     ImageView ivUpdate;
 
     private WeatherCardsActivityPresenter weatherCardsActivityPresenter;
@@ -73,11 +74,12 @@ public class WeatherCardsActivity extends AppCompatActivity implements WeatherCa
 
         weatherCardsActivityPresenter = new WeatherCardsActivityPresenter(this);
 
-        viewPager.setPageTransformer(true, new CardTiltTransformer());
+
     }
 
     @Override
     public void setViewPagerData(ArrayList<WeatherModel> weatherModels) {
+        viewPager.setPageTransformer(true, new CardTiltTransformer());
         rlContainer.removeAllViews();
         tvStatus.setVisibility(View.GONE);
         viewPager.setAdapter(null);
@@ -90,6 +92,7 @@ public class WeatherCardsActivity extends AppCompatActivity implements WeatherCa
 
     @Override
     public void setUserLocation(String cityName) {
+        Log.e("name",cityName);
         tvCityName.setText(cityName);
     }
 

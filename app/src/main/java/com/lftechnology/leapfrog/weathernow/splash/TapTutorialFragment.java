@@ -11,11 +11,11 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
-import com.lftechnology.leapfrog.weathernow.utils.GeneralUtils;
 import com.droid.manasshrestha.weathernow.R;
+import com.lftechnology.leapfrog.weathernow.utils.GeneralUtils;
 import com.lftechnology.leapfrog.weathernow.weathercards.FlipAnimation;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -28,13 +28,13 @@ public class TapTutorialFragment extends Fragment implements PageChangeListener 
     private static final int IMG_WIDTH = 300;
     private static final int ANIMATION_DELAY = 1000;
 
-    @Bind(R.id.iv_dummy_back)
+    @BindView(R.id.iv_dummy_back)
     ImageView ivDummyBack;
 
-    @Bind(R.id.iv_dummy_front)
+    @BindView(R.id.iv_dummy_front)
     ImageView ivDummyFront;
 
-    @Bind(R.id.rl_card_container)
+    @BindView(R.id.rl_card_container)
     RelativeLayout relativeLayout;
 
     public static TapTutorialFragment getInstance(int position) {

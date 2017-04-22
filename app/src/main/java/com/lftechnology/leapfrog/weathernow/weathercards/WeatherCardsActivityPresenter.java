@@ -11,27 +11,35 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.view.ViewGroup;
 
-import com.lftechnology.leapfrog.weathernow.utils.GeneralUtils;
+import com.google.android.gms.maps.model.LatLng;
 import com.lftechnology.leapfrog.weathernow.animatedicons.NoConnectionView;
+import com.lftechnology.leapfrog.weathernow.base.presenter.BasePresenter;
+import com.lftechnology.leapfrog.weathernow.base.view.BaseView;
 import com.lftechnology.leapfrog.weathernow.data.PrefUtils;
 import com.lftechnology.leapfrog.weathernow.location.GpsInfo;
 import com.lftechnology.leapfrog.weathernow.location.LocationCatcher;
-import com.lftechnology.leapfrog.weathernow.retrofit.RetrofitManager;
 import com.lftechnology.leapfrog.weathernow.update.UpdateService;
+import com.lftechnology.leapfrog.weathernow.utils.GeneralUtils;
 import com.lftechnology.leapfrog.weathernow.weathercards.contracts.WeatherCardsActivityContract;
 import com.lftechnology.leapfrog.weathernow.weathermodels.WeatherModel;
 import com.lftechnology.leapfrog.weathernow.widget.UpdateWidget;
-import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import javax.inject.Inject;
+
+import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
+import rx.schedulers.Schedulers;
 
 /**
  * Presenter for {@link WeatherCardsActivity}
  */
-public class WeatherCardsActivityPresenter implements WeatherCardsActivityContract {
+public class WeatherCardsActivityPresenter extends BasePresenter<BaseView> implements WeatherCardsActivityContract {
+
+    @Inject
+    WeatherInteractor weatherInteractor;
 
     public static final int MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 101;
 
@@ -76,9 +84,20 @@ public class WeatherCardsActivityPresenter implements WeatherCardsActivityContra
                 @Override
                 public void onLocationNotFound() {
                     if (PrefUtils.getLastKnownLatitude() != 0.0) {
+
                         //use the location from shared preferences if location was not found
-                        RetrofitManager.getInstance().getWeatherForecastDaily(new LatLng(PrefUtils.getLastKnownLatitude(),
-                                PrefUtils.getLastKnownLongitude()), onNextAction, onErrorAction);
+//                        weatherInteractor.getWeatherForecastDaily(new LatLng(PrefUtils.getLastKnownLatitude(),
+//                                PrefUtils.getLastKnownLongitude()), onNextAction, onErrorAction);
+
+//                        observable1.subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .unsubscribeOn(Schedulers.io())
+//                .subscribe(onNextAction, onError);
+
+                        addSubscription(weatherInteractor.getWeatherForecastDaily(new LatLng(PrefUtils.getLastKnownLatitude(),
+                                PrefUtils.getLastKnownLongitude()), onNextAction, onErrorAction).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe());
+
+
                     } else {
                         locationCatcher.showSettingsAlert();
                     }
@@ -88,8 +107,12 @@ public class WeatherCardsActivityPresenter implements WeatherCardsActivityContra
                 public void onLocationFound(GpsInfo location) {
                     if (location != null) {
                         locationCatcher.cancelLocationCallback();
-                        RetrofitManager.getInstance().getWeatherForecastDaily(new LatLng(location.getLatitude(),
-                                location.getLongitude()), onNextAction, onErrorAction);
+
+//                        weatherInteractor.getWeatherForecastDaily(new LatLng(location.getLatitude(),
+//                                location.getLongitude()), onNextAction, onErrorAction);
+
+                        addSubscription(weatherInteractor.getWeatherForecastDaily(new LatLng(location.getLatitude(),
+                                location.getLongitude()), onNextAction, onErrorAction).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe());
 
                         //save the new location as last known location
                         PrefUtils.setLastKnownLocation(location);

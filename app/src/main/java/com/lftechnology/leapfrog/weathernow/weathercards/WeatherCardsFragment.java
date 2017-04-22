@@ -23,7 +23,7 @@ import com.lftechnology.leapfrog.weathernow.weathercards.transformer.RoundedCorn
 import com.lftechnology.leapfrog.weathernow.weathermodels.Temp;
 import com.lftechnology.leapfrog.weathernow.weathermodels.WeatherModel;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import lecho.lib.hellocharts.model.LineChartData;
@@ -36,79 +36,79 @@ public class WeatherCardsFragment extends Fragment implements WeatherCardContrac
 
     private final static String KEY_BUNDLE = "bundle";
 
-    @Bind(R.id.tv_week_day)
+    @BindView(R.id.tv_week_day)
     TextView tvWeekDay;
 
-    @Bind(R.id.iv_water_drop)
+    @BindView(R.id.iv_water_drop)
     ImageView ivWaterDrop;
 
-    @Bind(R.id.iv_clouds)
+    @BindView(R.id.iv_clouds)
     ImageView ivClouds;
 
-    @Bind(R.id.tv_avg_temp)
+    @BindView(R.id.tv_avg_temp)
     TextView tvAvgTemp;
 
-    @Bind(R.id.fl_animated_icons)
+    @BindView(R.id.fl_animated_icons)
     FrameLayout flAnimatedIcons;
 
-    @Bind(R.id.tv_humidity)
+    @BindView(R.id.tv_humidity)
     TextView tvHumidity;
 
-    @Bind(R.id.iv_bg_back)
+    @BindView(R.id.iv_bg_back)
     ImageView ivBgBack;
 
-    @Bind(R.id.tv_clouds)
+    @BindView(R.id.tv_clouds)
     TextView tvClouds;
 
-    @Bind(R.id.ll_card_front)
+    @BindView(R.id.ll_card_front)
     LinearLayout cardContainerFront;
 
-    @Bind(R.id.card_front)
+    @BindView(R.id.card_front)
     CardView cardFront;
 
-    @Bind(R.id.card_back)
+    @BindView(R.id.card_back)
     CardView cardBack;
 
-    @Bind(R.id.main_activity_root)
+    @BindView(R.id.main_activity_root)
     RelativeLayout rvMainRoot;
 
-    @Bind(R.id.tv_pressure)
+    @BindView(R.id.tv_pressure)
     TextView tvPressure;
 
-    @Bind(R.id.tv_wind_speed)
+    @BindView(R.id.tv_wind_speed)
     TextView tvWindSpeed;
 
-    @Bind(R.id.tv_wind_direction)
+    @BindView(R.id.tv_wind_direction)
     TextView tvWindDirection;
 
-    @Bind(R.id.tv_max_temp_time)
+    @BindView(R.id.tv_max_temp_time)
     TextView tvMaxTempTime;
 
-    @Bind(R.id.tv_date)
+    @BindView(R.id.tv_date)
     TextView tvDate;
 
-    @Bind(R.id.tv_max_temp)
+    @BindView(R.id.tv_max_temp)
     TextView tvMaxTemp;
 
-    @Bind(R.id.tv_min_temp)
+    @BindView(R.id.tv_min_temp)
     TextView tvMinTemp;
 
-    @Bind(R.id.tv_temp_min_time)
+    @BindView(R.id.tv_temp_min_time)
     TextView tvMinTempTime;
 
-    @Bind(R.id.tv_weather_desc)
+    @BindView(R.id.tv_weather_desc)
     TextView tvWeatherDesc;
 
-    @Bind(R.id.chart)
+    @BindView(R.id.chart)
     LineChartView lineChartView;
 
-    @Bind(R.id.iv_bg)
+    @BindView(R.id.iv_bg)
     ImageView ivBgFont;
 
-    @Bind(R.id.tv_weather_ticker)
+    @BindView(R.id.tv_weather_ticker)
     TextView tvTicker;
 
-    @Bind(R.id.view_overlay)
+    @BindView(R.id.view_overlay)
     View overlay;
 
     WeatherModel forecastList;

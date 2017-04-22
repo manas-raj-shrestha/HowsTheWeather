@@ -10,10 +10,10 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
-import com.lftechnology.leapfrog.weathernow.utils.GeneralUtils;
 import com.droid.manasshrestha.weathernow.R;
+import com.lftechnology.leapfrog.weathernow.utils.GeneralUtils;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -26,10 +26,10 @@ public class SwipeTutorialFragment extends Fragment implements PageChangeListene
     private static final int IMG_HEIGHT = 300;
     private static final int IMG_WIDTH = 300;
 
-    @Bind(R.id.iv_dummy_card)
+    @BindView(R.id.iv_dummy_card)
     ImageView ivDummyCard;
 
-    @Bind(R.id.iv_dummy_card_2)
+    @BindView(R.id.iv_dummy_card_2)
     ImageView ivDummyCard2;
 
     private SwipeFragmentPresenter swipeFragmentPresenter;

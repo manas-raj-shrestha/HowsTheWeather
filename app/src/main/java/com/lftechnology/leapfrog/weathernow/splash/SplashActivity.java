@@ -16,7 +16,7 @@ import com.lftechnology.leapfrog.weathernow.data.PrefUtils;
 import com.lftechnology.leapfrog.weathernow.weathercards.WeatherCardsActivity;
 import com.pixelcan.inkpageindicator.InkPageIndicator;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -29,13 +29,13 @@ public class SplashActivity extends AppCompatActivity {
     private static final int IMG_WIDTH = 250;
     private static final int IMG_HEIGHT = 250;
 
-    @Bind(R.id.iv_bg)
+    @BindView(R.id.iv_bg)
     ImageView ivBg;
 
-    @Bind(R.id.indicator)
+    @BindView(R.id.indicator)
     InkPageIndicator inkPageIndicator;
 
-    @Bind(R.id.view_pager)
+    @BindView(R.id.view_pager)
     ViewPager viewPager;
 
     @Override
