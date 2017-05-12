@@ -30,21 +30,21 @@ public class WeatherInteractorImpl extends BaseInteractor implements WeatherInte
         Observable<WeatherModel> daySevenObservable = getWeatherObservable(latLng, calendar);
 
         Observable zippedObservable = Observable.zip(dayOneObservable, dayTwoObservable, dayThreeObservable, dayFourObservable,
-                dayFiveObservable, daySixObservable, daySevenObservable, (dayOneModel, dayTwoModel,
-                                                                          dayThreeModel, dayFourModel,
-                                                                          dayFiveModel, daySixModel,
-                                                                          daySevenModel) -> {
+                dayFiveObservable, daySixObservable, daySevenObservable, (dayOneInfo, dayTwoInfo,
+                                                                          dayThreeInfo, dayFourInfo,
+                                                                          dayFiveInfo, daySixInfo,
+                                                                          daySevenInfo) -> {
 
-                    ArrayList<WeatherModel> weatherModels = new ArrayList<>();
-                    weatherModels.add(dayOneModel);
-                    weatherModels.add(dayTwoModel);
-                    weatherModels.add(dayThreeModel);
-                    weatherModels.add(dayFourModel);
-                    weatherModels.add(dayFiveModel);
-                    weatherModels.add(daySixModel);
-                    weatherModels.add(daySevenModel);
+                    ArrayList<WeatherModel> weatherInfos = new ArrayList<>();
+                    weatherInfos.add(dayOneInfo);
+                    weatherInfos.add(dayTwoInfo);
+                    weatherInfos.add(dayThreeInfo);
+                    weatherInfos.add(dayFourInfo);
+                    weatherInfos.add(dayFiveInfo);
+                    weatherInfos.add(daySixInfo);
+                    weatherInfos.add(daySevenInfo);
 
-                    return weatherModels;
+                    return weatherInfos;
                 });
 
         return zippedObservable;
