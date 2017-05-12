@@ -19,60 +19,44 @@ public class WeatherInteractorImpl extends BaseInteractor implements WeatherInte
 
     @Override
     public Observable<WeatherModel> getWeatherForecastDaily(LatLng latLng, Action1 onNextAction, Action1 onError) {
-        Calendar c = Calendar.getInstance();
-//
-        Observable<WeatherModel> observable = retrofitServices.getWeatherDaily(API_KEY,
-                String.valueOf(latLng.latitude) + "," + String.valueOf(latLng.longitude) + ","
-                        + c.getTimeInMillis() / UNIX_TIME_CONVERSION_CONSTANT, UNIT);
+        Calendar calendar = Calendar.getInstance();
 
-        c.add(Calendar.DATE, DAY_INCREMENT);
-        Observable<WeatherModel> observable2 = retrofitServices.getWeatherDaily(API_KEY,
-                String.valueOf(latLng.latitude) + "," + String.valueOf(latLng.longitude) + ","
-                        + c.getTimeInMillis() / UNIX_TIME_CONVERSION_CONSTANT, UNIT);
+        Observable<WeatherModel> dayOneObservable = getWeatherObservable(latLng, calendar);
+        Observable<WeatherModel> dayTwoObservable = getWeatherObservable(latLng, calendar);
+        Observable<WeatherModel> dayThreeObservable = getWeatherObservable(latLng, calendar);
+        Observable<WeatherModel> dayFourObservable = getWeatherObservable(latLng, calendar);
+        Observable<WeatherModel> dayFiveObservable = getWeatherObservable(latLng, calendar);
+        Observable<WeatherModel> daySixObservable = getWeatherObservable(latLng, calendar);
+        Observable<WeatherModel> daySevenObservable = getWeatherObservable(latLng, calendar);
 
-        c.add(Calendar.DATE, DAY_INCREMENT);
-        Observable<WeatherModel> observable3 = retrofitServices.getWeatherDaily(API_KEY,
-                String.valueOf(latLng.latitude) + "," + String.valueOf(latLng.longitude) + ","
-                        + c.getTimeInMillis() / UNIX_TIME_CONVERSION_CONSTANT, UNIT);
-
-        c.add(Calendar.DATE, DAY_INCREMENT);
-        Observable<WeatherModel> observable4 = retrofitServices.getWeatherDaily(API_KEY,
-                String.valueOf(latLng.latitude) + "," + String.valueOf(latLng.longitude) + ","
-                        + c.getTimeInMillis() / UNIX_TIME_CONVERSION_CONSTANT, UNIT);
-
-        c.add(Calendar.DATE, DAY_INCREMENT);
-        Observable<WeatherModel> observable5 = retrofitServices.getWeatherDaily(API_KEY,
-                String.valueOf(latLng.latitude) + "," + String.valueOf(latLng.longitude) + ","
-                        + c.getTimeInMillis() / UNIX_TIME_CONVERSION_CONSTANT, UNIT);
-
-        c.add(Calendar.DATE, DAY_INCREMENT);
-        Observable<WeatherModel> observable6 = retrofitServices.getWeatherDaily(API_KEY,
-                String.valueOf(latLng.latitude) + "," + String.valueOf(latLng.longitude) + ","
-                        + c.getTimeInMillis() / UNIX_TIME_CONVERSION_CONSTANT, UNIT);
-
-        c.add(Calendar.DATE, DAY_INCREMENT);
-        Observable<WeatherModel> observable7 = retrofitServices.getWeatherDaily(API_KEY,
-                String.valueOf(latLng.latitude) + "," + String.valueOf(latLng.longitude) + ","
-                        + c.getTimeInMillis() / UNIX_TIME_CONVERSION_CONSTANT, UNIT);
-
-        Observable observable1 = Observable.zip(observable, observable2, observable3, observable4,
-                observable5, observable6, observable7, (weatherModel, weatherModel2,
-                                                        weatherModel3, weatherModel4,
-                                                        weatherModel5, weatherModel6,
-                                                        weatherModel7) -> {
+        Observable zippedObservable = Observable.zip(dayOneObservable, dayTwoObservable, dayThreeObservable, dayFourObservable,
+                dayFiveObservable, daySixObservable, daySevenObservable, (dayOneModel, dayTwoModel,
+                                                                          dayThreeModel, dayFourModel,
+                                                                          dayFiveModel, daySixModel,
+                                                                          daySevenModel) -> {
 
                     ArrayList<WeatherModel> weatherModels = new ArrayList<>();
-                    weatherModels.add(weatherModel);
-                    weatherModels.add(weatherModel2);
-                    weatherModels.add(weatherModel3);
-                    weatherModels.add(weatherModel4);
-                    weatherModels.add(weatherModel5);
-                    weatherModels.add(weatherModel6);
-                    weatherModels.add(weatherModel7);
+                    weatherModels.add(dayOneModel);
+                    weatherModels.add(dayTwoModel);
+                    weatherModels.add(dayThreeModel);
+                    weatherModels.add(dayFourModel);
+                    weatherModels.add(dayFiveModel);
+                    weatherModels.add(daySixModel);
+                    weatherModels.add(daySevenModel);
 
                     return weatherModels;
                 });
 
-        return observable1;
+        return zippedObservable;
+    }
+
+    private Observable<WeatherModel> getWeatherObservable(LatLng latLng, Calendar calendar) {
+        Observable<WeatherModel> weatherObservable = retrofitServices.getWeatherDaily(API_KEY,
+                String.valueOf(latLng.latitude) + "," + String.valueOf(latLng.longitude) + ","
+                        + calendar.getTimeInMillis() / UNIX_TIME_CONVERSION_CONSTANT, UNIT);
+
+        calendar.add(Calendar.DATE, DAY_INCREMENT);
+
+        return weatherObservable;
     }
 }
