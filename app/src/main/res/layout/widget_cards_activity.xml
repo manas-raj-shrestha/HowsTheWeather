@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#2b2b2b"
+    android:id="@+id/rl_parent"
+    android:background="@color/colorPrimary"
     android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp">
+        android:id="@+id/rl_place_name_container"
+        android:layout_marginBottom="@dimen/dimen_8_2x"
+        android:layout_marginLeft="@dimen/dimen_8_2x"
+        android:layout_marginTop="@dimen/dimen_8_2x">
 
         <ImageView
             android:id="@+id/iv_location"
@@ -21,49 +23,77 @@
             android:src="@drawable/location" />
 
         <TextView
+            android:id="@+id/tv_city_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="8dp"
+            android:layout_marginLeft="@dimen/dimen_8_1x"
             android:layout_toRightOf="@id/iv_location"
             android:fontFamily="sans-serif-condensed"
-            android:text="KATHMANDU"
-            android:textColor="#727272"
+            android:textColor="#f5f5f5"
             android:textSize="18sp" />
+
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/iv_update"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="8dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_refresh_white_24dp" />
 
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
+        android:layout_below="@+id/rl_place_name_container"
         android:layout_height="match_parent">
 
-        <pl.droidsonroids.gif.GifImageView
+        <RelativeLayout
+            android:id="@+id/rl_container"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:id="@+id/gif_cloud_load"
-            android:background="@drawable/loading_cloud"
             android:layout_centerInParent="true"
-            android:layout_marginTop="-100dp"
-            />
+            android:layout_marginTop="-500dp">
+
+            <com.howstheweather.animatedicons.LoadingView
+                android:id="@+id/animated_loading"
+                android:layout_width="100dp"
+                android:layout_height="100dp" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rl_container"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:textColor="#f5f5f5"
+            android:textSize="14sp"
+            android:visibility="gone" />
 
         <com.pixelcan.inkpageindicator.InkPageIndicator
-            android:layout_marginBottom="8dp"
             android:id="@+id/indicator"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="8dp"
+            app:animationDuration="320"
+            app:currentPageIndicatorColor="#727272"
             app:dotDiameter="8dp"
             app:dotGap="8dp"
-            android:layout_alignParentBottom="true"
-            app:animationDuration="320"
-            app:pageIndicatorColor="#ffffff"
-            app:currentPageIndicatorColor="#727272"/>
+            app:pageIndicatorColor="#ffffff" />
 
         <android.support.v4.view.ViewPager
             android:id="@+id/vp_cards"
-            android:layout_above="@id/indicator"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_above="@id/indicator" />
 
     </RelativeLayout>
 
-</LinearLayout>
+</RelativeLayout>

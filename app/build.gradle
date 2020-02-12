@@ -1,22 +1,46 @@
+buildscript {
+    repositories {
+        maven { url 'https://maven.fabric.io/public' }
+    }
+
+    repositories {
+        // ...
+        maven { url "https://jitpack.io" }
+    }
+
+    dependencies {
+    }
+}
 apply plugin: 'com.android.application'
+
+repositories {
+    maven { url 'https://maven.fabric.io/public' }
+}
+
+apply plugin: 'me.tatarka.retrolambda'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.2"
+    buildToolsVersion "28.0.3"
 
     defaultConfig {
-        applicationId "com.droid.manasshrestha.rxandroid"
-        minSdkVersion 16
+        applicationId "com.howstheweather"
+        minSdkVersion 17
         multiDexEnabled true
         targetSdkVersion 23
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
@@ -25,8 +49,8 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.1.1'
 
-    //rxjava
-    compile 'io.reactivex:rxandroid:1.0.1'
+    //reactive java
+    compile 'io.reactivex:rxandroid:1.1.0'
     compile 'com.squareup.retrofit:adapter-rxjava:2.0.0-beta2'
 
     //retrofit 2
@@ -41,13 +65,17 @@ dependencies {
     //card view
     compile 'com.android.support:cardview-v7:23.0.0'
     compile 'com.pacioianu.david:ink-page-indicator:1.1.1'
-    compile 'pl.droidsonroids.gif:android-gif-drawable:1.1.+'
-    compile 'com.google.android.gms:play-services:8.4.0'
+    compile 'com.google.android.gms:play-services-location:8.4.0'
 
     //charts
     compile 'com.github.lecho:hellocharts-android:v1.5.8'
 
     //glide
     compile 'com.github.bumptech.glide:glide:3.7.0'
+//    compile('com.crashlytics.sdk.android:crashlytics:2.5.5@aar') {
+//        transitive = true;
+//    }
+
+    compile 'com.github.orhanobut:hawk:1.23'
 
 }

@@ -2,4 +2,25 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="day_margin_top">30dp</dimen>
+    <dimen name="weather_ticker_marin_bottom">30dp</dimen>
+    <dimen name="animated_icons_margin_bottom">20dp</dimen>
+    <dimen name="card_corner_radius">8dp</dimen>
+    <dimen name="weather_detail_txt_size">22sp</dimen>
+    <dimen name="temperature_margin">16dp</dimen>
+    <dimen name="weather_desc_bottom_margin">16dp</dimen>
+    <dimen name="chart_margin_top">24dp</dimen>
+    <dimen name="help_text_size">24sp</dimen>
+    <dimen name="help_text_margin_top">36dp</dimen>
+    <dimen name="dummy_card_width">200dp</dimen>
+    <dimen name="dummy_card_height">350dp</dimen>
+    <dimen name="dimen_8_2x">16dp</dimen>
+    <dimen name="dimen_8_1x">8dp</dimen>
+
+    <!--widget-->
+    <dimen name="text_clock_text_size">18sp</dimen>
+    <dimen name="widget_temp_text_size">28sp</dimen>
+    <dimen name="text_clock_margin_top">5dp</dimen>
+    <dimen name="temp_margin_top">5dp</dimen>
+
 </resources>

@@ -1,4 +1,27 @@
 <resources>
-    <string name="app_name">Weather Now</string>
-    <string name="app_key_open_weather">c18f5a141f0911f9867030a2d9ee1ea3</string>
+    <string name="app_name">How\'s the weather?</string>
+
+    <string name="txt_clear">Clear</string>
+    <string name="txt_rainy">Rainy</string>
+    <string name="txt_snow">Snow</string>
+    <string name="txt_sleet">Sleet</string>
+    <string name="txt_windy">Windy</string>
+    <string name="txt_foggy">Foggy</string>
+    <string name="txt_cloudy">Cloudy</string>
+    <string name="txt_partly_cloudy">Partly Cloudy</string>
+
+    <string name="txt_time">Time</string>
+    <string name="txt_temperature">Temperature</string>
+    <string name="txt_loading_ticker">Just a moment.</string>
+    <string name="txt_allow_permission">Please go to settings and allow \nlocation permission for \n Weather Now.</string>
+
+    <string name="txt_notification_sunny">The weather looks clear today. Have a nice day.</string>
+    <string name="txt_notification_rain">Looks like it is going to rain today. Do not forget to carry an umbrella.</string>
+    <string name="txt_notification_snow">Looks like it is going to snow today. Do not forget to carry an umbrella.</string>
+    <string name="txt_notification_sleet">Sleet expected today.</string>
+    <string name="txt_notification_wind">It is going to be windy today.</string>
+    <string name="txt_notification_fog">It is going to be foggy today.</string>
+    <string name="txt_notification_cloudy">It is going to be cloudy today.</string>
+    <string name="txt_notification_partly_cloudy">There are going to be some clouds in the sky.</string>
+
 </resources>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_widget"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/iv_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="35dp"
+        android:background="@drawable/layout_rounded_bg" />
+
+    <ImageView
+        android:id="@+id/iv_widget_icon"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/widget_snow" />
+
+    <LinearLayout
+        android:layout_marginRight="20dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignTop="@+id/iv_bg"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_widget_temp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/iv_bg"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/widget_temp_text_size"
+            tools:text="22 C" />
+
+        <TextView
+            android:textSize="10sp"
+            android:id="@+id/tv_widget_last_updated"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/tv_widget_temp"
+            android:layout_below="@+id/tv_widget_temp"
+            tools:text="Last Updated : 28 June" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignTop="@+id/iv_bg"
+        android:layout_centerVertical="true"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <TextClock
+            android:id="@+id/tc_digital"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/iv_bg"
+            android:textSize="@dimen/text_clock_text_size"
+            android:layout_marginLeft="20dp" />
+
+        <TextView
+            android:id="@+id/tv_widget_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tc_digital"
+            android:textSize="10sp"
+            android:layout_marginLeft="20dp"
+            android:text="21 DEC" />
+
+        <TextView
+            android:textSize="10sp"
+            android:id="@+id/tv_widget_day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_widget_date"
+            android:layout_marginLeft="20dp"
+            android:text="WEDNESDAY" />
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/tv_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="20dp"
+        android:text="Application has not been initialized"
+        android:textColor="@android:color/white"
+        android:textSize="15sp"
+        android:visibility="gone" />
+
+</RelativeLayout>
