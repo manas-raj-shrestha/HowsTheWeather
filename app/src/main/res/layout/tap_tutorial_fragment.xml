@@ -36,7 +36,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/help_text_margin_top"
         android:textSize="@dimen/help_text_size"
-        android:text="Tap The Cards To View Detail"
+        android:text="Tap the cards to view detail"
         android:textColor="@android:color/white" />
 
 </RelativeLayout>

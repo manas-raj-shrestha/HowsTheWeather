@@ -13,7 +13,7 @@
         android:gravity="center"
         android:paddingLeft="50dp"
         android:paddingRight="50dp"
-        android:text="Change permission in your device's app settings. Give Weather Now access to location."
+        android:text="Change permission in your device's app settings. Enable location permission for How's The Weather"
         android:textColor="@android:color/white"
         android:id="@+id/tv_help_text"
         android:textSize="@dimen/help_text_size" />

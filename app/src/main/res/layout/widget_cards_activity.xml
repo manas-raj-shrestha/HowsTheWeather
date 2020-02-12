@@ -57,7 +57,7 @@
             android:layout_centerInParent="true"
             android:layout_marginTop="-500dp">
 
-            <com.droid.manasshrestha.rxandroid.animatedicons.LoadingView
+            <com.howstheweather.animatedicons.LoadingView
                 android:id="@+id/animated_loading"
                 android:layout_width="100dp"
                 android:layout_height="100dp" />

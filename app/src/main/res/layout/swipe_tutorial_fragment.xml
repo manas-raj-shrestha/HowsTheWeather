@@ -36,7 +36,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/help_text_margin_top"
         android:textSize="@dimen/help_text_size"
-        android:text="Swipe The Cards To See Weekly Forecast"
+        android:text="Swipe the cards to see weekly forecast"
         android:textColor="@android:color/white" />
 
 </RelativeLayout>
